@@ -15,3 +15,6 @@ MonoBehaviour:
   upgradePrefab: {fileID: 5513542027840897256, guid: 79588ea9bd3e9104b8d0976c7c911eda,
     type: 3}
   upgradeCost: 12
+  upgradeName: WeaponsRight
+  upgradeLocation: {fileID: 3690622485254681691, guid: 4a3cea27b23c46346b7e64d1e03bd1b3,
+    type: 3}

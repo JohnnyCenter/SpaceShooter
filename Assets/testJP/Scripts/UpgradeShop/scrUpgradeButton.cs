@@ -7,7 +7,11 @@ using UnityEngine.UI;
 public class scrUpgradeButton : MonoBehaviour
 {
     private GameObject upgradeButton;
+    [Header("Assign upgrade button texts")]
+    [Tooltip("Drag the text item on the upgrade button that is supposed to contain the upgradeCost")]
     [SerializeField] private TextMeshProUGUI upgradeCost;
+    [Tooltip("Drag the text item on the upgrade button that is supposed to contain the upgradeName")]
+    [SerializeField] private TextMeshProUGUI upgradeName;
     private bool upgradeIsSold;
     private Image buttonImage;
     [Header("Define upgrade")]
@@ -15,10 +19,12 @@ public class scrUpgradeButton : MonoBehaviour
 
     private void Awake()
     {
+        upgrade.ResetUpgradeStats();
         buttonImage = GetComponent<Image>();
         upgradeIsSold = false;
         upgradeButton = this.gameObject; //Self-assign as gameobject
-        upgradeCost.text = 10.ToString();
+        upgradeCost.text = upgrade.UpgradeCost.ToString();
+        upgradeName.text = upgrade.UpgradeName;
     }
 
     private void Start()

@@ -15,3 +15,6 @@ MonoBehaviour:
   upgradePrefab: {fileID: 5315281703966141356, guid: 8db344324b71729429d4158235683774,
     type: 3}
   upgradeCost: 10
+  upgradeName: Engines
+  upgradeLocation: {fileID: 1198447088581137938, guid: 255e643b002ca494fab87851e2123ae3,
+    type: 3}
