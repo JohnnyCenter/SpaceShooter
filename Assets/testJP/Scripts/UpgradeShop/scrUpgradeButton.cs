@@ -16,6 +16,11 @@ public class scrUpgradeButton : MonoBehaviour
     private Image buttonImage;
     [Header("Define upgrade")]
     [SerializeField] private UpgradesSO upgrade;
+    private scrUpgradeMenu upgradeMenu;
+
+    private bool middlePurchased;
+    private bool leftPurchased;
+    private bool rightPurchased;
 
     private void Awake()
     {
@@ -25,20 +30,28 @@ public class scrUpgradeButton : MonoBehaviour
         upgradeButton = this.gameObject; //Self-assign as gameobject
         upgradeCost.text = upgrade.UpgradeCost.ToString();
         upgradeName.text = upgrade.UpgradeName;
+        upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
+        middlePurchased = false;
+        leftPurchased = false;
+        rightPurchased = false;
     }
 
     private void Start()
     {
         //upgradeButton.SetActive(false);
     }
-    public void UpgradePurchased()
+
+    public void UpgradeSelected() //Remember that if you rename this function, you will need to reasign it for the button in the inspector
     {
         if (upgradeIsSold == false)
         {
-            upgrade.UpgradePurchased();
+            //CHECK that there is enough scrap
+            //If yes:
+            upgrade.UpgradePurchased(); //Not yet, open the placement window first
             buttonImage.color = Color.grey;
             upgradeIsSold = true;
             upgradeCost.text = "Sold";
+            upgradeMenu.CloseUpgradePanel();
         }
         else
             Debug.Log("Upgrade is already purchased");

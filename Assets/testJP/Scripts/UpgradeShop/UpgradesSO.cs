@@ -34,7 +34,7 @@ public class UpgradesSO : ScriptableObject
     }
     public void UpgradePurchased()
     {
-        //This is not final, only works temporarily.
-        Instantiate(upgradePrefab, upgradeLocation.transform.position, Quaternion.identity, playerObject.transform);
+        Instantiate(upgradePrefab, upgradeLocation.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
+        //the parent prefab
     }
 }
