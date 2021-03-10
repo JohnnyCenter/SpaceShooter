@@ -14,7 +14,11 @@ public class UpgradesSO : ScriptableObject
     [Tooltip("Set the name of the upgrade")]
     [SerializeField] private string upgradeName;
     [Tooltip("assign the location on the player prefab for this uppgrade to spawn when purchased")]
-    [SerializeField] private GameObject upgradeLocation;
+
+    [SerializeField] GameObject upgradeLocationLeft;
+    [SerializeField] GameObject upgradeLocationRight;
+    [SerializeField] GameObject upgradeLocationMiddle;
+    //private GameObject upgradeLocation;
     private GameObject playerObject;
     public string UpgradeName { get; private set; }
 
@@ -32,9 +36,22 @@ public class UpgradesSO : ScriptableObject
             UpgradeName = "not assigned";
         }
     }
-    public void UpgradePurchased()
+    public void UpgradePurchased(int placement)
     {
-        Instantiate(upgradePrefab, upgradeLocation.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
-        //the parent prefab
+        switch(placement)
+        {
+            case 0:
+                Instantiate(upgradePrefab, upgradeLocationLeft.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
+                return;
+            case 1:
+                Instantiate(upgradePrefab, upgradeLocationMiddle.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
+                return;
+            case 2:
+                Instantiate(upgradePrefab, upgradeLocationRight.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
+                return;
+            default:
+                Debug.LogError("The placement value is incorrect when used for switch statement in the class UpgradeSO");
+                return;
+        }
     }
 }

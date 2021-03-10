@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72da23797404b764885f8ea7226c7d9a, type: 3}
-  m_Name: WeaponsRight
+  m_Name: WeaponsB
   m_EditorClassIdentifier: 
   upgradePrefab: {fileID: 5513542027840897256, guid: 79588ea9bd3e9104b8d0976c7c911eda,
     type: 3}
   upgradeCost: 12
-  upgradeName: WeaponsRight
-  upgradeLocation: {fileID: 3690622485254681691, guid: 4a3cea27b23c46346b7e64d1e03bd1b3,
+  upgradeName: WeaponsB
+  upgradeLocationLeft: {fileID: 2198014172043957542, guid: be11a39ec48b4c241bc9607e91a36edb,
+    type: 3}
+  upgradeLocationRight: {fileID: 3690622485254681691, guid: 4a3cea27b23c46346b7e64d1e03bd1b3,
+    type: 3}
+  upgradeLocationMiddle: {fileID: 1198447088581137938, guid: 255e643b002ca494fab87851e2123ae3,
     type: 3}

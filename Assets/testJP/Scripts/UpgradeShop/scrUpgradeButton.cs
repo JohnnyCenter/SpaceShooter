@@ -17,10 +17,7 @@ public class scrUpgradeButton : MonoBehaviour
     [Header("Define upgrade")]
     [SerializeField] private UpgradesSO upgrade;
     private scrUpgradeMenu upgradeMenu;
-
-    private bool middlePurchased;
-    private bool leftPurchased;
-    private bool rightPurchased;
+    private int placement;
 
     private void Awake()
     {
@@ -31,14 +28,6 @@ public class scrUpgradeButton : MonoBehaviour
         upgradeCost.text = upgrade.UpgradeCost.ToString();
         upgradeName.text = upgrade.UpgradeName;
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
-        middlePurchased = false;
-        leftPurchased = false;
-        rightPurchased = false;
-    }
-
-    private void Start()
-    {
-        //upgradeButton.SetActive(false);
     }
 
     public void UpgradeSelected() //Remember that if you rename this function, you will need to reasign it for the button in the inspector
@@ -47,14 +36,50 @@ public class scrUpgradeButton : MonoBehaviour
         {
             //CHECK that there is enough scrap
             //If yes:
-            upgrade.UpgradePurchased(); //Not yet, open the placement window first
-            buttonImage.color = Color.grey;
-            upgradeIsSold = true;
-            upgradeCost.text = "Sold";
-            upgradeMenu.CloseUpgradePanel();
+            switch (placement)
+            {
+                case 0:
+                    upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
+                    buttonImage.color = Color.grey;
+                    upgradeIsSold = true;
+                    upgradeCost.text = "Sold";
+                    upgradeMenu.CloseUpgradePanel();
+                    return;
+                case 1:
+                    upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
+                    buttonImage.color = Color.grey;
+                    upgradeIsSold = true;
+                    upgradeCost.text = "Sold";
+                    upgradeMenu.CloseUpgradePanel();
+                    return;
+                case 2:
+                    upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
+                    buttonImage.color = Color.grey;
+                    upgradeIsSold = true;
+                    upgradeCost.text = "Sold";
+                    upgradeMenu.CloseUpgradePanel();
+                    return;
+                default:
+                    Debug.LogError("The placement value is incorrect when used for switch statement in the class scrUpgradeButton");
+                    return;
+            }
+
         }
         else
             Debug.Log("Upgrade is already purchased");
             return;
+    }
+    private void getPlacement(int _placement) //Gets the int value for the placement from the OnPlacementSelected action
+    {
+        placement = _placement;
+        print("UpgradeButton is assigned the followin value for int placement: " + placement);
+    }
+    private void OnEnable()
+    {
+        scrUpgradeMenu.OnPlacementSelected += getPlacement;
+    }
+    private void OnDisable()
+    {
+        scrUpgradeMenu.OnPlacementSelected -= getPlacement;
     }
 }

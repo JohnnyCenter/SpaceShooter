@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 /// <summary>
 /// This is a singleton, do not place this class on any objects with the exception of the "upgradePanelManager".
 /// </summary>
@@ -13,9 +14,14 @@ public class scrUpgradeMenu : MonoBehaviour
     [SerializeField] private GameObject upgradePanel; //Don`t forget to set this in the inspector!
     [SerializeField] private GameObject upgradePlacementPanel; //Don`t forget to set this in the inspector!
     public GameObject UpgradePLacementPanel { get; private set; }
+    //public int UpgradePlacement { get; private set; } //Buttons rerference this variable for upgrade placement
+    public static Action<int> OnPlacementSelected;
+
     private void Awake()
     {
         UpgradePLacementPanel = upgradePlacementPanel;
+        //UpgradePlacement = 0; //Assign a default value
+
         if(instance != null && instance != this)
         {
             Destroy(this.gameObject); //We do not want duplicates of this class
@@ -44,15 +50,13 @@ public class scrUpgradeMenu : MonoBehaviour
     public void OpenUpgradeMenuWithPlacementReference(int placement)
     {
         upgradePanel.SetActive(true);
-        print("Upgrade menu is opened with the following placement: " + placement);
-        /*switch(placement)
-        {
-
-        }*/
+        //print("Upgrade menu is opened with the following placement: " + placement);
+        //UpgradePlacement = placement;
+        OnPlacementSelected?.Invoke(placement);
     }
     public void CloseUpgradePanel()
     {
         upgradePanel.SetActive(false);
-        //upgradePlacementPanel.SetActive(false); //Call this here?
+        upgradePlacementPanel.SetActive(false); 
     }
 }
