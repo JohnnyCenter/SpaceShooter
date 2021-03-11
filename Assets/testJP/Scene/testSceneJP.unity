@@ -392,6 +392,8 @@ MonoBehaviour:
   upgradeCost: {fileID: 1719352365}
   upgradeName: {fileID: 1092346988}
   upgrade: {fileID: 11400000, guid: 56c0e5296ceeaac4cbf3bb6546ef08d0, type: 2}
+  leftUpgradeInfo: {fileID: 1688246654}
+  rightUpgradeInfo: {fileID: 333937109}
 --- !u!114 &137521181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,7 +1121,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 382723462}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 333937109}
+        m_MethodName: IncreaseUpgradeLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &382723462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,6 +1361,8 @@ MonoBehaviour:
   upgradeCost: {fileID: 296179079}
   upgradeName: {fileID: 417908409}
   upgrade: {fileID: 11400000, guid: 7761f65431f71f3409c984d8b8a01a4a, type: 2}
+  leftUpgradeInfo: {fileID: 1688246654}
+  rightUpgradeInfo: {fileID: 333937109}
 --- !u!114 &503472225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4684,7 +4699,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1789736466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1688246654}
+        m_MethodName: IncreaseUpgradeLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1789736466
 MonoBehaviour:
   m_ObjectHideFlags: 0

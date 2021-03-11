@@ -17,6 +17,7 @@ public class UpgradesSO : ScriptableObject
 
     [SerializeField] GameObject upgradeLocationLeft;
     [SerializeField] GameObject upgradeLocationRight;
+
     //private GameObject upgradeLocation;
     private GameObject playerObject;
     public string UpgradeName { get; private set; }

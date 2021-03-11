@@ -7,7 +7,7 @@ using System;
 
 public class scrUpgradeButton : MonoBehaviour
 {
-    public Action<UpgradesSO> OnUpgradeSelected; //Used to send a reference of the upgrade purchaed to the upgradeUpgrade menu
+    public static Action<UpgradesSO> OnUpgradeSelected; //Used to send a reference of the upgrade purchaed to the upgradeUpgrade menu
 
     private GameObject upgradeButton;
     [Header("Assign upgrade button texts")]
@@ -21,6 +21,8 @@ public class scrUpgradeButton : MonoBehaviour
     [SerializeField] private UpgradesSO upgrade;
     private scrUpgradeMenu upgradeMenu;
     private int placement;
+    [SerializeField] private scrUpgradeTheUpgradeButton leftUpgradeInfo; //Try assigning these through code, if this works
+    [SerializeField] private scrUpgradeTheUpgradeButton rightUpgradeInfo;
 
     private void Awake()
     {
@@ -47,7 +49,8 @@ public class scrUpgradeButton : MonoBehaviour
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
                     upgradeMenu.CloseUpgradePanel();
-                    OnUpgradeSelected?.Invoke(upgrade);
+                    leftUpgradeInfo.UpdateTheUpgrade(upgrade);
+                    //OnUpgradeSelected?.Invoke(upgrade);
                     return;
                 case 1:
                     upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
@@ -55,7 +58,8 @@ public class scrUpgradeButton : MonoBehaviour
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
                     upgradeMenu.CloseUpgradePanel();
-                    OnUpgradeSelected?.Invoke(upgrade);
+                    rightUpgradeInfo.UpdateTheUpgrade(upgrade);
+                    //OnUpgradeSelected?.Invoke(upgrade);
                     return;
                 default:
                     Debug.LogError("The placement value is incorrect when used for switch statement in the class scrUpgradeButton");
