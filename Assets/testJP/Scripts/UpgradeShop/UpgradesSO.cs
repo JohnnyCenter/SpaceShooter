@@ -17,7 +17,6 @@ public class UpgradesSO : ScriptableObject
 
     [SerializeField] GameObject upgradeLocationLeft;
     [SerializeField] GameObject upgradeLocationRight;
-    [SerializeField] GameObject upgradeLocationMiddle;
     //private GameObject upgradeLocation;
     private GameObject playerObject;
     public string UpgradeName { get; private set; }
@@ -44,9 +43,6 @@ public class UpgradesSO : ScriptableObject
                 Instantiate(upgradePrefab, upgradeLocationLeft.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
                 return;
             case 1:
-                Instantiate(upgradePrefab, upgradeLocationMiddle.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
-                return;
-            case 2:
                 Instantiate(upgradePrefab, upgradeLocationRight.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
                 return;
             default:

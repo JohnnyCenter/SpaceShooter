@@ -10,8 +10,8 @@ public class scrPlacementButton : MonoBehaviour
     [SerializeField] TextMeshProUGUI placementText;
     private Image buttonImage;
     private scrUpgradeMenu upgrademenu;
-    [Tooltip("0 is left placement, 1 is middle and 2 is right")]
-    [Range(0, 2)]
+    [Tooltip("0 is left placement, 1 is right")]
+    [Range(0, 1)]
     [SerializeField] int upgradePlacementNumber;
     private bool placementUsed;
     private void Awake()

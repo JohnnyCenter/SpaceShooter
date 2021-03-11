@@ -11,8 +11,10 @@ public class scrUpgradeMenu : MonoBehaviour
 
     public static scrUpgradeMenu Instance { get { return instance; }}
 
-    [SerializeField] private GameObject upgradePanel; //Don`t forget to set this in the inspector!
-    [SerializeField] private GameObject upgradePlacementPanel; //Don`t forget to set this in the inspector!
+     [SerializeField] private GameObject upgradePanel; //Don`t forget to set this in the inspector!
+     [SerializeField] private GameObject upgradePlacementPanel; //Don`t forget to set this in the inspector!
+     [SerializeField] private GameObject purchasePanel; //Don`t forget to set this in the inspector!
+     [SerializeField] private GameObject upgradeTheUpgradePanel; //Don`t forget to set this in the inspector!
     public GameObject UpgradePLacementPanel { get; private set; }
     //public int UpgradePlacement { get; private set; } //Buttons rerference this variable for upgrade placement
     public static Action<int> OnPlacementSelected;
@@ -38,14 +40,27 @@ public class scrUpgradeMenu : MonoBehaviour
 
     private void Start()
     {
+        purchasePanel.SetActive(false);
         upgradePanel.SetActive(false);
+        UpgradePLacementPanel.SetActive(false);
+        upgradeTheUpgradePanel.SetActive(false);
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.U))
         {
-            UpgradePLacementPanel.SetActive(true);
+            purchasePanel.SetActive(true);
         }
+    }
+    public void OpenUpgradeTheUpgradePanel()
+    {
+        upgradeTheUpgradePanel.SetActive(true);
+        purchasePanel.SetActive(false);
+    }
+    public void OpenUpgradePlacementPanel()
+    {
+        purchasePanel.SetActive(false);
+        UpgradePLacementPanel.SetActive(true);
     }
     public void OpenUpgradeMenuWithPlacementReference(int placement)
     {
@@ -56,7 +71,9 @@ public class scrUpgradeMenu : MonoBehaviour
     }
     public void CloseUpgradePanel()
     {
+        purchasePanel.SetActive(false);
         upgradePanel.SetActive(false);
-        upgradePlacementPanel.SetActive(false); 
+        upgradePlacementPanel.SetActive(false);
+        upgradeTheUpgradePanel.SetActive(false);
     }
 }

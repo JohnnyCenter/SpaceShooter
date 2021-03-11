@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class scrUpgradeButton : MonoBehaviour
 {
+    public Action<UpgradesSO> OnUpgradeSelected; //Used to send a reference of the upgrade purchaed to the upgradeUpgrade menu
+
     private GameObject upgradeButton;
     [Header("Assign upgrade button texts")]
     [Tooltip("Drag the text item on the upgrade button that is supposed to contain the upgradeCost")]
@@ -44,6 +47,7 @@ public class scrUpgradeButton : MonoBehaviour
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
                     upgradeMenu.CloseUpgradePanel();
+                    OnUpgradeSelected?.Invoke(upgrade);
                     return;
                 case 1:
                     upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
@@ -51,19 +55,12 @@ public class scrUpgradeButton : MonoBehaviour
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
                     upgradeMenu.CloseUpgradePanel();
-                    return;
-                case 2:
-                    upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
-                    buttonImage.color = Color.grey;
-                    upgradeIsSold = true;
-                    upgradeCost.text = "Sold";
-                    upgradeMenu.CloseUpgradePanel();
+                    OnUpgradeSelected?.Invoke(upgrade);
                     return;
                 default:
                     Debug.LogError("The placement value is incorrect when used for switch statement in the class scrUpgradeButton");
                     return;
             }
-
         }
         else
             Debug.Log("Upgrade is already purchased");
