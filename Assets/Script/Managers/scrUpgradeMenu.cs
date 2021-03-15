@@ -52,6 +52,10 @@ public class scrUpgradeMenu : MonoBehaviour
             purchasePanel.SetActive(true);
         }
     }
+    public void OpenUpgradeMenu() //Called from the "Menu" button
+    {
+        purchasePanel.SetActive(true);
+    }
     public void OpenUpgradeTheUpgradePanel()
     {
         upgradeTheUpgradePanel.SetActive(true);
