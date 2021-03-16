@@ -19,12 +19,10 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
 
     private void Awake()
     {
+        print("Upgrade panel has awoken");
         UpgradeImage = GetComponent<Image>();
         upgradeLevel = 0;
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
-    }
-    private void Start()
-    {
         upgradeLevelText.text = "Level " + upgradeLevel.ToString();
         upgradeCost.text = "0";
     }
@@ -47,13 +45,5 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
             upgradeMenu.CloseUpgradePanel();
         }
 
-    }
-    private void OnEnable()
-    {
-        //scrUpgradeButton.OnUpgradeSelected += UpdateTheUpgrade;
-    }
-    private void OnDisable()
-    {
-        //scrUpgradeButton.OnUpgradeSelected -= UpdateTheUpgrade;
     }
 }
