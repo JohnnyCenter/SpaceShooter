@@ -15,16 +15,17 @@ public class UpgradesSO : ScriptableObject
     [SerializeField] private string upgradeName;
     [Tooltip("assign the location on the player prefab for this uppgrade to spawn when purchased")]
 
-    [SerializeField] GameObject upgradeLocationLeft;
-    [SerializeField] GameObject upgradeLocationRight;
+    private Vector3 upgradeLocationLeft;
+    private Vector3 upgradeLocationRight;
+    private int playerWidth = 1;
 
     //private GameObject upgradeLocation;
-    private GameObject playerObject;
+    private GameObject playerBody;
     public string UpgradeName { get; private set; }
 
     public void ResetUpgradeStats()
     {
-        playerObject = GameObject.FindGameObjectWithTag("ThePlayer");
+        playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
         UpgradeCost = upgradeCost;
         if (upgradeName != null)
         {
@@ -36,15 +37,27 @@ public class UpgradesSO : ScriptableObject
             UpgradeName = "not assigned";
         }
     }
+    public Vector3 SetUpgradeLocationLeft(Vector3 _playerPossition)
+    {
+        upgradeLocationLeft = _playerPossition;
+        upgradeLocationLeft.x = _playerPossition.x - playerWidth;
+        return upgradeLocationLeft;
+    }public Vector3 SetUpgradeLocationRight(Vector3 _playerPossition)
+    {
+        upgradeLocationRight = _playerPossition;
+        upgradeLocationRight.x = _playerPossition.x + playerWidth;
+        return upgradeLocationRight;
+    }
+
     public void UpgradePurchased(int placement)
     {
         switch(placement)
         {
             case 0:
-                Instantiate(upgradePrefab, upgradeLocationLeft.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
+                Instantiate(upgradePrefab, SetUpgradeLocationLeft(playerBody.transform.position), Quaternion.identity, playerBody.transform); //Instantiate the upgrade with the player as parent
                 return;
             case 1:
-                Instantiate(upgradePrefab, upgradeLocationRight.transform.position, Quaternion.identity, playerObject.transform); //Instantiate the upgrade with the player as 
+                Instantiate(upgradePrefab, SetUpgradeLocationRight(playerBody.transform.position), Quaternion.identity, playerBody.transform); //Instantiate the upgrade with the player as parent
                 return;
             default:
                 Debug.LogError("The placement value is incorrect when used for switch statement in the class UpgradeSO");

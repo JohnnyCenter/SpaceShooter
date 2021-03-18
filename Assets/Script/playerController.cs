@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
+    Rigidbody2D rb; //Names Rigidbody2D rb
     public float moveSpeed = 10; //Variable that defines the speed of the ship
 
     [SerializeField]
     float movementShootingSpeed = 5;
 
-    Rigidbody2D rb; //Names Rigidbody2D rb
-
     bool moveAllowed = false; //Bool for if the player is allowed to move left and right
 
-    private void Start()
+    private void Awake()
     {
-        rb.GetComponent<Rigidbody2D>(); //Grabs the Rigidbody2D component from GameObject
+        rb = GetComponent<Rigidbody2D>();//Grabs the Rigidbody2D component from GameObject
     }
 
     private void Update()

@@ -23,6 +23,8 @@ public class scrUpgradeButton : MonoBehaviour
     private int placement;
     [SerializeField] private scrUpgradeTheUpgradeButton leftUpgradeInfo; //Try assigning these through code, if this works
     [SerializeField] private scrUpgradeTheUpgradeButton rightUpgradeInfo;
+    private Vector3 playerPossition;
+
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class scrUpgradeButton : MonoBehaviour
         upgradeCost.text = upgrade.UpgradeCost.ToString();
         upgradeName.text = upgrade.UpgradeName;
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
+        playerPossition = GameObject.FindGameObjectWithTag("PlayerBody").transform.position;
     }
 
     public void UpgradeSelected() //Remember that if you rename this function, you will need to reasign it for the button in the inspector
@@ -41,6 +44,7 @@ public class scrUpgradeButton : MonoBehaviour
         {
             //CHECK that there is enough scrap
             //If yes:
+
             switch (placement)
             {
                 case 0:
