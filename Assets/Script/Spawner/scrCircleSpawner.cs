@@ -89,7 +89,6 @@ public class scrCircleSpawner : MonoBehaviour
                 }
                 return;
         }
-
     }
 
     private IEnumerator StartSpawnTimer(float _timer)

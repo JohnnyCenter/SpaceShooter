@@ -882,7 +882,7 @@ MonoBehaviour:
   - {fileID: 400895082572231295, guid: 046ef9a669c411c49bd586d2f0826fbe, type: 3}
   - {fileID: 2453836205064642923, guid: 193848db1550d69489ca070a6c044a42, type: 3}
   spawnTimer: 5
-  gameIntensety: 1
+  gameIntensety: 2
 --- !u!4 &1080954506
 Transform:
   m_ObjectHideFlags: 0
@@ -915,7 +915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1086964259}
   m_Layer: 0
-  m_Name: SpawnPointRightLeft
+  m_Name: SpawnPointLeftBack
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
