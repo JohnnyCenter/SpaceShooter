@@ -316,12 +316,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426392721}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.71, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3472293815260234958}
-  m_RootOrder: 2
+  m_Father: {fileID: 3472293815277634413}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &426392723
 MonoBehaviour:
@@ -340,8 +340,10 @@ MonoBehaviour:
   - {fileID: 5337143145188243958, guid: b1fde8abb662d1641911baa6afe75b2e, type: 3}
   - {fileID: 5337143145188243958, guid: d1a47890b3b50384981b5b35e520e8db, type: 3}
   - {fileID: 5337143145188243958, guid: d4b7800d8d5d14e47bef20ca63dc0f16, type: 3}
-  numberOfProjectilesToSpawn: 10
+  numberOfProjectilesToSpawn: 15
   upgradeLeft_RightPlacement: 1
+  firePossitionLeft: {fileID: 985315033}
+  firePossitionRight: {fileID: 426392721}
 --- !u!1 &513578715
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,12 +879,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985315033}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.74, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3472293815260234958}
-  m_RootOrder: 1
+  m_Father: {fileID: 3472293815277634413}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &985315035
 MonoBehaviour:
@@ -901,8 +903,10 @@ MonoBehaviour:
   - {fileID: 5337143145188243958, guid: b1fde8abb662d1641911baa6afe75b2e, type: 3}
   - {fileID: 5337143145188243958, guid: d1a47890b3b50384981b5b35e520e8db, type: 3}
   - {fileID: 5337143145188243958, guid: d4b7800d8d5d14e47bef20ca63dc0f16, type: 3}
-  numberOfProjectilesToSpawn: 10
+  numberOfProjectilesToSpawn: 15
   upgradeLeft_RightPlacement: 0
+  firePossitionLeft: {fileID: 985315033}
+  firePossitionRight: {fileID: 426392721}
 --- !u!1 &1020708653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,8 +2918,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3472293815277634413}
-  - {fileID: 985315034}
-  - {fileID: 426392722}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2948,6 +2950,8 @@ Transform:
   m_Children:
   - {fileID: 752634988}
   - {fileID: 1080954506}
+  - {fileID: 985315034}
+  - {fileID: 426392722}
   m_Father: {fileID: 3472293815260234958}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

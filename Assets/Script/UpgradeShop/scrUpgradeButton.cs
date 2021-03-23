@@ -24,7 +24,7 @@ public class scrUpgradeButton : MonoBehaviour
     [SerializeField] private scrUpgradeTheUpgradeButton leftUpgradeInfo; //Try assigning these through code, if this works
     [SerializeField] private scrUpgradeTheUpgradeButton rightUpgradeInfo;
     private Vector3 playerPossition;
-    public static event Action<int, int> OnWeaponPurchased; //Weapon _ID, Weapon placement
+    public static event Action<int, int> OnWeaponPurchased; //Weapon _ID, Weapon placement(left or right)
 
 
     private void Awake()

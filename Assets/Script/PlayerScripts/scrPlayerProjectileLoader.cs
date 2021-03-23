@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 /// <summary>
 /// This script should sit on two different gameobjects placed at the weapon placement
 /// </summary>
@@ -36,13 +37,19 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     private List<GameObject> projectilesType2;
     private List<GameObject> projectilesType3;
     private GameObject currentProjectileLoaded;
-    private int _ID;
+    private int projectileID;
     public int CurrentWeaponID { get; private set; } //Needs to be set when wheapon is purchased
+    public static event Action<GameObject> OnFireWeapon;
+
+    [Header("Assign fire possitions")]
+    [SerializeField] private GameObject firePossitionLeft;
+    [SerializeField] private GameObject firePossitionRight;
+    private Vector3 firePossition;
 
     private void Awake()
     {
         CurrentWeaponID = -1; //No weapon is purchased
-        _ID = 0;
+        projectileID = 0;
         projectilesType0 = new List<GameObject>(); //Initialize the list
         projectilesType1 = new List<GameObject>(); //Initialize the list
         projectilesType2 = new List<GameObject>(); //Initialize the list
@@ -62,19 +69,13 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             LoadProjectile(CurrentWeaponID);
             FireProjectile(currentProjectileLoaded);
         }
-        if(Input.GetKeyDown(KeyCode.W)) //For testing
+        if(upgradeLeft_RightPlacement == 0)
         {
-            if(CurrentWeaponID < 3)
-            {
-                CurrentWeaponID += 1;
-            }
+            firePossition = firePossitionLeft.transform.position; //Decides the possition the porjectiles spawn at.
         }
-        if (Input.GetKeyDown(KeyCode.S)) //For testing
+        else if(upgradeLeft_RightPlacement == 1)
         {
-            if (CurrentWeaponID > 0)
-            {
-                CurrentWeaponID -= 1;
-            }
+            firePossition = firePossitionRight.transform.position; //Decides the possition the porjectiles spawn at.
         }
     }
 
@@ -85,9 +86,9 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             GameObject projectilePool = Instantiate(new GameObject("Pool for " + _projectilePrefab)); //Instantiate a new empty gameobject to act as a pool
 
 
-            print("The ID is: " + _ID);
+            //print("The ID is: " + projectileID);
             //_ID++; //Increment the ID each time the code is run
-            switch (_ID)
+            switch (projectileID)
             {
                 case 0:
                     for (int i = 0; i < numberOfProjectilesToSpawn; i++) //Spawns a set number of each projectile
@@ -96,7 +97,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                         projectilesType0.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
-                        _ID = 1;
+                        projectileID = 1;
                     }
                     break;
                 case 1:
@@ -106,7 +107,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                         projectilesType1.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
-                        _ID = 2;
+                        projectileID = 2;
                     }
                     break;
                 case 2:
@@ -116,7 +117,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                         projectilesType2.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
-                        _ID = 3;
+                        projectileID = 3;
                     }
                     break;
                 case 3:
@@ -126,7 +127,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                         projectilesType3.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
-                        _ID = 4;
+                        projectileID = 4;
                     }
                     break;
             }
@@ -172,7 +173,9 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         {
             return;
         }
+        _loadedProjectile.transform.position = firePossition;
         _loadedProjectile.SetActive(true);
+        OnFireWeapon?.Invoke(_loadedProjectile);
     }
     public void WeaponPurchased(int _weaponType, int placement)
     {

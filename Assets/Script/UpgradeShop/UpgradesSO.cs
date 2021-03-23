@@ -44,10 +44,19 @@ public class UpgradesSO : ScriptableObject
         upgradeLocationLeft = _playerPossition;
         upgradeLocationLeft.x = _playerPossition.x - playerWidth;
         return upgradeLocationLeft;
-    }public Vector3 SetUpgradeLocationRight(Vector3 _playerPossition)
+    }
+    public Vector3 GetUPgradeLocationLeft()
+    {
+        return upgradeLocationLeft;
+    }
+    public Vector3 SetUpgradeLocationRight(Vector3 _playerPossition)
     {
         upgradeLocationRight = _playerPossition;
         upgradeLocationRight.x = _playerPossition.x + playerWidth;
+        return upgradeLocationRight;
+    }
+    public Vector3 GetUpgradeLocationRight()
+    {
         return upgradeLocationRight;
     }
 
