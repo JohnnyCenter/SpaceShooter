@@ -26,6 +26,10 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     [Tooltip("This array should contain ONE instance of every projectile prefab")]
     [SerializeField] private GameObject[] projectileTypes;
     [SerializeField] private int numberOfProjectilesToSpawn = 10;
+    [Header("Possition")]
+    [Tooltip("0 = left possition. 1 = right possition.")]
+    [Range(0, 1)]
+    [SerializeField] private int upgradeLeft_RightPlacement = 0;
 
     private List<GameObject> projectilesType0;
     private List<GameObject> projectilesType1;
@@ -73,6 +77,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             }
         }
     }
+
     private void InstantiateProjectiles()
     {
         foreach(GameObject _projectilePrefab in projectileTypes) //Runs once for each type of projectile
@@ -168,5 +173,21 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             return;
         }
         _loadedProjectile.SetActive(true);
+    }
+    public void WeaponPurchased(int _weaponType, int placement)
+    {
+        if(upgradeLeft_RightPlacement == placement)
+        {
+            print("Weapon purchased");
+            CurrentWeaponID = _weaponType;
+        }
+    }
+    private void OnEnable()
+    {
+        scrUpgradeButton.OnWeaponPurchased += WeaponPurchased;
+    }
+    private void OnDisable()
+    {
+        scrUpgradeButton.OnWeaponPurchased -= WeaponPurchased;
     }
 }

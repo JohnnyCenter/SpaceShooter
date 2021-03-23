@@ -24,6 +24,7 @@ public class scrUpgradeButton : MonoBehaviour
     [SerializeField] private scrUpgradeTheUpgradeButton leftUpgradeInfo; //Try assigning these through code, if this works
     [SerializeField] private scrUpgradeTheUpgradeButton rightUpgradeInfo;
     private Vector3 playerPossition;
+    public static event Action<int, int> OnWeaponPurchased; //Weapon _ID, Weapon placement
 
 
     private void Awake()
@@ -54,7 +55,7 @@ public class scrUpgradeButton : MonoBehaviour
                     upgradeCost.text = "Sold";
                     upgradeMenu.CloseUpgradePanel();
                     leftUpgradeInfo.UpdateTheUpgrade(upgrade);
-                    //OnUpgradeSelected?.Invoke(upgrade);
+                    OnWeaponPurchased?.Invoke(upgrade.ProjectileType, 0);
                     return;
                 case 1:
                     upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
@@ -63,7 +64,7 @@ public class scrUpgradeButton : MonoBehaviour
                     upgradeCost.text = "Sold";
                     upgradeMenu.CloseUpgradePanel();
                     rightUpgradeInfo.UpdateTheUpgrade(upgrade);
-                    //OnUpgradeSelected?.Invoke(upgrade);
+                    OnWeaponPurchased?.Invoke(upgrade.ProjectileType, 1);
                     return;
                 default:
                     Debug.LogError("The placement value is incorrect when used for switch statement in the class scrUpgradeButton");
