@@ -2849,6 +2849,8 @@ MonoBehaviour:
   projectileTypes:
   - {fileID: 3909584754008862521, guid: 8ca08a6005c3d834f8080c9456fe9dc3, type: 3}
   - {fileID: 5337143145188243958, guid: b1fde8abb662d1641911baa6afe75b2e, type: 3}
+  - {fileID: 5337143145188243958, guid: d1a47890b3b50384981b5b35e520e8db, type: 3}
+  - {fileID: 5337143145188243958, guid: d4b7800d8d5d14e47bef20ca63dc0f16, type: 3}
   numberOfProjectilesToSpawn: 10
 --- !u!4 &3472293815277634413
 Transform:

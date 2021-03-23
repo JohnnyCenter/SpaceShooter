@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This script should sit on two different gameobjects placed at the weapon placement
+/// </summary>
 public class scrPlayerProjectileLoader : MonoBehaviour
 {
     //Initialization:
@@ -31,9 +33,11 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     private List<GameObject> projectilesType3;
     private GameObject currentProjectileLoaded;
     private int _ID;
+    public int CurrentWeaponID { get; private set; } //Needs to be set when wheapon is purchased
 
     private void Awake()
     {
+        CurrentWeaponID = -1; //No weapon is purchased
         _ID = 0;
         projectilesType0 = new List<GameObject>(); //Initialize the list
         projectilesType1 = new List<GameObject>(); //Initialize the list
@@ -42,7 +46,33 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
         InstantiateProjectiles();
     }
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(CurrentWeaponID == -1) //Check that a weapon is purchased
+            {
+                return;
+            }
+            print("Weapon is fired");
+            LoadProjectile(CurrentWeaponID);
+            FireProjectile(currentProjectileLoaded);
+        }
+        if(Input.GetKeyDown(KeyCode.W)) //For testing
+        {
+            if(CurrentWeaponID < 3)
+            {
+                CurrentWeaponID += 1;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.S)) //For testing
+        {
+            if (CurrentWeaponID > 0)
+            {
+                CurrentWeaponID -= 1;
+            }
+        }
+    }
     private void InstantiateProjectiles()
     {
         foreach(GameObject _projectilePrefab in projectileTypes) //Runs once for each type of projectile
@@ -78,7 +108,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                     for (int i = 0; i < numberOfProjectilesToSpawn; i++) //Spawns a set number of each projectile
                     {
                         GameObject newInstance = Instantiate(_projectilePrefab, transform.position, Quaternion.identity, projectilePool.transform);
-                        projectilesType1.Add(newInstance); //Add the new instance to its own list
+                        projectilesType2.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
                         _ID = 3;
@@ -88,7 +118,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                     for (int i = 0; i < numberOfProjectilesToSpawn; i++) //Spawns a set number of each projectile
                     {
                         GameObject newInstance = Instantiate(_projectilePrefab, transform.position, Quaternion.identity, projectilePool.transform);
-                        projectilesType1.Add(newInstance); //Add the new instance to its own list
+                        projectilesType3.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
                         _ID = 4;
@@ -98,16 +128,45 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
         }
     }
-
-    private GameObject LoadProjectile(int _ID)
+    public GameObject LoadProjectile(int weaponType) //The int it is assigned is "CurrentWeaponID"
     {
-        switch(_ID)
+        switch(weaponType)
         {
             case 0:
-                print("Loaded weapon for case: " + 0);
-                return currentProjectileLoaded = projectilesType0[0];
+                print("Loaded projectile type: " + 0);
+                return currentProjectileLoaded = GetInstanceFromPool(projectilesType0);
+            case 1:
+                print("Loaded projectile type: " + 1);
+                return currentProjectileLoaded = GetInstanceFromPool(projectilesType1);
+            case 2:
+                print("Loaded projectile type: " + 2);
+                return currentProjectileLoaded = GetInstanceFromPool(projectilesType2);
+            case 3:
+                print("Loaded projectile type: " + 3);
+                return currentProjectileLoaded = GetInstanceFromPool(projectilesType3);
             default:
+                Debug.LogError("The value of the int passed to the LoadProjectile function in the scrPlayerProjectileLoader class is incorrect");
                 return null;
         }
+    }
+    private GameObject GetInstanceFromPool(List<GameObject> _list)
+    {
+        for(int i = 0; i < _list.Count; i ++)
+        {
+            if(!_list[i].activeInHierarchy)
+            {
+                return _list[i];
+            }
+        }
+        Debug.Log("There are no more unactive projectiles left in pool. Returning null");
+        return null;
+    }
+    private void FireProjectile(GameObject _loadedProjectile)
+    {
+        if(_loadedProjectile == null)
+        {
+            return;
+        }
+        _loadedProjectile.SetActive(true);
     }
 }
