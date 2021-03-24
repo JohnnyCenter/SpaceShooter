@@ -16,15 +16,25 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     private int upgradeLevel;
     UpgradesSO localUpgrade; //This will be null, until its assigned by the "UpdateTheUpgrade" function bellow.
     private scrUpgradeMenu upgradeMenu;
+    [Tooltip("0 = left placement. 1 = right placement")]
+    [Range(0, 1)]
+    [SerializeField] private int upgradePlacement = 0;
+    private GameObject thePlayer;
+    scrProjectileLevelTracker[] projectileLevelTrackers;
 
     private void Awake()
     {
+        thePlayer = GameObject.FindGameObjectWithTag("ThePlayer"); //Gets the instance of the player
         print("Upgrade panel has awoken");
         UpgradeImage = GetComponent<Image>();
         upgradeLevel = 0;
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
         upgradeLevelText.text = "Level " + upgradeLevel.ToString();
         upgradeCost.text = "0";
+    }
+    private void Start()
+    {
+        projectileLevelTrackers = thePlayer.GetComponentsInChildren<scrProjectileLevelTracker>(); //Gets the projectileLevelTracjers
     }
     public void UpdateTheUpgrade(UpgradesSO _upgrade)
     {
@@ -42,6 +52,10 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
             upgradeLevel += 1;
             upgradeLevelText.text = "Level " + upgradeLevel.ToString();
             upgradeCost.text = localUpgrade.UpgradeCost.ToString(); //This local upgrade is assigned by the "UpdateTheUpgrade" function found in this script
+            foreach(scrProjectileLevelTracker levelTracker in projectileLevelTrackers)
+            {
+                levelTracker.IncreaseProjectileLevel(upgradePlacement);
+            }
             upgradeMenu.CloseUpgradePanel();
         }
 

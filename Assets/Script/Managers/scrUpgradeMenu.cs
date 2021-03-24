@@ -75,17 +75,23 @@ public class scrUpgradeMenu : MonoBehaviour
             //Debug.Log("Opens upgrade panel");
             purchasePanel.SetActive(true);
             menuButton.SetActive(false); //Hide the open menu button
+            Time.timeScale = 0f;
+
         }
     }
     public void OpenUpgradeTheUpgradePanel()
     {
         upgradeTheUpgradePanel.SetActive(true);
         purchasePanel.SetActive(false);
+        Time.timeScale = 0f;
+
     }
     public void OpenUpgradePlacementPanel()
     {
         purchasePanel.SetActive(false);
         UpgradePLacementPanel.SetActive(true);
+        Time.timeScale = 0f;
+
     }
     public void OpenUpgradeMenuWithPlacementReference(int placement)
     {
@@ -93,6 +99,8 @@ public class scrUpgradeMenu : MonoBehaviour
         //print("Upgrade menu is opened with the following placement: " + placement);
         //UpgradePlacement = placement;
         OnPlacementSelected?.Invoke(placement);
+        Time.timeScale = 0f;
+
     }
     public void CloseUpgradePanel()
     {
@@ -101,5 +109,6 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradePlacementPanel.SetActive(false);
         upgradeTheUpgradePanel.SetActive(false);
         menuButton.SetActive(true);
+        Time.timeScale = 1f;
     }
 }

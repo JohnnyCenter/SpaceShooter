@@ -13,11 +13,12 @@ public class UpgradesSO : ScriptableObject
     public int UpgradeCost { get; private set; }
     [Tooltip("Set the name of the upgrade")]
     [SerializeField] private string upgradeName;
-    [Tooltip("assign the location on the player prefab for this uppgrade to spawn when purchased")]
-
     private Vector3 upgradeLocationLeft;
     private Vector3 upgradeLocationRight;
     private int playerWidth = 1;
+    [Tooltip("Assign projectile type by number. The projectile will be the same as the INDEX NUMBER of the projectile type in the array in the scrPlayerProjectileLoader class")]
+    [SerializeField] private int projectileType;
+    public int ProjectileType { get; private set; }
 
     //private GameObject upgradeLocation;
     private GameObject playerBody;
@@ -25,6 +26,7 @@ public class UpgradesSO : ScriptableObject
 
     public void ResetUpgradeStats()
     {
+        ProjectileType = projectileType;
         playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
         UpgradeCost = upgradeCost;
         if (upgradeName != null)
@@ -42,10 +44,19 @@ public class UpgradesSO : ScriptableObject
         upgradeLocationLeft = _playerPossition;
         upgradeLocationLeft.x = _playerPossition.x - playerWidth;
         return upgradeLocationLeft;
-    }public Vector3 SetUpgradeLocationRight(Vector3 _playerPossition)
+    }
+    public Vector3 GetUPgradeLocationLeft()
+    {
+        return upgradeLocationLeft;
+    }
+    public Vector3 SetUpgradeLocationRight(Vector3 _playerPossition)
     {
         upgradeLocationRight = _playerPossition;
         upgradeLocationRight.x = _playerPossition.x + playerWidth;
+        return upgradeLocationRight;
+    }
+    public Vector3 GetUpgradeLocationRight()
+    {
         return upgradeLocationRight;
     }
 
