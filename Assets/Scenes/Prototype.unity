@@ -302,6 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426392722}
   - component: {fileID: 426392723}
+  - component: {fileID: 426392724}
   m_Layer: 0
   m_Name: WeaponsRight
   m_TagString: Untagged
@@ -344,6 +345,18 @@ MonoBehaviour:
   upgradeLeft_RightPlacement: 1
   firePossitionLeft: {fileID: 985315033}
   firePossitionRight: {fileID: 426392721}
+--- !u!114 &426392724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426392721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5e9451428880840894bbeba1a7b545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &513578715
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,6 +878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 985315034}
   - component: {fileID: 985315035}
+  - component: {fileID: 985315036}
   m_Layer: 0
   m_Name: WeaponsLeft
   m_TagString: Untagged
@@ -907,6 +921,18 @@ MonoBehaviour:
   upgradeLeft_RightPlacement: 0
   firePossitionLeft: {fileID: 985315033}
   firePossitionRight: {fileID: 426392721}
+--- !u!114 &985315036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985315033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5e9451428880840894bbeba1a7b545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1020708653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1315,7 @@ PrefabInstance:
     - target: {fileID: 1251224795736952552, guid: b812dfd1abfc38a429bd7445d8c06876,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1251224795736952555, guid: b812dfd1abfc38a429bd7445d8c06876,
         type: 3}
@@ -1695,6 +1721,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251224796721542856, guid: b812dfd1abfc38a429bd7445d8c06876,
+        type: 3}
+      propertyPath: upgradePlacement
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1251224796721542863, guid: b812dfd1abfc38a429bd7445d8c06876,
         type: 3}

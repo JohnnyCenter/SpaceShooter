@@ -22,7 +22,8 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
     //Using a level var for projectiles:
     //As the weapon is upgraded, an upgrade event is called that upgrades the stats on the weapons with the level!
-    
+    private scrProjectileLevelTracker projectileLevelTracker;
+
     [Header("Assign projectile prefabs")]
     [Tooltip("This array should contain ONE instance of every projectile prefab")]
     [SerializeField] private GameObject[] projectileTypes;
@@ -31,6 +32,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     [Tooltip("0 = left possition. 1 = right possition.")]
     [Range(0, 1)]
     [SerializeField] private int upgradeLeft_RightPlacement = 0;
+    public int UpgradeLeft_RightPlacement { get; private set; }
 
     private List<GameObject> projectilesType0;
     private List<GameObject> projectilesType1;
@@ -50,6 +52,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
     private void Awake()
     {
+        projectileLevelTracker = GetComponent<scrProjectileLevelTracker>(); //Gets the instance of the level tracker
         player = GameObject.FindGameObjectWithTag("ThePlayer"); //Get the player instance
         CurrentWeaponID = -1; //No weapon is purchased
         projectileID = 0;
@@ -58,6 +61,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         projectilesType2 = new List<GameObject>(); //Initialize the list
         projectilesType3 = new List<GameObject>(); //Initialize the list
 
+        UpgradeLeft_RightPlacement = upgradeLeft_RightPlacement;
         InstantiateProjectiles();
     }
     private void Update()
@@ -188,6 +192,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         {
             print("Weapon purchased");
             CurrentWeaponID = _weaponType;
+            projectileLevelTracker.WeaponPurchased();
         }
     }
     private void OnEnable()
