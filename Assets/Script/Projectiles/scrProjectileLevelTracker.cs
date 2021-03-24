@@ -43,15 +43,19 @@ public class scrProjectileLevelTracker : MonoBehaviour
             {
                 case 1:
                     //Uppgrade or assign stats
+                    projectileLoader.UpdatePorjectileLevel(1);
                     return;
                 case 2:
                     //Uppgrade or assign stats
+                    projectileLoader.UpdatePorjectileLevel(2);
                     return;
                 case 3:
                     //Uppgrade or assign stats
+                    projectileLoader.UpdatePorjectileLevel(3);
                     return;
                 case 4:
                     //Uppgrade or assign stats
+                    projectileLoader.UpdatePorjectileLevel(4);
                     return;
                 default:
                     Debug.LogError("Invalid int value for switch statement for the UpdateProjectileStats method in the scrProjectileLevelTracker class");

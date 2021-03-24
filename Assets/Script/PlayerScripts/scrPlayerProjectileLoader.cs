@@ -33,6 +33,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] private int upgradeLeft_RightPlacement = 0;
     public int UpgradeLeft_RightPlacement { get; private set; }
+    private int projectileLevel;
 
     private List<GameObject> projectilesType0;
     private List<GameObject> projectilesType1;
@@ -52,6 +53,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
     private void Awake()
     {
+        projectileLevel = 0;
         projectileLevelTracker = GetComponent<scrProjectileLevelTracker>(); //Gets the instance of the level tracker
         player = GameObject.FindGameObjectWithTag("ThePlayer"); //Get the player instance
         CurrentWeaponID = -1; //No weapon is purchased
@@ -181,8 +183,13 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         {
             return;
         }
+        //Set possition and align projectile
         _loadedProjectile.transform.position = firePossition;
         _loadedProjectile.transform.rotation = playerRotation;
+        //Update projectile stats based on weapon level
+        scrProjectileLevel loadedProjectileLevel = _loadedProjectile.GetComponent<scrProjectileLevel>();
+        loadedProjectileLevel.UpdateProjectileLevel(projectileLevel); //Updates the stats for the loaded projectile 
+        //Set the projectile to active and fire it
         _loadedProjectile.SetActive(true);
         OnFireWeapon?.Invoke(_loadedProjectile);
     }
@@ -194,6 +201,10 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             CurrentWeaponID = _weaponType;
             projectileLevelTracker.WeaponPurchased();
         }
+    }
+    public void UpdatePorjectileLevel(int _newLevel) //Update the projectile level
+    {
+        projectileLevel = _newLevel;
     }
     private void OnEnable()
     {
