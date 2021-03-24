@@ -11,6 +11,14 @@ public class scrProjectileLevel : MonoBehaviour
             case 0:
                 //Use specified SO for stats
                 return;
+            case 1:
+                return;
+            case 2:
+                return;
+            case 3:
+                return;
+            case 4:
+                return;
             default:
                 Debug.LogError("The value for the int passed to the UpdateProjectileLevel funcion in the scrProjectileLevel class is invalid.");
                 return;
