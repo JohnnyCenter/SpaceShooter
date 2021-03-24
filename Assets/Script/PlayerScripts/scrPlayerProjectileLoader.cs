@@ -45,9 +45,12 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     [SerializeField] private GameObject firePossitionLeft;
     [SerializeField] private GameObject firePossitionRight;
     private Vector3 firePossition;
+    Quaternion playerRotation;
+    private GameObject player;
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("ThePlayer"); //Get the player instance
         CurrentWeaponID = -1; //No weapon is purchased
         projectileID = 0;
         projectilesType0 = new List<GameObject>(); //Initialize the list
@@ -59,6 +62,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     }
     private void Update()
     {
+        playerRotation = player.transform.rotation; //Update the player rotation, so that projectiles are facing the right direction when the player turns
         if(Input.GetKeyDown(KeyCode.Space))
         {
             if(CurrentWeaponID == -1) //Check that a weapon is purchased
@@ -93,7 +97,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                 case 0:
                     for (int i = 0; i < numberOfProjectilesToSpawn; i++) //Spawns a set number of each projectile
                     {
-                        GameObject newInstance = Instantiate(_projectilePrefab, transform.position, Quaternion.identity, projectilePool.transform);
+                        GameObject newInstance = Instantiate(_projectilePrefab, transform.position, playerRotation, projectilePool.transform);
                         projectilesType0.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
@@ -103,7 +107,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                 case 1:
                     for (int i = 0; i < numberOfProjectilesToSpawn; i++) //Spawns a set number of each projectile
                     {
-                        GameObject newInstance = Instantiate(_projectilePrefab, transform.position, Quaternion.identity, projectilePool.transform);
+                        GameObject newInstance = Instantiate(_projectilePrefab, transform.position, playerRotation, projectilePool.transform);
                         projectilesType1.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
@@ -113,7 +117,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                 case 2:
                     for (int i = 0; i < numberOfProjectilesToSpawn; i++) //Spawns a set number of each projectile
                     {
-                        GameObject newInstance = Instantiate(_projectilePrefab, transform.position, Quaternion.identity, projectilePool.transform);
+                        GameObject newInstance = Instantiate(_projectilePrefab, transform.position, playerRotation, projectilePool.transform);
                         projectilesType2.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
@@ -123,7 +127,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
                 case 3:
                     for (int i = 0; i < numberOfProjectilesToSpawn; i++) //Spawns a set number of each projectile
                     {
-                        GameObject newInstance = Instantiate(_projectilePrefab, transform.position, Quaternion.identity, projectilePool.transform);
+                        GameObject newInstance = Instantiate(_projectilePrefab, transform.position, playerRotation, projectilePool.transform);
                         projectilesType3.Add(newInstance); //Add the new instance to its own list
 
                         newInstance.SetActive(false);
@@ -174,6 +178,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             return;
         }
         _loadedProjectile.transform.position = firePossition;
+        _loadedProjectile.transform.rotation = playerRotation;
         _loadedProjectile.SetActive(true);
         OnFireWeapon?.Invoke(_loadedProjectile);
     }

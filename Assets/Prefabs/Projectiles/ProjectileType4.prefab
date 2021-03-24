@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4335749823516030852}
   - component: {fileID: 3920807280498507064}
   - component: {fileID: 2576613448207787308}
-  - component: {fileID: 2043134504705182345}
+  - component: {fileID: 2627082405332184990}
   m_Layer: 0
   m_Name: ProjectileType4
   m_TagString: Untagged
@@ -95,7 +95,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2043134504705182345
+--- !u!114 &2627082405332184990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5337143145188243958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8faa5b7a4ec6f2d448ba1c4960e057f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 40ceaca57c9801e49950e117a0b3ae7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectileLifeTime: 2
