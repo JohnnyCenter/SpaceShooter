@@ -51,6 +51,9 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     Quaternion playerRotation;
     private GameObject player;
 
+    [SerializeField]
+    playerController pc; //TEMPORARY CHANGE TO CONNECT PLAYERCONTROLLER WITH THIS SCRIPT//
+
     private void Awake()
     {
         projectileLevel = 0;
@@ -65,11 +68,13 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
         UpgradeLeft_RightPlacement = upgradeLeft_RightPlacement;
         InstantiateProjectiles();
+
+        pc = FindObjectOfType<playerController>(); //TEMPORARY CHANGE TO CONNECT PLAYERCONTROLLER WITH THIS SCRIPT//
     }
     private void Update()
     {
         playerRotation = player.transform.rotation; //Update the player rotation, so that projectiles are facing the right direction when the player turns
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) || pc.firing == true) //ADDED PC.FIRING == TRUE//
         {
             if(CurrentWeaponID == -1) //Check that a weapon is purchased
             {
