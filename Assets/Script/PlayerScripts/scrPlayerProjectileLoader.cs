@@ -43,6 +43,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     private int projectileID;
     public int CurrentWeaponID { get; private set; } //Needs to be set when wheapon is purchased
     public static event Action<GameObject> OnFireWeapon;
+    private bool weaponCanFire;
 
     [Header("Assign fire possitions")]
     [SerializeField] private GameObject firePossitionLeft;
@@ -56,9 +57,10 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
     private void Awake()
     {
+        weaponCanFire = true;
         projectileLevel = 0;
         projectileLevelTracker = GetComponent<scrProjectileLevelTracker>(); //Gets the instance of the level tracker
-        player = GameObject.FindGameObjectWithTag("ThePlayer"); //Get the player instance
+        player = GameObject.FindGameObjectWithTag("PlayerBody"); //Get the player instance
         CurrentWeaponID = -1; //No weapon is purchased
         projectileID = 0;
         projectilesType0 = new List<GameObject>(); //Initialize the list
@@ -80,7 +82,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             {
                 return;
             }
-            print("Weapon is fired");
+            //print("Weapon is fired");
             LoadProjectile(CurrentWeaponID);
             FireProjectile(currentProjectileLoaded);
         }
@@ -184,7 +186,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     }
     private void FireProjectile(GameObject _loadedProjectile)
     {
-        if(_loadedProjectile == null)
+        if(_loadedProjectile == null || weaponCanFire == false)
         {
             return;
         }
@@ -197,6 +199,14 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         //Set the projectile to active and fire it
         _loadedProjectile.SetActive(true);
         OnFireWeapon?.Invoke(_loadedProjectile);
+        weaponCanFire = false;
+        float weaponCooldown = loadedProjectileLevel.stats.WeaponFireRate; //Gets the fire rate from the current loaded projectile
+        StartCoroutine(WeaponCooldown(weaponCooldown)); //Sets cooldown length
+    }
+    private IEnumerator WeaponCooldown(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        weaponCanFire = true;
     }
     public void WeaponPurchased(int _weaponType, int placement)
     {

@@ -122,3 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daab12f2e5cda1f44a9f6399727a8114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  statsLevel0: {fileID: 11400000, guid: bcfd78e22d11d134cb3ce30506c1ebd8, type: 2}
+  statsLevel1: {fileID: 11400000, guid: 4bb4e64a5e5d3fb4dacd2d4141d3987a, type: 2}
+  statsLevel2: {fileID: 11400000, guid: 38b77b05cb38d4f4999f4d5068c614a2, type: 2}
+  statsLevel3: {fileID: 11400000, guid: e9afbaf43da928d48a774b1fe9536ad4, type: 2}
