@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 4335749823516030852}
   - component: {fileID: 3920807280498507064}
   - component: {fileID: 2576613448207787308}
-  - component: {fileID: 1246228211936039804}
+  - component: {fileID: 2246696289679991596}
   - component: {fileID: -1994688220517172492}
   m_Layer: 0
-  m_Name: ProjectileType2
+  m_Name: Torpedo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1246228211936039804
+--- !u!114 &2246696289679991596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,11 +105,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5337143145188243958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40ceaca57c9801e49950e117a0b3ae7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 367cab7191be0dc41ae553bb7d144693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileLifeTime: 2
-  movementSpeed: 20
 --- !u!114 &-1994688220517172492
 MonoBehaviour:
   m_ObjectHideFlags: 0
