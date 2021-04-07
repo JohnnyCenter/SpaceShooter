@@ -8,16 +8,23 @@ public class scrProjectileMovement : MonoBehaviour
     [SerializeField] private float projectileLifeTime = 3.5f;
     [Range(15f, 30f)]
     [SerializeField] private float movementSpeed = 20f;
-    
 
+    private playerController playerController;
+    private float playerMovement;
+
+    private void Awake()
+    {
+        playerController = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<playerController>(); //Gets the reference
+    }
     private void Update()
     {
         MovePorjectile();
+        playerMovement = playerController.moveSpeed;
     }
     protected virtual void MovePorjectile() //I made this virtual because it allows us to edit and change the way the other projectiles move
     {
         //print("Parent moving");
-        transform.position += (transform.up * movementSpeed * Time.deltaTime); //Makes the projectile move in the direction its facing
+        transform.position += (transform.up * (movementSpeed + playerMovement) * Time.deltaTime); //Makes the projectile move in the direction its facing
     }
 
     private void DissableProjectileAfterSetTime(float _projectileTimer)

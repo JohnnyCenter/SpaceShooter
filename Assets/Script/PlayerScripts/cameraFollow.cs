@@ -54,7 +54,7 @@ public class cameraFollow : MonoBehaviour
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotationZ);
         currentPlayerPosition = thePlayer.transform.position;
         transform.position = new Vector3(currentPlayerPosition.x, currentPlayerPosition.y, transform.position.z);
-        transform.position += -transform.up * 5;
+        //transform.position += -transform.up * 5;
         compass.SetActive(true);
         thePlayer.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotationZ / 2);
         yield return new WaitForSeconds(1);
