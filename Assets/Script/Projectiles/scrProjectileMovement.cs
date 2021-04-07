@@ -5,40 +5,44 @@ using UnityEngine;
 public class scrProjectileMovement : MonoBehaviour
 {
     [Tooltip("How long the projectile lasts in the scene if it does not hit anything. Defaults to 3.5 seconds")]
-    [SerializeField] private float projectileLifeTime = 3.5f;
+    [SerializeField] protected float projectileLifeTime = 3.5f;
     [Range(15f, 30f)]
-    [SerializeField] private float movementSpeed = 20f;
+    [SerializeField] protected float movementSpeed = 20f;
 
     private playerController playerController;
-    private float playerMovement;
+    protected float playerMovementSpeed;
 
     private void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<playerController>(); //Gets the reference
+        playerMovementSpeed = 0f;
     }
-    private void Update()
+    protected void Update()
     {
+        if(playerController!= null)
+        {
+            playerMovementSpeed = playerController.moveSpeed;
+        }
         MovePorjectile();
-        playerMovement = playerController.moveSpeed;
     }
     protected virtual void MovePorjectile() //I made this virtual because it allows us to edit and change the way the other projectiles move
     {
         //print("Parent moving");
-        transform.position += (transform.up * (movementSpeed + playerMovement) * Time.deltaTime); //Makes the projectile move in the direction its facing
+        transform.position += (transform.up * (movementSpeed + playerMovementSpeed) * Time.deltaTime); //Makes the projectile move in the direction its facing
     }
 
-    private void DissableProjectileAfterSetTime(float _projectileTimer)
+    protected void DissableProjectileAfterSetTime(float _projectileTimer)
     {
         print("Function for starting iEnumerator called");
         StartCoroutine(StartProjectileTimer(_projectileTimer));
     }
-    private IEnumerator StartProjectileTimer(float _projectileTimer)
+    protected IEnumerator StartProjectileTimer(float _projectileTimer)
     {
         print("iEnumerator called");
         yield return new WaitForSeconds(_projectileTimer);
         this.gameObject.SetActive(false); //Dissables this gameobject
     }
-    private void FireProjectile(GameObject _projectile)
+    protected void FireProjectile(GameObject _projectile)
     {
         if(this.gameObject == _projectile) //Check that the reference is correct
         {
@@ -46,12 +50,14 @@ public class scrProjectileMovement : MonoBehaviour
             DissableProjectileAfterSetTime(projectileLifeTime);
         }
     }
-    private void OnEnable()
+    protected void OnEnable()
     {
         scrPlayerProjectileLoader.OnFireWeapon += FireProjectile;
+        scrFireBasicProjectile.OnFireBasicWeapon += FireProjectile;
     }
-    private void OnDisable()
+    protected void OnDisable()
     {
         scrPlayerProjectileLoader.OnFireWeapon -= FireProjectile;
+        scrFireBasicProjectile.OnFireBasicWeapon -= FireProjectile;
     }
 }
