@@ -74,6 +74,14 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     }
     private void Update()
     {
+        if (upgradeLeft_RightPlacement == 0)
+        {
+            firePossition = firePossitionLeft.transform.position; //Decides the possition the porjectiles spawn at.
+        }
+        else if (upgradeLeft_RightPlacement == 1)
+        {
+            firePossition = firePossitionRight.transform.position; //Decides the possition the porjectiles spawn at.
+        }
         playerRotation = player.transform.rotation; //Update the player rotation, so that projectiles are facing the right direction when the player turns
         if(Input.GetKeyDown(KeyCode.Space) || pc.firing == true) //ADDED PC.FIRING == TRUE//
         {
@@ -84,14 +92,6 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             //print("Weapon is fired");
             LoadProjectile(CurrentWeaponID);
             FireProjectile(currentProjectileLoaded);
-        }
-        if(upgradeLeft_RightPlacement == 0)
-        {
-            firePossition = firePossitionLeft.transform.position; //Decides the possition the porjectiles spawn at.
-        }
-        else if(upgradeLeft_RightPlacement == 1)
-        {
-            firePossition = firePossitionRight.transform.position; //Decides the possition the porjectiles spawn at.
         }
     }
     private void InstantiateProjectiles()

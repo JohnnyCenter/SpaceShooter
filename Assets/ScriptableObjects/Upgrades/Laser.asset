@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98edf95f0cc6830448b0b2ffb9b41891, type: 3}
-  m_Name: TestWeapon2Level4
+  m_Script: {fileID: 11500000, guid: 72da23797404b764885f8ea7226c7d9a, type: 3}
+  m_Name: Laser
   m_EditorClassIdentifier: 
-  weaponDamage: 10
-  weaponFireRate: 0.01
+  upgradePrefab: {fileID: 2386764981752485831, guid: 9cce832882a36cf4b92b91d2ce7cc642,
+    type: 3}
+  upgradeCost: 12
+  upgradeName: Laser
+  projectileType: 3
