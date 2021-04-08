@@ -70,7 +70,6 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
         UpgradeLeft_RightPlacement = upgradeLeft_RightPlacement;
         InstantiateProjectiles();
-
         pc = FindObjectOfType<playerController>(); //TEMPORARY CHANGE TO CONNECT PLAYERCONTROLLER WITH THIS SCRIPT//
     }
     private void Update()
@@ -95,7 +94,6 @@ public class scrPlayerProjectileLoader : MonoBehaviour
             firePossition = firePossitionRight.transform.position; //Decides the possition the porjectiles spawn at.
         }
     }
-
     private void InstantiateProjectiles()
     {
         foreach(GameObject _projectilePrefab in projectileTypes) //Runs once for each type of projectile
@@ -151,21 +149,21 @@ public class scrPlayerProjectileLoader : MonoBehaviour
 
         }
     }
-    public GameObject LoadProjectile(int weaponType) //The int it is assigned is "CurrentWeaponID"
+    private GameObject LoadProjectile(int weaponType) //The int it is assigned is "CurrentWeaponID"
     {
         switch(weaponType)
         {
             case 0:
-                print("Loaded projectile type: " + 0);
+                //print("Loaded projectile type: " + 0);
                 return currentProjectileLoaded = GetInstanceFromPool(projectilesType0);
             case 1:
-                print("Loaded projectile type: " + 1);
+                //print("Loaded projectile type: " + 1);
                 return currentProjectileLoaded = GetInstanceFromPool(projectilesType1);
             case 2:
-                print("Loaded projectile type: " + 2);
+                //print("Loaded projectile type: " + 2);
                 return currentProjectileLoaded = GetInstanceFromPool(projectilesType2);
             case 3:
-                print("Loaded projectile type: " + 3);
+                //print("Loaded projectile type: " + 3);
                 return currentProjectileLoaded = GetInstanceFromPool(projectilesType3);
             default:
                 Debug.LogError("The value of the int passed to the LoadProjectile function in the scrPlayerProjectileLoader class is incorrect");
