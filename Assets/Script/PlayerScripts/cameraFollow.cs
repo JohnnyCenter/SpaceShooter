@@ -15,6 +15,15 @@ public class cameraFollow : MonoBehaviour
     LeanSelectable ls;
     UnityEvent deselect;
 
+    private void OnEnable()
+    {
+        playerBounds.onPlayerEnterBounds += camRelocate;
+    }
+    private void OnDisable()
+    {
+        playerBounds.onPlayerEnterBounds -= camRelocate;
+    }
+
     private void Start()
     {
         thePlayer = FindObjectOfType<playerController>();
@@ -59,5 +68,12 @@ public class cameraFollow : MonoBehaviour
         thePlayer.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotationZ / 2);
         yield return new WaitForSeconds(1);
         thePlayer.turning = false;
+    }
+
+    void camRelocate()
+    {
+        transform.position = new Vector3(thePlayer.transform.position.x, thePlayer.transform.position.y, transform.position.z);
+        transform.position += -transform.up * 5;
+        Debug.Log("Cam has been relocated");
     }
 }
