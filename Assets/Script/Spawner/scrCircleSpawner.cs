@@ -12,7 +12,7 @@ public class scrCircleSpawner : MonoBehaviour
     [Tooltip("How much time there is between each spawning cycle. Defaults to five")]
     [SerializeField] private float spawnTimer = 5f;
     [Tooltip("This int decides what type of enemy spawns each cycle. It is manualy set for now, will increment based on score later")]
-    [SerializeField] private int gameIntensety = 1; //Make this increment based on score!
+    private int gameIntensety = 0;
     private List<GameObject> poolOfEnemyType1;
     private List<GameObject> poolOfEnemyType2;
 
@@ -30,6 +30,8 @@ public class scrCircleSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(StartSpawnTimer(spawnTimer));
+        //gameIntensety = scrGameWaveManager.gameWaveManager.CurrentWave; //This reference does not work yet
+        gameIntensety = 1;
     }
     private void InstantiateEnemies()
     {

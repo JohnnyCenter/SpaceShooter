@@ -78,7 +78,7 @@ public class scrUpgradeButton : MonoBehaviour
     private void getPlacement(int _placement) //Gets the int value for the placement from the OnPlacementSelected action
     {
         placement = _placement;
-        print("UpgradeButton is assigned the followin value for int placement: " + placement);
+        //print("UpgradeButton is assigned the followin value for int placement: " + placement);
     }
     private void OnEnable()
     {

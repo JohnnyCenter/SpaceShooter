@@ -10,6 +10,7 @@ public class scrTorpedoMovement : scrProjectileMovement
     private void Awake()
     {
         targets = new List<GameObject>();
+        torpedoTarget = null;
     }
     protected override void MovePorjectile()
     {
@@ -19,6 +20,7 @@ public class scrTorpedoMovement : scrProjectileMovement
     {
         if(torpedoTarget == null)//No targets? Move the projectile as normal
         {
+            //print("moving rocket with default movement method");
             base.MovePorjectile();
         }
         else if(torpedoTarget != null) //Target? Home in on target.
