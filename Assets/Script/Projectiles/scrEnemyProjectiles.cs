@@ -9,7 +9,7 @@ public class scrEnemyProjectiles : MonoBehaviour
     {
         if (collision.CompareTag("PlayerCollider") == true)
         {
-            print("Hit the player");
+            //print("Hit the player");
             //Deal damage to player through event
 
             //Dissable this object

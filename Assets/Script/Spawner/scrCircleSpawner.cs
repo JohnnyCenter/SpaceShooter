@@ -73,8 +73,13 @@ public class scrCircleSpawner : MonoBehaviour
             case 1:
                 for (int i = 0; i < spawnPoints.Length; i++)
                 {
-                    //spawn enemy at i possition
                     GameObject _enemy = poolOfEnemyType1[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
+                    //Check that the enemy is not currenty on screen
+                    if(_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
+                    {
+                        break;
+                    }
+                    //spawn enemy at i possition
                     _enemy.transform.position = spawnPoints[i].transform.position; //Move the enemy to the right possition
                     _enemy.transform.parent = null; //Remove parents
                     _enemy.SetActive(true); //Set the enemy to active
@@ -85,6 +90,11 @@ public class scrCircleSpawner : MonoBehaviour
                 {
                     //spawn enemy at i possition
                     GameObject _enemy = poolOfEnemyType2[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
+                    //Check that the enemy is not currenty on screen
+                    if (_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
+                    {
+                        break;
+                    }
                     _enemy.transform.position = spawnPoints[i].transform.position; //Move the enemy to the right possition
                     _enemy.transform.parent = null; //Remove parents
                     _enemy.SetActive(true); //Set the enemy to active

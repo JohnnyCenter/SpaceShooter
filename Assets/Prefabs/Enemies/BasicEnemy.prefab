@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4786250661466286519}
   - component: {fileID: 4786250661466286518}
   - component: {fileID: 4786250661466286517}
+  - component: {fileID: 7961601817673387638}
   - component: {fileID: 4786250661466286516}
   - component: {fileID: 4786250661466286523}
-  - component: {fileID: -8066851932278719160}
+  - component: {fileID: 6758709428883247253}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -113,6 +114,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sidewaysMovementSpeed: 2
+--- !u!114 &7961601817673387638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786250661466286522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec863252da53d44a849abc82d94a202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 19cae673a3d48ad45b252b9fb912fcff, type: 2}
 --- !u!114 &4786250661466286516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +163,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &-8066851932278719160
-CircleCollider2D:
+--- !u!70 &6758709428883247253
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -162,6 +176,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 2.71
+  m_Offset: {x: -0.055079818, y: 0.027540207}
+  m_Size: {x: 1.1922185, y: 2.2333412}
+  m_Direction: 0

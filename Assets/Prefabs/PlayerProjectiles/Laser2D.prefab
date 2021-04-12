@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8911935561497905024}
   - component: {fileID: 7754561206847029097}
   - component: {fileID: -1201108530144690990}
+  - component: {fileID: 852396670785821877}
   m_Layer: 0
   m_Name: Laser2D
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileLifeTime: 3.5
   movementSpeed: 15
+  isLazer: 1
 --- !u!114 &-1201108530144690990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +66,22 @@ MonoBehaviour:
   statsLevel1: {fileID: 11400000, guid: 4bb4e64a5e5d3fb4dacd2d4141d3987a, type: 2}
   statsLevel2: {fileID: 11400000, guid: 38b77b05cb38d4f4999f4d5068c614a2, type: 2}
   statsLevel3: {fileID: 11400000, guid: e9afbaf43da928d48a774b1fe9536ad4, type: 2}
+--- !u!70 &852396670785821877
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337143145188243958}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.013706736, y: 8.01336}
+  m_Size: {x: 0.1619003, y: 21.822752}
+  m_Direction: 0
 --- !u!1 &8501257929735186803
 GameObject:
   m_ObjectHideFlags: 0

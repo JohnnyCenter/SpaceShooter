@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7330692231329683572}
   - component: {fileID: -2625755856481952293}
   - component: {fileID: -647619209795276502}
+  - component: {fileID: 7067850649795564038}
   m_Layer: 0
   m_Name: Plasma2D
   m_TagString: Untagged
@@ -114,3 +115,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &7067850649795564038
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3909584754008862521}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05293095, y: 0.10056853}
+  m_Size: {x: 1.0084155, y: 1.0955534}
+  m_Direction: 0

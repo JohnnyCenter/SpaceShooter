@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2009637758045555875}
   - component: {fileID: 2246696289679991596}
   - component: {fileID: -1994688220517172492}
+  - component: {fileID: 5335211211919568812}
   m_Layer: 0
   m_Name: Torpedo2D
   m_TagString: Untagged
@@ -97,7 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileLifeTime: 3.5
-  movementSpeed: 20
+  movementSpeed: 15
+  isLazer: 0
 --- !u!114 &-1994688220517172492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +117,22 @@ MonoBehaviour:
   statsLevel1: {fileID: 11400000, guid: 6a56689ca463a234a865b6334316fb7c, type: 2}
   statsLevel2: {fileID: 11400000, guid: d42b73d1f7eab994780b7a756ba9d7b7, type: 2}
   statsLevel3: {fileID: 11400000, guid: db66d9ca0199c144b98ff07cba03f34b, type: 2}
+--- !u!70 &5335211211919568812
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337143145188243958}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.019988418, y: 0.12649369}
+  m_Size: {x: 0.70071864, y: 0.87404346}
+  m_Direction: 0
 --- !u!1 &6089225097400562330
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +180,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 8.03
+  m_Radius: 3.5
 --- !u!114 &7384043532006922231
 MonoBehaviour:
   m_ObjectHideFlags: 0

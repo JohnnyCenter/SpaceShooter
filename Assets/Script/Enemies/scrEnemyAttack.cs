@@ -7,6 +7,7 @@ public class scrEnemyAttack : MonoBehaviour
     private scrEnemyMovement enemyMovement;
     [SerializeField] private GameObject enemyProjectile;
     [SerializeField] private float timeBetweenAttacks;
+    private scrEnemyStats enemyStats;
     private float weaponCooldownTimer;
     private bool canFire;
     Quaternion projectileRotation;
@@ -14,6 +15,7 @@ public class scrEnemyAttack : MonoBehaviour
     private void Awake()
     {
         enemyMovement = GetComponent<scrEnemyMovement>();
+        enemyStats = GetComponent<scrEnemyStats>();
     }
     private void Start()
     {
@@ -43,6 +45,7 @@ public class scrEnemyAttack : MonoBehaviour
     }
     private void OnBecameVisible()
     {
+        enemyStats.IsVisibleOnScreen = true;
         projectileRotation = (transform.rotation);
     }
 }

@@ -16,6 +16,8 @@ public class scrEnemyMovement : MonoBehaviour
     private float switchSideValue;
     private bool canMove;
     private float movementSpeed;
+    private float playerFiringSpeed;
+    private float playerMovementSpeed;
 
     private void Awake()
     {
@@ -33,7 +35,20 @@ public class scrEnemyMovement : MonoBehaviour
     }
     private void Update()
     {
-        movementSpeed = playerController.moveSpeed; //Updates the movement speed with that of the player
+        #region UpdateMovementSpeedVar
+        playerMovementSpeed = playerController.moveSpeed; //Updates the movement speed with that of the player
+        movementSpeed = playerMovementSpeed;
+        playerFiringSpeed = playerMovementSpeed / 2;
+
+        if(playerController.firing && !playerController.turning)
+        {
+            movementSpeed = playerFiringSpeed;
+        }
+        else if(!playerController.firing && !playerController.turning)
+        {
+            movementSpeed = playerMovementSpeed;
+        }
+        #endregion
         if (IAmActive)
         {
             BasicEnemyMovement();
