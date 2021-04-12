@@ -5,36 +5,46 @@ using Lean.Touch;
 
 public class scrEnemyMovement : MonoBehaviour
 {
+    private GameObject thePlayer;
+
     private bool iAmActive;
     public bool IAmActive { get; private set; }
-    Lean.Common.LeanConstrainToCollider LeanConstrainToCollider;
-    [SerializeField] private float movementSpeed;
+    private playerController playerController;
+    [SerializeField] private float sidewaysMovementSpeed;
     private bool moveRight;
     private float switchSideCounter;
     private float switchSideValue;
+    private bool canMove;
+    private float movementSpeed;
 
     private void Awake()
     {
-        LeanConstrainToCollider = GetComponent<Lean.Common.LeanConstrainToCollider>();
+        thePlayer = GameObject.FindGameObjectWithTag("PlayerBody");
+        playerController = thePlayer.GetComponent<playerController>();
     }
 
     private void Start()
     {
         iAmActive = false;
         IAmActive = iAmActive;
-        LeanConstrainToCollider.enabled = false;
         switchSideCounter = 0f;
         switchSideValue = GetRandomNumber();
+        canMove = false;
     }
     private void Update()
     {
-        if(IAmActive)
+        movementSpeed = playerController.moveSpeed; //Updates the movement speed with that of the player
+        if (IAmActive)
         {
             BasicEnemyMovement();
         }
     }
     private void BasicEnemyMovement()
     {
+        if(canMove)
+        {
+            transform.Translate(Vector2.up * movementSpeed * Time.deltaTime);
+        }
         switchSideCounter += Time.deltaTime;
         if(switchSideCounter >= switchSideValue)
         {
@@ -44,11 +54,18 @@ public class scrEnemyMovement : MonoBehaviour
         }
         if(moveRight)
         {
-            transform.Translate(Vector2.right * movementSpeed * Time.deltaTime);
+            transform.Translate(Vector2.right * sidewaysMovementSpeed * Time.deltaTime);
         }
         else
         {
-            transform.Translate(-Vector2.right * movementSpeed * Time.deltaTime);
+            transform.Translate(-Vector2.right * sidewaysMovementSpeed * Time.deltaTime);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("EnemyCollider"))
+        {
+            canMove = true;
         }
     }
     private float GetRandomNumber()
@@ -65,14 +82,11 @@ public class scrEnemyMovement : MonoBehaviour
     private void OnBecameVisible()
     {
         //print("Hello player!");
-        iAmActive = true;
-        IAmActive = iAmActive;
-        LeanConstrainToCollider.enabled = true;
+        IAmActive = true;
     }
     private void OnBecameInvisible()
     {
-        iAmActive = false;
-        IAmActive = iAmActive;
-        LeanConstrainToCollider.enabled = false;
+        canMove = false;
+        IAmActive = false;
     }
 }

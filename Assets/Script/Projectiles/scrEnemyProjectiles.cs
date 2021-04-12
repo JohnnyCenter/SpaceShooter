@@ -7,13 +7,13 @@ public class scrEnemyProjectiles : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerBody") == true)
+        if (collision.CompareTag("PlayerCollider") == true)
         {
             print("Hit the player");
             //Deal damage to player through event
 
             //Dissable this object
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

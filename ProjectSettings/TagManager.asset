@@ -8,6 +8,8 @@ TagManager:
   - PlayerBody
   - circleSpawner
   - Enemy
+  - EnemyCollider
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX

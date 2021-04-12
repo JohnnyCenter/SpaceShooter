@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4786250661466286519}
   - component: {fileID: 4786250661466286518}
   - component: {fileID: 4786250661466286517}
-  - component: {fileID: 4786250661466286513}
   - component: {fileID: 4786250661466286516}
   - component: {fileID: 4786250661466286523}
   - component: {fileID: -8066851932278719160}
@@ -113,21 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb74dd8571b0b24684685d71c5b4ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3.49
---- !u!114 &4786250661466286513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4786250661466286522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8e207cd0603c8428167dd7b372a793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Collider: {fileID: 4783948840498317276, guid: 9e5490a806cd8dc46b5307a8305f2e23,
-    type: 3}
+  sidewaysMovementSpeed: 2
 --- !u!114 &4786250661466286516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +159,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
