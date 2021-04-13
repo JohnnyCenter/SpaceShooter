@@ -25,7 +25,7 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     private void Awake()
     {
         thePlayer = GameObject.FindGameObjectWithTag("ThePlayer"); //Gets the instance of the player
-        print("Upgrade panel has awoken");
+        //print("Upgrade panel has awoken");
         UpgradeImage = GetComponent<Image>();
         upgradeLevel = 0;
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
@@ -38,7 +38,7 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     }
     public void UpdateTheUpgrade(UpgradesSO _upgrade)
     {
-        print("UpdatedTheUpgrade");
+        //print("UpdatedTheUpgrade");
         upgradeLevel += 1;
         upgradeLevelText.text = "Level " + upgradeLevel.ToString();
         upgradeCost.text = _upgrade.UpgradeCost.ToString();
