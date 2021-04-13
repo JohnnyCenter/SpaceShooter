@@ -10,6 +10,9 @@ public class UpgradesSO : ScriptableObject
     public GameObject upgradePrefab;
     [Tooltip("Set the cost of this upgrade")]
     [SerializeField] private int upgradeCost;
+    [Tooltip("Set the cost of upgrading this upgrade")]
+    [SerializeField] private int upgradingCost;
+    public int UpgradingCost { get; set; }
     public int UpgradeCost { get; private set; }
     [Tooltip("Set the name of the upgrade")]
     [SerializeField] private string upgradeName;
@@ -29,6 +32,7 @@ public class UpgradesSO : ScriptableObject
         ProjectileType = projectileType;
         playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
         UpgradeCost = upgradeCost;
+        UpgradingCost = upgradingCost;
         if (upgradeName != null)
         {
             UpgradeName = upgradeName;

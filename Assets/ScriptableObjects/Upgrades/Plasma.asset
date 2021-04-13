@@ -15,5 +15,6 @@ MonoBehaviour:
   upgradePrefab: {fileID: 2386764981752485831, guid: 9cce832882a36cf4b92b91d2ce7cc642,
     type: 3}
   upgradeCost: 30
+  upgradingCost: 36
   upgradeName: Plasma
   projectileType: 0

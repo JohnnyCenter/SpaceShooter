@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradePrefab: {fileID: 2386764981752485831, guid: 9cce832882a36cf4b92b91d2ce7cc642,
     type: 3}
-  upgradeCost: 12
+  upgradeCost: 36
+  upgradingCost: 40
   upgradeName: Laser
   projectileType: 3

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradePrefab: {fileID: 5513542027840897256, guid: 79588ea9bd3e9104b8d0976c7c911eda,
     type: 3}
-  upgradeCost: 120
+  upgradeCost: 80
+  upgradingCost: 100
   upgradeName: Rocket
   projectileType: 1
