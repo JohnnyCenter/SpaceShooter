@@ -14,6 +14,10 @@ public class playerController : MonoBehaviour
     public GameObject Compass;
     LeanSelectable compassActive;
     tempCompass rotation;
+    public AudioSource Shipvolume1;
+    public AudioSource Shipvolume2;
+    public AudioSource Shipvolume3;
+    
 
     private void Awake()
     {
@@ -21,6 +25,8 @@ public class playerController : MonoBehaviour
         compassActive = Compass.GetComponent<LeanSelectable>();
         rotation = GetComponent<tempCompass>();
     }
+
+   
 
     private void Update()
     {
@@ -58,6 +64,31 @@ public class playerController : MonoBehaviour
             turning = true;
         }
 
+
+        if (moveSpeed <= 15 && moveSpeed > 10)
+        {
+            Debug.Log("Sound should play");
+            Shipvolume1.Play();
+          //  Shipvolume2.Stop();
+         //   Shipvolume3.Stop();
+        }
+
+        if(moveSpeed <= 25 && moveSpeed > 15)
+        {
+            Debug.Log("15-25");
+            Shipvolume2.Play();
+         //   Shipvolume1.Stop();
+          //  Shipvolume3.Stop();
+        }
+ 
+        if (moveSpeed <= 30 && moveSpeed > 25)
+        {
+            Debug.Log("25-30");
+            Shipvolume3.Play();
+          //  Shipvolume1.Stop();
+           // Shipvolume2.Stop();
+        }
+      
     }
     public void adjustSpeed(float newSpeed) //Function to adjust the moveSpeed of the player.
     {
