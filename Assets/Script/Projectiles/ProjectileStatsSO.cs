@@ -10,6 +10,7 @@ public class ProjectileStatsSO : ScriptableObject
     public int WeaponDamage { get; private set; }
     [Tooltip("A higher value means more time between each shot")]
     [SerializeField] private float weaponFireRate;
+    public AudioClip BulletSound;
     public float WeaponFireRate { get; private set; }
 
     public void ResetStats()

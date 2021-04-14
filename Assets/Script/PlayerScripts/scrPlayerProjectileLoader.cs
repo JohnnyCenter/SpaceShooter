@@ -52,6 +52,11 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     Quaternion playerRotation;
     private GameObject player;
 
+
+    [SerializeField]
+    private AudioSource SoundSource;
+    private AudioClip Sound;
+
     [SerializeField]
     playerController pc; //TEMPORARY CHANGE TO CONNECT PLAYERCONTROLLER WITH THIS SCRIPT//
 
@@ -71,6 +76,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         UpgradeLeft_RightPlacement = upgradeLeft_RightPlacement;
         InstantiateProjectiles();
         pc = FindObjectOfType<playerController>(); //TEMPORARY CHANGE TO CONNECT PLAYERCONTROLLER WITH THIS SCRIPT//
+        SoundSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -188,12 +194,18 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         {
             return;
         }
+
+        
         //Set possition and align projectile
         _loadedProjectile.transform.position = firePossition;
         _loadedProjectile.transform.rotation = playerRotation;
         //Update projectile stats based on weapon level
         scrProjectileLevel loadedProjectileLevel = _loadedProjectile.GetComponent<scrProjectileLevel>();
-        loadedProjectileLevel.UpdateProjectileLevel(projectileLevel); //Updates the stats for the loaded projectile 
+        loadedProjectileLevel.UpdateProjectileLevel(projectileLevel); //Updates the stats for the loaded projectile
+        //LoadSound
+        Sound = loadedProjectileLevel.stats.BulletSound;
+        SoundSource.Play();
+        print("LoadedSoundIs: "+ Sound);
         //Set the projectile to active and fire it
         _loadedProjectile.SetActive(true);
         OnFireWeapon?.Invoke(_loadedProjectile);

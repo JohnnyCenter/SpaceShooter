@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDamage: 1
   weaponFireRate: 1
+  BulletSound: {fileID: 8300000, guid: 4ddb90352efaf74479c8c050226246c8, type: 3}

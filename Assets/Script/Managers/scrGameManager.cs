@@ -27,6 +27,7 @@ public class scrGameManager : MonoBehaviour
     {
         scrapText.text = "Current scrap is: " + PlayerScrap.ToString();
         totalNumberOfEnemiesKilled = 0;
+        
     }
     public void SpendScrap(int _amount)
     {
