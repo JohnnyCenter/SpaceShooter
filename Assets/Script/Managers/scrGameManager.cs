@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class scrGameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject respawnPanel;
     public static scrGameManager instance;
     public scrPlacementButton CurrentPlacementButton { get; set; }
     [SerializeField] private TextMeshProUGUI scrapText;
@@ -27,7 +29,7 @@ public class scrGameManager : MonoBehaviour
     {
         scrapText.text =  PlayerScrap.ToString();
         totalNumberOfEnemiesKilled = 0;
-        
+        respawnPanel.SetActive(false);
     }
     public void SpendScrap(int _amount)
     {
@@ -49,14 +51,24 @@ public class scrGameManager : MonoBehaviour
     {
         _buttonSent.SetButtonToNotActive();
     }
+    private void OpenRespawnPanel()
+    {
+        respawnPanel.SetActive(true);
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     private void OnEnable()
     {
         scrPlacementButton.OnPlacementButtonUsed += GetPlacementButtonUsed;
         scrEnemyStats.OnEnemyKilled += ScrapGained;
+        scrPlayerHealth.OnPlayerDeath += OpenRespawnPanel;
     }
     private void OnDisable()
     {
         scrEnemyStats.OnEnemyKilled -= ScrapGained;
         scrPlacementButton.OnPlacementButtonUsed -= GetPlacementButtonUsed;
+        scrPlayerHealth.OnPlayerDeath -= OpenRespawnPanel;
     }
 }
