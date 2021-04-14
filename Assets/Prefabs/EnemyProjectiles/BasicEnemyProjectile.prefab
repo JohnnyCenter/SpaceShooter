@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4620744663318280084}
-  - component: {fileID: 7502490565247030559}
-  - component: {fileID: 1248613805439451274}
   - component: {fileID: 7476803661874085019}
   m_Layer: 0
   m_Name: Projectile
@@ -33,37 +31,6 @@ Transform:
   m_Father: {fileID: 361083476011641323}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!114 &7502490565247030559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2772556649744660990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8faa5b7a4ec6f2d448ba1c4960e057f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileLifeTime: 3.5
-  movementSpeed: 20
---- !u!114 &1248613805439451274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2772556649744660990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daab12f2e5cda1f44a9f6399727a8114, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 0}
-  statsLevel0: {fileID: 11400000, guid: bcfd78e22d11d134cb3ce30506c1ebd8, type: 2}
-  statsLevel1: {fileID: 11400000, guid: 4bb4e64a5e5d3fb4dacd2d4141d3987a, type: 2}
-  statsLevel2: {fileID: 11400000, guid: 38b77b05cb38d4f4999f4d5068c614a2, type: 2}
-  statsLevel3: {fileID: 11400000, guid: e9afbaf43da928d48a774b1fe9536ad4, type: 2}
 --- !u!212 &7476803661874085019
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -159,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728368b4aa5945e449ec9e52769cee96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnTimer: 5
+  movementSpeed: 20
 --- !u!70 &2078392255311662523
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
