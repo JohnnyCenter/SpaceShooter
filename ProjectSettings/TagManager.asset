@@ -12,6 +12,7 @@ TagManager:
   - PlayerCollider
   - LeftBorder
   - RightBorder
+  - PlayerMesh
   layers:
   - Default
   - TransparentFX
