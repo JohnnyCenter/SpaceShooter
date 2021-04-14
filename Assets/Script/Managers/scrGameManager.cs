@@ -25,19 +25,19 @@ public class scrGameManager : MonoBehaviour
 
     private void Start()
     {
-        scrapText.text = "Current scrap is: " + PlayerScrap.ToString();
+        scrapText.text =  PlayerScrap.ToString();
         totalNumberOfEnemiesKilled = 0;
         
     }
     public void SpendScrap(int _amount)
     {
         PlayerScrap -= _amount;
-        scrapText.text = "Current scrap is: " + PlayerScrap.ToString();
+        scrapText.text =  PlayerScrap.ToString();
     }
     private void ScrapGained(int _amount)
     {
         PlayerScrap += _amount; //Update scrap amount
-        scrapText.text = "Current scrap is: " + PlayerScrap.ToString(); //Update display
+        scrapText.text =  PlayerScrap.ToString(); //Update display
         totalNumberOfEnemiesKilled += 1; //Increment total number of enemies killed
     }
     private void GetPlacementButtonUsed(scrPlacementButton _buttonSent)
