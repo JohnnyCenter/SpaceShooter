@@ -22,6 +22,7 @@ public class scrProjectileLevel : MonoBehaviour
         statsLevel1.ResetStats();
         statsLevel2.ResetStats();
         statsLevel3.ResetStats();
+        stats = statsLevel0;
     }
     public void UpdateProjectileLevel(int _assignedLevel)
     {

@@ -8,6 +8,10 @@ TagManager:
   - PlayerBody
   - circleSpawner
   - Enemy
+  - EnemyCollider
+  - PlayerCollider
+  - LeftBorder
+  - RightBorder
   layers:
   - Default
   - TransparentFX
@@ -17,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - PlayerBounds
   - 
   - 
   - 

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98edf95f0cc6830448b0b2ffb9b41891, type: 3}
   m_Name: TestWeapon1Level2
   m_EditorClassIdentifier: 
-  weaponDamage: 10
+  weaponDamage: 2
   weaponFireRate: 0.6

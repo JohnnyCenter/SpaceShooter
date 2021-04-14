@@ -7,24 +7,32 @@ public class scrTorpedoMovement : scrProjectileMovement
     private List<GameObject> targets;
     private GameObject torpedoTarget;
     private float minDistanceToTarget = 0.5f;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        playerController = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<playerController>(); //Gets the reference
         targets = new List<GameObject>();
+        torpedoTarget = null;
     }
     protected override void MovePorjectile()
     {
+        if (playerController != null)
+        {
+            playerMovementSpeed = playerController.moveSpeed;
+        }
         MoveTorpedo();
     }
     private void MoveTorpedo()
     {
         if(torpedoTarget == null)//No targets? Move the projectile as normal
         {
+            //print("moving rocket with default movement method");
             base.MovePorjectile();
         }
         else if(torpedoTarget != null) //Target? Home in on target.
         {
             //print("Projectile homing in on target");
-            RotateTorpedo();
+            //RotateTorpedo();
             transform.position = Vector3.MoveTowards(transform.position, torpedoTarget.transform.position, (movementSpeed + playerMovementSpeed) * Time.deltaTime);
             if((transform.position - torpedoTarget.transform.position).magnitude <= minDistanceToTarget)
             {

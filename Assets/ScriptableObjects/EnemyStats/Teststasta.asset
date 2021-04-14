@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98edf95f0cc6830448b0b2ffb9b41891, type: 3}
-  m_Name: TestWeapon1Level1
+  m_Script: {fileID: 11500000, guid: 5004ba0d364a82240a8e32d8c8eda81c, type: 3}
+  m_Name: Teststasta
   m_EditorClassIdentifier: 
-  weaponDamage: 1
-  weaponFireRate: 1
+  health: 1
+  scrapReward: 12

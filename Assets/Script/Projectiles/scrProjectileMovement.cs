@@ -8,14 +8,17 @@ public class scrProjectileMovement : MonoBehaviour
     [SerializeField] protected float projectileLifeTime = 3.5f;
     [Range(15f, 30f)]
     [SerializeField] protected float movementSpeed = 20f;
-
-    private playerController playerController;
+    [Tooltip("Decides if the projectile will despawn when it hits target or not")]
+    [SerializeField] protected bool isLazer;
+    protected scrProjectileLevel projectileStats;
+    protected playerController playerController;
     protected float playerMovementSpeed;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<playerController>(); //Gets the reference
         playerMovementSpeed = 0f;
+        projectileStats = GetComponent<scrProjectileLevel>(); //Gets the reference
     }
     protected void Update()
     {
@@ -29,6 +32,31 @@ public class scrProjectileMovement : MonoBehaviour
     {
         //print("Parent moving");
         transform.position += (transform.up * (movementSpeed + playerMovementSpeed) * Time.deltaTime); //Makes the projectile move in the direction its facing
+    }
+    protected virtual void BasicProjectileHit(string _hitEnemy)
+    {
+        print("Hit enemy: " + _hitEnemy);
+    }
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            collision.TryGetComponent<scrEnemyStats>(out scrEnemyStats targetStats);
+            if(targetStats != null)
+            {
+                targetStats.TakeDamage(projectileStats.stats.WeaponDamage);
+                DestroyProjectile();
+            }
+            BasicProjectileHit(collision.gameObject.name);
+        }
+    }
+    private void DestroyProjectile()
+    {
+        if(isLazer)
+        {
+            return;
+        }
+        gameObject.SetActive(false);
     }
 
     protected void DissableProjectileAfterSetTime(float _projectileTimer)

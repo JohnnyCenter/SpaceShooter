@@ -12,7 +12,7 @@ public class scrCircleSpawner : MonoBehaviour
     [Tooltip("How much time there is between each spawning cycle. Defaults to five")]
     [SerializeField] private float spawnTimer = 5f;
     [Tooltip("This int decides what type of enemy spawns each cycle. It is manualy set for now, will increment based on score later")]
-    [SerializeField] private int gameIntensety = 1; //Make this increment based on score!
+    private int gameIntensety = 0;
     private List<GameObject> poolOfEnemyType1;
     private List<GameObject> poolOfEnemyType2;
 
@@ -30,6 +30,8 @@ public class scrCircleSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(StartSpawnTimer(spawnTimer));
+        //gameIntensety = scrGameWaveManager.gameWaveManager.CurrentWave; //This reference does not work yet
+        gameIntensety = 1;
     }
     private void InstantiateEnemies()
     {
@@ -71,8 +73,13 @@ public class scrCircleSpawner : MonoBehaviour
             case 1:
                 for (int i = 0; i < spawnPoints.Length; i++)
                 {
-                    //spawn enemy at i possition
                     GameObject _enemy = poolOfEnemyType1[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
+                    //Check that the enemy is not currenty on screen
+                    if(_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
+                    {
+                        break;
+                    }
+                    //spawn enemy at i possition
                     _enemy.transform.position = spawnPoints[i].transform.position; //Move the enemy to the right possition
                     _enemy.transform.parent = null; //Remove parents
                     _enemy.SetActive(true); //Set the enemy to active
@@ -83,6 +90,11 @@ public class scrCircleSpawner : MonoBehaviour
                 {
                     //spawn enemy at i possition
                     GameObject _enemy = poolOfEnemyType2[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
+                    //Check that the enemy is not currenty on screen
+                    if (_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
+                    {
+                        break;
+                    }
                     _enemy.transform.position = spawnPoints[i].transform.position; //Move the enemy to the right possition
                     _enemy.transform.parent = null; //Remove parents
                     _enemy.SetActive(true); //Set the enemy to active

@@ -7,8 +7,9 @@ using System;
 
 public class scrUpgradeButton : MonoBehaviour
 {
-    public static Action<UpgradesSO> OnUpgradeSelected; //Used to send a reference of the upgrade purchaed to the upgradeUpgrade menu
-
+    public static Action<UpgradesSO> OnUpgradeSelected; //Used to send a reference of the upgrade purchased to the upgradeUpgrade menu
+    private scrGameManager gameManager;
+    private scrPlacementButton currentPlacementButton;
     private GameObject upgradeButton;
     [Header("Assign upgrade button texts")]
     [Tooltip("Drag the text item on the upgrade button that is supposed to contain the upgradeCost")]
@@ -37,6 +38,7 @@ public class scrUpgradeButton : MonoBehaviour
         upgradeName.text = upgrade.UpgradeName;
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
         playerPossition = GameObject.FindGameObjectWithTag("PlayerBody").transform.position;
+        gameManager = scrGameManager.instance; //Gets the instance of this singleton
     }
 
     public void UpgradeSelected() //Remember that if you rename this function, you will need to reasign it for the button in the inspector
@@ -45,26 +47,35 @@ public class scrUpgradeButton : MonoBehaviour
         {
             //CHECK that there is enough scrap
             //If yes:
-
+            if(upgrade.UpgradeCost > gameManager.PlayerScrap)
+            {
+                upgradeMenu.CloseUpgradePanel();
+                print("Could not afford upgrade. The cost was: " + upgrade.UpgradeCost + " and the player had: " + gameManager.PlayerScrap);
+                return;
+            }
+            currentPlacementButton = gameManager.CurrentPlacementButton; //Gets the current reference from the game manager
+            gameManager.DissableLastUsedPlacementButton(currentPlacementButton);
             switch (placement)
             {
                 case 0:
-                    upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
+                    upgrade.UpgradePurchased(placement);
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
                     upgradeMenu.CloseUpgradePanel();
                     leftUpgradeInfo.UpdateTheUpgrade(upgrade);
                     OnWeaponPurchased?.Invoke(upgrade.ProjectileType, 0);
+                    gameManager.SpendScrap(upgrade.UpgradeCost);
                     return;
                 case 1:
-                    upgrade.UpgradePurchased(placement); //Not yet, open the placement window first
+                    upgrade.UpgradePurchased(placement);
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
                     upgradeMenu.CloseUpgradePanel();
                     rightUpgradeInfo.UpdateTheUpgrade(upgrade);
                     OnWeaponPurchased?.Invoke(upgrade.ProjectileType, 1);
+                    gameManager.SpendScrap(upgrade.UpgradeCost);
                     return;
                 default:
                     Debug.LogError("The placement value is incorrect when used for switch statement in the class scrUpgradeButton");
@@ -78,8 +89,9 @@ public class scrUpgradeButton : MonoBehaviour
     private void getPlacement(int _placement) //Gets the int value for the placement from the OnPlacementSelected action
     {
         placement = _placement;
-        print("UpgradeButton is assigned the followin value for int placement: " + placement);
+        //print("UpgradeButton is assigned the followin value for int placement: " + placement);
     }
+
     private void OnEnable()
     {
         scrUpgradeMenu.OnPlacementSelected += getPlacement;

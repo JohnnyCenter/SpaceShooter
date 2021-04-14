@@ -21,11 +21,13 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     [SerializeField] private int upgradePlacement = 0;
     private GameObject thePlayer;
     scrProjectileLevelTracker[] projectileLevelTrackers;
+    scrGameManager gameManager;
 
     private void Awake()
     {
+        gameManager = scrGameManager.instance; //Get the instance
         thePlayer = GameObject.FindGameObjectWithTag("ThePlayer"); //Gets the instance of the player
-        print("Upgrade panel has awoken");
+        //print("Upgrade panel has awoken");
         UpgradeImage = GetComponent<Image>();
         upgradeLevel = 0;
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
@@ -38,20 +40,28 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     }
     public void UpdateTheUpgrade(UpgradesSO _upgrade)
     {
-        print("UpdatedTheUpgrade");
+        //print("UpdatedTheUpgrade");
         upgradeLevel += 1;
         upgradeLevelText.text = "Level " + upgradeLevel.ToString();
-        upgradeCost.text = _upgrade.UpgradeCost.ToString();
+        upgradeCost.text = _upgrade.UpgradingCost.ToString();
         localUpgrade = _upgrade;
     }
     public void IncreaseUpgradeLevel() //This is called from a button
     {
         if (upgradeLevel >= 1) //Because this code cannot run if we are not already at least level 1 (or else, the upgrade is not yet assigned or purchased)
         {
+            if(gameManager.PlayerScrap < localUpgrade.UpgradingCost)
+            {
+                print("Did not have enough money to purchase the upgrade");
+                upgradeMenu.CloseUpgradePanel();
+                return;
+            }
             //Implement if check to check that we have enough scrap
+            gameManager.SpendScrap(localUpgrade.UpgradingCost);
             upgradeLevel += 1;
             upgradeLevelText.text = "Level " + upgradeLevel.ToString();
-            upgradeCost.text = localUpgrade.UpgradeCost.ToString(); //This local upgrade is assigned by the "UpdateTheUpgrade" function found in this script
+            localUpgrade.UpgradingCost += (localUpgrade.UpgradeCost / 2);
+            upgradeCost.text = localUpgrade.UpgradingCost.ToString(); //This local upgrade is assigned by the "UpdateTheUpgrade" function found in this script
             foreach(scrProjectileLevelTracker levelTracker in projectileLevelTrackers)
             {
                 levelTracker.IncreaseProjectileLevel(upgradePlacement);
