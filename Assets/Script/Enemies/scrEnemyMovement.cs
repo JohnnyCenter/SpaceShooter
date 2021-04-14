@@ -11,20 +11,21 @@ public class scrEnemyMovement : MonoBehaviour
     public bool IAmActive { get; private set; }
     private playerController playerController;
     [SerializeField] private float sidewaysMovementSpeed;
-    private bool moveRight;
     private float switchSideCounter;
     private float switchSideValue;
-    private bool canMove;
     private float movementSpeed;
     private float playerFiringSpeed;
     private float playerMovementSpeed;
+    private bool canMove;
+    private bool moveRight;
+    private bool collidingWithRightBorder;
+    private bool collidingWithLeftBorder;
 
     private void Awake()
     {
         thePlayer = GameObject.FindGameObjectWithTag("PlayerBody");
         playerController = thePlayer.GetComponent<playerController>();
     }
-
     private void Start()
     {
         iAmActive = false;
@@ -32,6 +33,8 @@ public class scrEnemyMovement : MonoBehaviour
         switchSideCounter = 0f;
         switchSideValue = GetRandomNumber();
         canMove = false;
+        collidingWithLeftBorder = false;
+        collidingWithRightBorder = false;
     }
     private void Update()
     {
@@ -67,11 +70,11 @@ public class scrEnemyMovement : MonoBehaviour
             switchSideCounter = 0f;
             switchSideValue = GetRandomNumber();
         }
-        if(moveRight)
+        if(moveRight && !collidingWithRightBorder)
         {
             transform.Translate(Vector2.right * sidewaysMovementSpeed * Time.deltaTime);
         }
-        else
+        else if(!collidingWithLeftBorder)
         {
             transform.Translate(-Vector2.right * sidewaysMovementSpeed * Time.deltaTime);
         }
@@ -82,18 +85,43 @@ public class scrEnemyMovement : MonoBehaviour
         {
             canMove = true;
         }
+        if(collision.CompareTag("LeftBorder"))
+        {
+            collidingWithLeftBorder = true;
+        }
+        if(collision.CompareTag("RightBorder"))
+        {
+            collidingWithRightBorder = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("LeftBorder"))
+        {
+            collidingWithLeftBorder = false;
+        }
+        if (collision.CompareTag("RightBorder"))
+        {
+            collidingWithRightBorder = false;
+        }
     }
     private float GetRandomNumber()
     {
         return Random.Range(0.5f, 2f);
     }
-
-    //2. Set player as target
-
-    //3. Move towards the player
-
-    //4. Fire projectiles that move in a straight direction
-    //1. Detect the player (onBecameVisible?)
+    private void RotateEnemy(Quaternion _newRotation)
+    {
+        //print("Rotating enemies...");
+        transform.rotation = _newRotation;
+    }
+    private void OnEnable()
+    {
+        playerController.OnPlayerTurning += RotateEnemy;
+    }
+    private void OnDisable()
+    {
+        playerController.OnPlayerTurning -= RotateEnemy;
+    }
     private void OnBecameVisible()
     {
         //print("Hello player!");

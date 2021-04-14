@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Touch;
+using System;
 
 public class playerController : MonoBehaviour
 {
+    public static Action<Quaternion> OnPlayerTurning; //JONT ADDITION. Used to make enemies turn with the player
     public float moveSpeed = 10; //Variable that defines the speed of the ship
     public bool firing = false;
     public bool turning = false;
@@ -39,6 +41,7 @@ public class playerController : MonoBehaviour
         else
         {
             rotation.enabled = false;
+            OnPlayerTurning?.Invoke(transform.rotation); //Added by JONT
         }
 
         if (ls.IsSelected)

@@ -43,6 +43,19 @@ public class scrEnemyAttack : MonoBehaviour
             canFire = false;
         }
     }
+    private void RotateEnemyProjectile(Quaternion _newRotation)
+    {
+        //print("Rotating enemies...");
+        projectileRotation = _newRotation;
+    }
+    private void OnEnable()
+    {
+        playerController.OnPlayerTurning += RotateEnemyProjectile;
+    }
+    private void OnDisable()
+    {
+        playerController.OnPlayerTurning -= RotateEnemyProjectile;
+    }
     private void OnBecameVisible()
     {
         enemyStats.IsVisibleOnScreen = true;
