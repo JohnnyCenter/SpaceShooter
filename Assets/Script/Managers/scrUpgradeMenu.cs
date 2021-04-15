@@ -50,7 +50,7 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradePanel.SetActive(true);
         UpgradePLacementPanel.SetActive(true);
         upgradeTheUpgradePanel.SetActive(true);
-        menuButton.SetActive(true);
+        menuButton.SetActive(false);
     }
 
     private void Start()

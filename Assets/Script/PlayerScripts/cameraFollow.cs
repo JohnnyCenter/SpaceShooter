@@ -11,9 +11,15 @@ public class cameraFollow : MonoBehaviour
     float rotationZ;
     [SerializeField]
     GameObject compass;
-    private Vector3 currentPlayerPosition;
     LeanSelectable ls;
     UnityEvent deselect;
+
+    [SerializeField]
+    private int rotationSpeed; 
+    private Vector3 playerPosition;
+    private float lastCamRotation;
+    private int currentCamRotation, playerRotation;
+    private bool rotating; 
 
     private void OnEnable()
     {
@@ -30,6 +36,7 @@ public class cameraFollow : MonoBehaviour
         ls = compass.GetComponent<LeanSelectable>();
         deselect = ls.OnDeselect;
         deselect.AddListener(beginRotation);
+        rotationSpeed = 50;
     }
 
     private void Update()
@@ -43,11 +50,21 @@ public class cameraFollow : MonoBehaviour
             transform.position += transform.up * thePlayer.moveSpeed * Time.deltaTime;
         }
 
-        rotationZ = thePlayer.transform.eulerAngles.z;
+        currentCamRotation = Mathf.RoundToInt(transform.eulerAngles.z);
 
-        if (rotationZ != transform.eulerAngles.z && thePlayer.turning == false)
+        if (rotating)
         {
-            thePlayer.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+            if (currentCamRotation != playerRotation)
+            {
+                if (currentCamRotation < playerRotation)
+                {
+                    transform.RotateAround(playerPosition, Vector3.forward, rotationSpeed * Time.deltaTime);
+                }
+                else if (currentCamRotation > playerRotation)
+                {
+                    transform.RotateAround(playerPosition, Vector3.back, rotationSpeed * Time.deltaTime);
+                }
+            }
         }
     }
 
@@ -59,15 +76,14 @@ public class cameraFollow : MonoBehaviour
     IEnumerator CamRotate()
     {
         compass.SetActive(false);
-        rotationZ = thePlayer.transform.eulerAngles.z;
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotationZ);
-        currentPlayerPosition = thePlayer.transform.position;
-        transform.position = new Vector3(currentPlayerPosition.x, currentPlayerPosition.y, transform.position.z);
-        //transform.position += -transform.up * 5;
-        compass.SetActive(true);
-        thePlayer.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotationZ / 2);
-        yield return new WaitForSeconds(1);
+        thePlayer.turning = true;
+        playerPosition = thePlayer.transform.position;
+        playerRotation = Mathf.RoundToInt(thePlayer.transform.eulerAngles.z);
+        rotating = true;
+        yield return new WaitUntil(() => currentCamRotation == playerRotation);
+        rotating = false;
         thePlayer.turning = false;
+        compass.SetActive(true);
     }
 
     void camRelocate()

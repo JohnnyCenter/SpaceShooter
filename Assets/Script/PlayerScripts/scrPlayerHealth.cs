@@ -9,6 +9,10 @@ public class scrPlayerHealth : MonoBehaviour
     [Tooltip("Set player health")]
     [SerializeField] private int playerHealth;
     private GameObject playerMesh;
+
+    //Linjen under er lagt til av August og burde slettes
+    [SerializeField]
+    GameObject Shield;
     private void Awake()
     {
         playerMesh = GameObject.FindGameObjectWithTag("PlayerMesh");
@@ -38,5 +42,15 @@ public class scrPlayerHealth : MonoBehaviour
     private void OnDisable()
     {
         scrEnemyProjectiles.OnPlayerDamagedByEnemy -= TakeDamage;
+    }
+
+    //ALT UNDER ER MIDLERTIDIG LAGT TIL AV AUGUST
+
+    private void Update()
+    {
+        if (playerHealth <= 1)
+            Shield.SetActive(false);
+        else
+            Shield.SetActive(true);
     }
 }

@@ -10,7 +10,7 @@ public class tempCompass : MonoBehaviour
 
     private void Update()
     {
-        rotationZ = compass.transform.eulerAngles.z;
+        rotationZ = compass.transform.localEulerAngles.z;
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotationZ);
     }
