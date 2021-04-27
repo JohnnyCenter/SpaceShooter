@@ -26,6 +26,14 @@ public class scrPlayerHealth : MonoBehaviour
             playerDies();
         }
     }
+    public void DealDamageToPlayer(int _amount) //For reference in other scripts
+    {
+        playerHealth -= _amount;
+        if (playerHealth <= 0)
+        {
+            playerDies();
+        }
+    }
     private void playerDies()
     {
         //Dissable player body

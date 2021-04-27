@@ -612,12 +612,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274006861}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.16, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -348.16, y: -213.33334, z: 0}
+  m_LocalScale: {x: 42.666668, y: 50, z: 42.666668}
   m_Children: []
-  m_Father: {fileID: 3472293815277634413}
-  m_RootOrder: 2
+  m_Father: {fileID: 1251224796583655625}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &274006863
 BoxCollider2D:
@@ -1568,12 +1568,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514033030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.99, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 383.57333, y: -213.33334, z: 0}
+  m_LocalScale: {x: 42.666668, y: 50, z: 42.666668}
   m_Children: []
-  m_Father: {fileID: 3472293815277634413}
-  m_RootOrder: 3
+  m_Father: {fileID: 1251224796583655625}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &514033032
 BoxCollider2D:
@@ -3659,8 +3659,9 @@ MonoBehaviour:
   - {fileID: 1252896006}
   - {fileID: 233438397}
   - {fileID: 1086964258}
-  testEnemyType:
+  enemyTypes:
   - {fileID: 4786250661466286522, guid: 8da7eadb08a749642bc1c45d9c5dd51f, type: 3}
+  - {fileID: 4786250661466286522, guid: bbd2c17db6c03004bb7a27e351cc2911, type: 3}
   spawnTimer: 5
 --- !u!4 &1080954506
 Transform:
@@ -5889,7 +5890,7 @@ Transform:
   - {fileID: 985315034}
   - {fileID: 1666848992}
   m_Father: {fileID: 3472293815277634413}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987029580
 GameObject:
@@ -9220,6 +9221,8 @@ RectTransform:
   - {fileID: 3044046453732603945}
   - {fileID: 894374901}
   - {fileID: 1401369825}
+  - {fileID: 274006862}
+  - {fileID: 514033031}
   m_Father: {fileID: 1251224796615801267}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13384,8 +13387,6 @@ Transform:
   m_Children:
   - {fileID: 724465410}
   - {fileID: 1080954506}
-  - {fileID: 274006862}
-  - {fileID: 514033031}
   - {fileID: 1943561022}
   m_Father: {fileID: 3472293815260234958}
   m_RootOrder: 0

@@ -34,7 +34,14 @@ public class scrEnemyProjectiles : MonoBehaviour
         {
             playerMovementSpeed = playerController.moveSpeed;
         }
-        transform.position -= (transform.up * (movementSpeed + playerMovementSpeed) * Time.deltaTime);
+        if(!playerController.firing)
+        {
+            transform.position -= (transform.up * (movementSpeed - playerMovementSpeed) * Time.deltaTime);
+        }
+        else if(playerController.firing)
+        {
+            transform.position -= (transform.up * (movementSpeed - (playerMovementSpeed / 2)) * Time.deltaTime);
+        }
     }
     private void DestroyProjectile()
     {

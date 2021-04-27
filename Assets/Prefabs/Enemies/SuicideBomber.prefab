@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 4786250661466286512}
   - component: {fileID: 4786250661466286519}
   - component: {fileID: 4786250661466286518}
-  - component: {fileID: 4786250661466286517}
   - component: {fileID: 7961601817673387638}
-  - component: {fileID: 4786250661466286516}
+  - component: {fileID: -508701124032782495}
   - component: {fileID: 4786250661466286523}
   - component: {fileID: 6758709428883247253}
   m_Layer: 0
-  m_Name: BasicEnemy
+  m_Name: SuicideBomber
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,8 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7878028633849923402, guid: aa16cb44e2de1ea40b826473705262a3,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: d8d1d7f2602791a40bba6d9ce97b1889, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,19 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
---- !u!114 &4786250661466286517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4786250661466286522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb74dd8571b0b24684685d71c5b4ebc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sidewaysMovementSpeed: 2
 --- !u!114 &7961601817673387638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,8 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec863252da53d44a849abc82d94a202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 19cae673a3d48ad45b252b9fb912fcff, type: 2}
---- !u!114 &4786250661466286516
+  stats: {fileID: 11400000, guid: 2705c324fa5daf741a22d98ac8001359, type: 2}
+--- !u!114 &-508701124032782495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,12 +121,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4786250661466286522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08c4eee2640a9e0439ec69445778dd90, type: 3}
+  m_Script: {fileID: 11500000, guid: 992cc36c5b67d6c498d5313af533ae86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyProjectile: {fileID: 4136501992356169458, guid: 117cc25bb0b5b134bb22a43ba55473f3,
-    type: 3}
-  timeBetweenAttacks: 1.7
+  movementSpeed: 10
 --- !u!50 &4786250661466286523
 Rigidbody2D:
   serializedVersion: 4

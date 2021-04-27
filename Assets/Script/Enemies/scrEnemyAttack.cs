@@ -20,7 +20,7 @@ public class scrEnemyAttack : MonoBehaviour
     private void Start()
     {
         weaponCooldownTimer = 0f;
-        canFire = true;
+        canFire = false;
     }
     private void Update()
     {
@@ -51,6 +51,8 @@ public class scrEnemyAttack : MonoBehaviour
     private void OnEnable()
     {
         playerController.OnPlayerTurning += RotateEnemyProjectile;
+        canFire = false;
+        weaponCooldownTimer = 0f;
     }
     private void OnDisable()
     {

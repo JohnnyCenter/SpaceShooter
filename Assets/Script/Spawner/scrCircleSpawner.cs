@@ -6,7 +6,7 @@ public class scrCircleSpawner : MonoBehaviour
 {
     public GameObject enemySpawner;
     public GameObject[] spawnPoints; //An array of the spawn points assigned in the inspector
-    public GameObject[] testEnemyType; //This array should be ordered, where the more difficult enemies are placed at the "bottom" of the array.
+    public GameObject[] enemyTypes; //This array should be ordered, where the more difficult enemies are placed at the "bottom" of the array.
     //This can (probably) be used together with a "int difficulty" to unlock more difficult spawns based on different parameters
     private int numberOfEachEnemyTypeInPool;
     [Tooltip("How much time there is between each spawning cycle. Defaults to five")]
@@ -29,13 +29,25 @@ public class scrCircleSpawner : MonoBehaviour
     }
     private void Start()
     {
+        gameIntensety = 1;
         StartCoroutine(StartSpawnTimer(spawnTimer));
         //gameIntensety = scrGameWaveManager.gameWaveManager.CurrentWave; //This reference does not work yet
-        gameIntensety = 1;
+
+    }
+    private void Update() //This is just for testing!
+    {
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            gameIntensety = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            gameIntensety = 2;
+        }
     }
     private void InstantiateEnemies()
     {
-        foreach(GameObject enemy in testEnemyType)
+        foreach(GameObject enemy in enemyTypes)
         {
             GameObject newInstance = Instantiate(enemy, transform.position, Quaternion.identity, enemySpawner.transform); //Instantiates enemies with spawner as parent
             scrEnemyTypeDefiner _enemyType = newInstance.GetComponent<scrEnemyTypeDefiner>(); //Get the reference
