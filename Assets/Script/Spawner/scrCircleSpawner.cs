@@ -13,6 +13,7 @@ public class scrCircleSpawner : MonoBehaviour
     [SerializeField] private float spawnTimer = 5f;
     [Tooltip("This int decides what type of enemy spawns each cycle. It is manualy set for now, will increment based on score later")]
     private int gameIntensety = 0;
+    private int enemyLevel = 1;
     private List<GameObject> poolOfEnemyType1;
     private List<GameObject> poolOfEnemyType2;
 
@@ -36,13 +37,30 @@ public class scrCircleSpawner : MonoBehaviour
     }
     private void Update() //This is just for testing!
     {
+        
         if(Input.GetKeyDown(KeyCode.Q))
         {
+            print("Game Intensity set to 1");
             gameIntensety = 1;
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
+            print("Game Intensity set to 2");
             gameIntensety = 2;
+        }
+        
+    }
+    private void RandomizeEnemies()
+    {
+        if(gameIntensety > 1)
+        {
+            enemyLevel = Random.Range(1, gameIntensety + 1); //Returns a random number between 1 and the game intensety
+            print("Randomized gameintensity, enemyLevel is set to: " + enemyLevel);
+        }
+        else
+        {
+            gameIntensety = 1;
+            print("Could not randomize enemies...");
         }
     }
     private void InstantiateEnemies()
@@ -76,13 +94,15 @@ public class scrCircleSpawner : MonoBehaviour
         print("Spawning enemies");
         StartCoroutine(StartSpawnTimer(spawnTimer)); //Start the next cycle
         //Assign possitions:
-        InstantiateObjectsByType(gameIntensety);
+        InstantiateObjectsByType(enemyLevel);
     }
     private void InstantiateObjectsByType(int _type) //The type of enemy that spawns depends on the "gameIntensety" var
     {
+        print("Spawning type is set to: " + _type);
         switch(_type)
         {
             case 1:
+                print("Spawning type 1");
                 for (int i = 0; i < spawnPoints.Length; i++)
                 {
                     GameObject _enemy = poolOfEnemyType1[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
@@ -98,6 +118,7 @@ public class scrCircleSpawner : MonoBehaviour
                 }
                 return;
             case 2:
+                print("Spawning type 2");
                 for (int i = 0; i < spawnPoints.Length; i++)
                 {
                     //spawn enemy at i possition
@@ -114,10 +135,10 @@ public class scrCircleSpawner : MonoBehaviour
                 return;
         }
     }
-
     private IEnumerator StartSpawnTimer(float _timer)
     {
         yield return new WaitForSeconds(_timer);
+        RandomizeEnemies();
         SpawnEnemies();
     }
 }
