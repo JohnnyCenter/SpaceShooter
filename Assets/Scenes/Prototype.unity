@@ -3922,8 +3922,9 @@ MonoBehaviour:
   - {fileID: 233438397}
   - {fileID: 1086964258}
   enemyTypes:
-  - {fileID: 4786250661466286522, guid: 8da7eadb08a749642bc1c45d9c5dd51f, type: 3}
+  - {fileID: 4786250661466286522, guid: 94510c5900f106d40a1bde2bda5a15b8, type: 3}
   - {fileID: 4786250661466286522, guid: bbd2c17db6c03004bb7a27e351cc2911, type: 3}
+  - {fileID: 4786250661466286522, guid: 8da7eadb08a749642bc1c45d9c5dd51f, type: 3}
   spawnTimer: 5
 --- !u!4 &1080954506
 Transform:
@@ -7442,7 +7443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 360, y: -399.3}
+  m_AnchoredPosition: {x: 360, y: -399}
   m_SizeDelta: {x: 500, y: 358.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1251224795627159976
@@ -8555,7 +8556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 360, y: -714.89996}
+  m_AnchoredPosition: {x: 360, y: -715}
   m_SizeDelta: {x: 500, y: 358.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1251224795863746052
