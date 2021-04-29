@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class scrEnemyAttack : MonoBehaviour
 {
+    private GameObject thePlayer;
     private scrEnemyMovement enemyMovement;
     [SerializeField] private GameObject enemyProjectile;
     [SerializeField] private float timeBetweenAttacks;
@@ -14,26 +15,89 @@ public class scrEnemyAttack : MonoBehaviour
     [SerializeField] private int firePossition;
     [SerializeField] private Transform FirePossitionA;
     [SerializeField] private Transform FirePossitionB;
+    [SerializeField] private bool canUseFranticAttack;
     private scrEnemyStats enemyStats;
     private float weaponCooldownTimer;
     private bool canFire;
     Quaternion projectileRotation;
+    private float franticAttackTimer;
+    private float timeSinceFranticAttack;
+    public bool FranticAttack { get; private set; }
+
+    private AudioSource SoundSource;
 
     private void Awake()
     {
         enemyMovement = GetComponent<scrEnemyMovement>();
         enemyStats = GetComponent<scrEnemyStats>();
+        SoundSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
         weaponCooldownTimer = 0f;
         canFire = false;
+        franticAttackTimer = 1.5f;
+        FranticAttack = false;
     }
     private void Update()
     {
-        if(enemyMovement.IAmActive)
+        if(enemyMovement.IAmActive && !FranticAttack)
         {
             FireBasicProjectile();
+        }
+        else if(enemyMovement.IAmActive && FranticAttack && timeSinceFranticAttack <= franticAttackTimer && canUseFranticAttack)
+        {
+            timeSinceFranticAttack += Time.deltaTime;
+            if (timeSinceFranticAttack >= franticAttackTimer)
+            {
+                FranticAttack = false;
+            }
+            FireFranticAttack();
+        }
+    }
+    public void SetFranticAttack()
+    {
+        if(canUseFranticAttack)
+        {
+            timeSinceFranticAttack = 0f;
+            FranticAttack = true;
+        }
+    }
+    private void FireFranticAttack()
+    {
+        //Calculate frantic aim
+
+        weaponCooldownTimer += (Time.deltaTime * 10);
+        if (weaponCooldownTimer >= timeBetweenAttacks)
+        {
+            canFire = true;
+            weaponCooldownTimer = 0f;
+        }
+        if (canFire)
+        {
+            if (!hasFirePossition)
+            {
+                Instantiate(enemyProjectile, transform.position, projectileRotation);
+                SoundSource.Play();
+                canFire = false;
+            }
+            else if (hasFirePossition)
+            {
+                switch (firePossition)
+                {
+                    case 0:
+                        Instantiate(enemyProjectile, FirePossitionA.position, projectileRotation);
+                        SoundSource.Play();
+                        canFire = false;
+                        return;
+                    case 1:
+                        Instantiate(enemyProjectile, FirePossitionB.position, projectileRotation);
+                        SoundSource.Play();
+                        canFire = false;
+                        return;
+                }
+            }
+
         }
     }
     private void FireBasicProjectile()
@@ -49,6 +113,7 @@ public class scrEnemyAttack : MonoBehaviour
             if(!hasFirePossition)
             {
                 Instantiate(enemyProjectile, transform.position, projectileRotation);
+                SoundSource.Play();
                 canFire = false;
             }
             else if (hasFirePossition)
@@ -57,10 +122,12 @@ public class scrEnemyAttack : MonoBehaviour
                 {
                     case 0:
                         Instantiate(enemyProjectile, FirePossitionA.position, projectileRotation);
+                        SoundSource.Play();
                         canFire = false;
                         return;
                     case 1:
                         Instantiate(enemyProjectile, FirePossitionB.position, projectileRotation);
+                        SoundSource.Play();
                         canFire = false;
                         return;
                 }
@@ -78,14 +145,19 @@ public class scrEnemyAttack : MonoBehaviour
         playerController.OnPlayerTurning += RotateEnemyProjectile;
         canFire = false;
         weaponCooldownTimer = 0f;
+        FranticAttack = false;
+        enemyStats.OnEnemyHit += SetFranticAttack;
     }
     private void OnDisable()
     {
         playerController.OnPlayerTurning -= RotateEnemyProjectile;
+        FranticAttack = false;
+        enemyStats.OnEnemyHit -= SetFranticAttack;
     }
     private void OnBecameVisible()
     {
         enemyStats.IsVisibleOnScreen = true;
+        FranticAttack = false;
         projectileRotation = (transform.rotation);
     }
 }

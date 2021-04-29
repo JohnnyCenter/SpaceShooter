@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileLifeTime: 3.5
   movementSpeed: 20
+  isLazer: 0
 --- !u!114 &-1819324372697438513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,10 +62,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
-  statsLevel0: {fileID: 11400000, guid: bcfd78e22d11d134cb3ce30506c1ebd8, type: 2}
-  statsLevel1: {fileID: 11400000, guid: 4bb4e64a5e5d3fb4dacd2d4141d3987a, type: 2}
-  statsLevel2: {fileID: 11400000, guid: 38b77b05cb38d4f4999f4d5068c614a2, type: 2}
-  statsLevel3: {fileID: 11400000, guid: e9afbaf43da928d48a774b1fe9536ad4, type: 2}
+  statsLevel0: {fileID: 11400000, guid: 0ff92cf5e1606f64dab1d4f5106e0556, type: 2}
+  statsLevel1: {fileID: 11400000, guid: 0ff92cf5e1606f64dab1d4f5106e0556, type: 2}
+  statsLevel2: {fileID: 11400000, guid: 0ff92cf5e1606f64dab1d4f5106e0556, type: 2}
+  statsLevel3: {fileID: 11400000, guid: 0ff92cf5e1606f64dab1d4f5106e0556, type: 2}
 --- !u!212 &-5849782232515775840
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class scrCircleSpawner : MonoBehaviour
     private List<GameObject> poolOfEnemyType1;
     private List<GameObject> poolOfEnemyType2;
     private List<GameObject> poolOfEnemyType3;
+    private List<GameObject> poolOfEnemyType4;
 
 
     private void Awake()
@@ -24,6 +25,7 @@ public class scrCircleSpawner : MonoBehaviour
         poolOfEnemyType1 = new List<GameObject>();
         poolOfEnemyType2 = new List<GameObject>();
         poolOfEnemyType3 = new List<GameObject>();
+        poolOfEnemyType4 = new List<GameObject>();
         numberOfEachEnemyTypeInPool = 8;
         for(int i = 0; i < numberOfEachEnemyTypeInPool; i ++)
         {
@@ -32,7 +34,7 @@ public class scrCircleSpawner : MonoBehaviour
     }
     private void Start()
     {
-        gameIntensety = 3; // ;)
+        gameIntensety = 4; // ;)
         StartCoroutine(StartSpawnTimer(spawnTimer));
         //gameIntensety = scrGameWaveManager.gameWaveManager.CurrentWave; //This reference does not work yet
 
@@ -54,6 +56,11 @@ public class scrCircleSpawner : MonoBehaviour
         {
             print("Game Intensity set to 3");
             gameIntensety = 3;
+        }     
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            print("Game Intensity set to 3");
+            gameIntensety = 4;
         }
 
     }
@@ -91,6 +98,11 @@ public class scrCircleSpawner : MonoBehaviour
                     break;
                 case 3:
                     poolOfEnemyType3.Add(newInstance); //Adds enemy to list 2
+                    newInstance.SetActive(false); //Hides it
+
+                    break;
+                case 4:
+                    poolOfEnemyType4.Add(newInstance); //Adds enemy to list 2
                     newInstance.SetActive(false); //Hides it
 
                     break;
@@ -151,6 +163,22 @@ public class scrCircleSpawner : MonoBehaviour
                 {
                     //spawn enemy at i possition
                     GameObject _enemy = poolOfEnemyType3[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
+                    //Check that the enemy is not currenty on screen
+                    if (_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
+                    {
+                        break;
+                    }
+                    _enemy.transform.position = spawnPoints[i].transform.position; //Move the enemy to the right possition
+                    _enemy.transform.parent = null; //Remove parents
+                    _enemy.SetActive(true); //Set the enemy to active
+                }
+                return;
+            case 4:
+                print("Spawning type 4");
+                for (int i = 0; i < spawnPoints.Length; i++)
+                {
+                    //spawn enemy at i possition
+                    GameObject _enemy = poolOfEnemyType4[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
                     //Check that the enemy is not currenty on screen
                     if (_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
                     {
