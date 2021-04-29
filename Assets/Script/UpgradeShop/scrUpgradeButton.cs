@@ -26,6 +26,8 @@ public class scrUpgradeButton : MonoBehaviour
     [SerializeField] private scrUpgradeTheUpgradeButton rightUpgradeInfo;
     private Vector3 playerPossition;
     public static event Action<int, int> OnWeaponPurchased; //Weapon _ID, Weapon placement(left or right)
+    private AudioSource audioSource;
+    private GameObject thePlayer;
 
 
     private void Awake()
@@ -38,7 +40,9 @@ public class scrUpgradeButton : MonoBehaviour
         upgradeName.text = upgrade.UpgradeName;
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
         playerPossition = GameObject.FindGameObjectWithTag("PlayerBody").transform.position;
+        thePlayer = GameObject.FindGameObjectWithTag("ThePlayer");
         gameManager = scrGameManager.instance; //Gets the instance of this singleton
+        audioSource = thePlayer.gameObject.GetComponent<AudioSource>();
     }
 
     public void UpgradeSelected() //Remember that if you rename this function, you will need to reasign it for the button in the inspector
@@ -58,6 +62,8 @@ public class scrUpgradeButton : MonoBehaviour
             switch (placement)
             {
                 case 0:
+                    //PLAY SOUND
+                    audioSource.Play();
                     upgrade.UpgradePurchased(placement);
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;
@@ -68,6 +74,8 @@ public class scrUpgradeButton : MonoBehaviour
                     gameManager.SpendScrap(upgrade.UpgradeCost);
                     return;
                 case 1:
+                    //PLAY SOUND
+
                     upgrade.UpgradePurchased(placement);
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;

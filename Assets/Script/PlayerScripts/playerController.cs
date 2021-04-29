@@ -17,6 +17,7 @@ public class playerController : MonoBehaviour
     public AudioSource Shipvolume1;
     public AudioSource Shipvolume2;
     public AudioSource Shipvolume3;
+    public bool shipvolume1, shipvolume2, shipvolume3;
     
 
     private void Awake()
@@ -24,6 +25,10 @@ public class playerController : MonoBehaviour
         ls = GetComponent<LeanSelectable>();
         compassActive = Compass.GetComponent<LeanSelectable>();
         rotation = GetComponent<tempCompass>();
+        Shipvolume1.Play();
+        shipvolume1 = true;
+        shipvolume2 = false;
+        shipvolume3 = false;
     }
 
    
@@ -65,28 +70,21 @@ public class playerController : MonoBehaviour
         }
 
 
-        if (moveSpeed <= 15 && moveSpeed > 10)
+        if (moveSpeed <= 15 && moveSpeed > 10 && shipvolume1 == false)
         {
-            Debug.Log("Sound should play");
-            Shipvolume1.Play();
-          //  Shipvolume2.Stop();
-         //   Shipvolume3.Stop();
+            PlayEngine1();
+
+           
         }
 
-        if(moveSpeed <= 25 && moveSpeed > 15)
+        if(moveSpeed <= 25 && moveSpeed > 15 && shipvolume2 == false)
         {
-            Debug.Log("15-25");
-            Shipvolume2.Play();
-         //   Shipvolume1.Stop();
-          //  Shipvolume3.Stop();
+            PlayEngine2();
         }
  
-        if (moveSpeed <= 30 && moveSpeed > 25)
+        if (moveSpeed <= 30 && moveSpeed > 25 && shipvolume3 == false)
         {
-            Debug.Log("25-30");
-            Shipvolume3.Play();
-          //  Shipvolume1.Stop();
-           // Shipvolume2.Stop();
+            PlayEngine3();
         }
       
     }
@@ -94,4 +92,39 @@ public class playerController : MonoBehaviour
     {
         moveSpeed = newSpeed;
     }
+
+     void PlayEngine1()
+    {
+        Debug.Log("Sound should play");
+        Shipvolume1.Play();
+
+        Shipvolume2.Stop();
+        Shipvolume3.Stop();
+        shipvolume1 = true;
+        shipvolume2 = false;
+        shipvolume3 = false;
+    }
+    void PlayEngine2()
+    {
+        Debug.Log("15-25");
+        Shipvolume2.Play();
+        Shipvolume1.Stop();
+        Shipvolume3.Stop();
+
+        shipvolume2 = true;
+        shipvolume1 = false;
+        shipvolume3 = false;
+    }
+
+        void PlayEngine3()
+        {       
+            Debug.Log("25-30");
+            Shipvolume3.Play();
+            Shipvolume1.Stop();
+            Shipvolume2.Stop();
+
+            shipvolume3 = true;
+            shipvolume2 = false;
+            shipvolume1 = false;
+        }
 }

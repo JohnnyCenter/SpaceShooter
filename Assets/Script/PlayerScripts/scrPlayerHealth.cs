@@ -9,6 +9,8 @@ public class scrPlayerHealth : MonoBehaviour
     [Tooltip("Set player health")]
     [SerializeField] private int playerHealth;
     private GameObject playerMesh;
+    public AudioSource playertakedamageaudio;
+    public AudioSource playerdiesaudio;
 
     //Linjen under er lagt til av August og burde slettes
     [SerializeField]
@@ -21,6 +23,7 @@ public class scrPlayerHealth : MonoBehaviour
     {
         print("ouch!");
         playerHealth -= 1;
+        playertakedamageaudio.Play();
         if(playerHealth <= 0)
         {
             playerDies();
@@ -29,6 +32,7 @@ public class scrPlayerHealth : MonoBehaviour
     public void DealDamageToPlayer(int _amount) //For reference in other scripts
     {
         playerHealth -= _amount;
+
         if (playerHealth <= 0)
         {
             playerDies();
@@ -42,6 +46,7 @@ public class scrPlayerHealth : MonoBehaviour
         //Play explotion effect
         OnPlayerDeath?.Invoke();
         //Move the player to a new scene
+        playerdiesaudio.Play();
     }
     private void OnEnable()
     {

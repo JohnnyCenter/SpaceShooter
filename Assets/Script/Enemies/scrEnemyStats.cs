@@ -13,6 +13,8 @@ public class scrEnemyStats : MonoBehaviour
     private bool canTakeDamage;
     private bool canTakeDamageCountdownStarted;
     private bool countDownStarted;
+    public AudioSource takedamageaudio;
+    public AudioSource upondeathaudio;
     public bool IsVisibleOnScreen { get; set; }  //Used to affect spawner
     public EnemyStatsSO LocalStats { get; private set; } //For reference in other scripts
 
@@ -50,6 +52,8 @@ public class scrEnemyStats : MonoBehaviour
             OnEnemyHit?.Invoke();
             print("Ouch, took this much damage: " + _damage);
             health -= _damage;
+            takedamageaudio.Play();
+
             if (health <= 0)
             {
                 EnemyDies();
@@ -67,6 +71,7 @@ public class scrEnemyStats : MonoBehaviour
         canTakeDamage = false;
         canTakeDamageCountdownStarted = false;
         countDownStarted = false;
+        upondeathaudio.Play();
     }
     public void EnemyDiesNoReward()
     {
