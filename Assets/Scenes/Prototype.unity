@@ -634,7 +634,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moonDistance: 69
-  distance: 0
   Red: 0
   Green: 1
   Yellow: 0
@@ -775,6 +774,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.8
+  colorFadeSpeed: 0
+  colorFadeTime: 5
+  playerSpeed: 0
+  speedTreshold: 15
+  player: {fileID: 3472293815277634418}
 --- !u!212 &352849096
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2759,6 +2763,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.9
+  colorFadeSpeed: 0
+  colorFadeTime: 5
+  playerSpeed: 0
+  speedTreshold: 15
+  player: {fileID: 3472293815277634418}
 --- !u!1 &724465409
 GameObject:
   m_ObjectHideFlags: 0
@@ -4163,6 +4172,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.85
+  colorFadeSpeed: 0
+  colorFadeTime: 5
+  playerSpeed: 0
+  speedTreshold: 15
+  player: {fileID: 3472293815277634418}
 --- !u!1 &1013294691
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,7 +4226,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moonDistance: 69
-  distance: 0
   Red: 0
   Green: 0
   Yellow: 1
@@ -4510,7 +4523,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1080954505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7217,6 +7230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.7
+  colorFadeSpeed: 0
+  colorFadeTime: 5
+  playerSpeed: 0
+  speedTreshold: 15
+  player: {fileID: 3472293815277634418}
 --- !u!212 &1943305355
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8321,7 +8339,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moonDistance: 69
-  distance: 0
   Red: 1
   Green: 0
   Yellow: 0

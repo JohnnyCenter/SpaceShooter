@@ -6,11 +6,12 @@ using System;
 public class Moon : MonoBehaviour
 {
     [SerializeField]
-    int moonDistance; //Determines how close the player needs to be to the moon to discover it !!Must be assigned in inspector or default value will be zero!!
+    int moonDistance; [Tooltip("How close does the player have to be for the moon to be discovered?")] //Determines how close the player needs to be to the moon to discover it !!Must be assigned in inspector or default value will be zero!!
     bool discovered; //Has the moon already been discovered?
-    public float distance; //The distance between player and the middle of the moon
+    private float distance; //The distance between player and the middle of the moon
     
     [SerializeField]
+    [Tooltip("Choose what color the background will change to when the player gets close")]
     bool Red, Green, Yellow; //What color is the moon, chosen in the Inspector
     public static event Action PlayerEnterMoonZoneRed, PlayerEnterMoonZoneYellow, PlayerEnterMoonZoneGreen, PlayerExitMoonZone; //Events regarding the backgrounds
     public static event Action MoonCompleted; //Event that runs if the player has discovered the moon
