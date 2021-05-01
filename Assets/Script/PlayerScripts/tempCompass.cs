@@ -12,6 +12,6 @@ public class tempCompass : MonoBehaviour
     {
         rotationZ = compass.transform.localEulerAngles.z;
 
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotationZ);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, Mathf.RoundToInt(rotationZ));
     }
 }

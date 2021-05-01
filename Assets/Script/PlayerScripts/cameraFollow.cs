@@ -17,7 +17,6 @@ public class cameraFollow : MonoBehaviour
     [SerializeField]
     private int rotationSpeed; 
     private Vector3 playerPosition;
-    private float lastCamRotation;
     private int currentCamRotation, playerRotation;
     private bool rotating; 
 
@@ -81,6 +80,7 @@ public class cameraFollow : MonoBehaviour
         playerRotation = Mathf.RoundToInt(thePlayer.transform.eulerAngles.z);
         rotating = true;
         yield return new WaitUntil(() => currentCamRotation == playerRotation);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, Mathf.RoundToInt(playerRotation)); //Resets rotatation for safety purposes
         rotating = false;
         thePlayer.turning = false;
         compass.SetActive(true);
@@ -89,7 +89,7 @@ public class cameraFollow : MonoBehaviour
     void camRelocate()
     {
         transform.position = new Vector3(thePlayer.transform.position.x, thePlayer.transform.position.y, transform.position.z);
-        transform.position += -transform.up * 5;
+        transform.position += -transform.up * 4; 
         Debug.Log("Cam has been relocated");
     }
 }

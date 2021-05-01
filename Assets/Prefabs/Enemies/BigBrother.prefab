@@ -201,7 +201,7 @@ MonoBehaviour:
   firePossition: 1
   FirePossitionA: {fileID: 1460819593840175806}
   FirePossitionB: {fileID: 8958589810482260138}
-  canUseFranticAttack: 1
+  canUseFranticAttack: 0
 --- !u!82 &8885890259757864216
 AudioSource:
   m_ObjectHideFlags: 0
