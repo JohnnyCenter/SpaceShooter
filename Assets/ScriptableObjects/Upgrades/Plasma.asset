@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72da23797404b764885f8ea7226c7d9a, type: 3}
   m_Name: Plasma
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 2386764981752485831, guid: 9cce832882a36cf4b92b91d2ce7cc642,
+  upgradePrefab: {fileID: 1726782760655020139, guid: ee9844a0d98dcad49aee910431f365b5,
     type: 3}
   upgradeCost: 30
   upgradingCost: 36

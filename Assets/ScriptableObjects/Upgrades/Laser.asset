@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72da23797404b764885f8ea7226c7d9a, type: 3}
   m_Name: Laser
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 2386764981752485831, guid: 9cce832882a36cf4b92b91d2ce7cc642,
+  upgradePrefab: {fileID: 5447082005439651558, guid: a807edc45890cc141bc5b8cd7b9e6de4,
     type: 3}
   upgradeCost: 36
   upgradingCost: 40

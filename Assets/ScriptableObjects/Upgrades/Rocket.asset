@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72da23797404b764885f8ea7226c7d9a, type: 3}
   m_Name: Rocket
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 5513542027840897256, guid: 79588ea9bd3e9104b8d0976c7c911eda,
+  upgradePrefab: {fileID: 1277045300027205372, guid: 320313e430aec8643bdcbcf81cc6803f,
     type: 3}
   upgradeCost: 80
   upgradingCost: 100
