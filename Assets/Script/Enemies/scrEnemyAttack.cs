@@ -19,6 +19,7 @@ public class scrEnemyAttack : MonoBehaviour
     private scrEnemyStats enemyStats;
     private float weaponCooldownTimer;
     private bool canFire;
+    public bool IsDead { get; set; }
     Quaternion projectileRotation;
     private float franticAttackTimer;
     private float timeSinceFranticAttack;
@@ -28,6 +29,7 @@ public class scrEnemyAttack : MonoBehaviour
 
     private void Awake()
     {
+        IsDead = false;
         enemyMovement = GetComponent<scrEnemyMovement>();
         enemyStats = GetComponent<scrEnemyStats>();
         SoundSource = GetComponent<AudioSource>();
@@ -41,11 +43,11 @@ public class scrEnemyAttack : MonoBehaviour
     }
     private void Update()
     {
-        if(enemyMovement.IAmActive && !FranticAttack)
+        if(enemyMovement.IAmActive && !FranticAttack && !IsDead)
         {
             FireBasicProjectile();
         }
-        else if(enemyMovement.IAmActive && FranticAttack && timeSinceFranticAttack <= franticAttackTimer && canUseFranticAttack)
+        else if(enemyMovement.IAmActive && FranticAttack && timeSinceFranticAttack <= franticAttackTimer && canUseFranticAttack && !IsDead)
         {
             timeSinceFranticAttack += Time.deltaTime;
             if (timeSinceFranticAttack >= franticAttackTimer)
@@ -142,6 +144,7 @@ public class scrEnemyAttack : MonoBehaviour
     }
     private void OnEnable()
     {
+        IsDead = false;
         playerController.OnPlayerTurning += RotateEnemyProjectile;
         canFire = false;
         weaponCooldownTimer = 0f;
