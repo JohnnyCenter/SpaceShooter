@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5004ba0d364a82240a8e32d8c8eda81c, type: 3}
   m_Name: BasicEnemyStats
   m_EditorClassIdentifier: 
-  health: 1
+  health: 2
   scrapReward: 10
+  damageDealthOnCollision: 0

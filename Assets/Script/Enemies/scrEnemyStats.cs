@@ -5,10 +5,18 @@ using System;
 
 public class scrEnemyStats : MonoBehaviour
 {
+    public Action OnEnemyHit;
+
     public static Action<int> OnEnemyKilled;
     [SerializeField] private EnemyStatsSO stats;
     private int health;
-    public bool IsVisibleOnScreen { get; set; }
+    private bool canTakeDamage;
+    private bool canTakeDamageCountdownStarted;
+    private bool countDownStarted;
+    public AudioSource takedamageaudio;
+    public AudioSource upondeathaudio;
+    public bool IsVisibleOnScreen { get; set; }  //Used to affect spawner
+    public EnemyStatsSO LocalStats { get; private set; } //For reference in other scripts
 
     private void Awake()
     {
@@ -16,15 +24,40 @@ public class scrEnemyStats : MonoBehaviour
     }
     private void Start()
     {
+        LocalStats = stats;
         health = stats.Health;
+        canTakeDamage = false;
+        canTakeDamageCountdownStarted = false;
+        countDownStarted = false;
+    }
+    private void Update()
+    {
+        if(canTakeDamageCountdownStarted && countDownStarted == false)
+        {
+            countDownStarted = true;
+            StartCoroutine(StartCanTakeDamageCountdown(0.3f));
+        }
+    }
+    private IEnumerator StartCanTakeDamageCountdown(float _timeToWait)
+    {
+        float timer = 0f;
+        timer += Time.deltaTime;
+        yield return new WaitForSeconds(_timeToWait);
+        canTakeDamage = true;
     }
     public void TakeDamage(int _damage)
     {
-        print("Ouch, took this much damage: " + _damage);
-        health -= _damage;
-        if(health <= 0)
+        if(canTakeDamage)
         {
-            EnemyDies();
+            OnEnemyHit?.Invoke();
+            print("Ouch, took this much damage: " + _damage);
+            health -= _damage;
+            takedamageaudio.Play();
+
+            if (health <= 0)
+            {
+                EnemyDies();
+            }
         }
     }
     private void EnemyDies()
@@ -35,5 +68,36 @@ public class scrEnemyStats : MonoBehaviour
         gameObject.SetActive(false);
         IsVisibleOnScreen = false;
         health = stats.Health;
+        canTakeDamage = false;
+        canTakeDamageCountdownStarted = false;
+        countDownStarted = false;
+        upondeathaudio.Play();
+    }
+    public void EnemyDiesNoReward()
+    {
+        //Enemy dies
+        gameObject.SetActive(false);
+        IsVisibleOnScreen = false;
+        health = stats.Health;
+        canTakeDamage = false;
+        canTakeDamageCountdownStarted = false;
+        countDownStarted = false;
+    }
+    private void OnEnable()
+    {
+        health = stats.Health;
+        canTakeDamage = false;
+        canTakeDamageCountdownStarted = false;
+        countDownStarted = false;
+    }
+    private void OnBecameVisible()
+    {
+        health = stats.Health;
+        canTakeDamageCountdownStarted = true;
+        IsVisibleOnScreen = true;
+    }
+    private void OnBecameInvisible()
+    {
+        IsVisibleOnScreen = false;
     }
 }

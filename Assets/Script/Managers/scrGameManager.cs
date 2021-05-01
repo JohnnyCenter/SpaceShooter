@@ -27,6 +27,7 @@ public class scrGameManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerScrap = 1000;
         scrapText.text =  PlayerScrap.ToString();
         totalNumberOfEnemiesKilled = 0;
         respawnPanel.SetActive(false);

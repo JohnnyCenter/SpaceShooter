@@ -62,10 +62,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
-  statsLevel0: {fileID: 11400000, guid: bcfd78e22d11d134cb3ce30506c1ebd8, type: 2}
-  statsLevel1: {fileID: 11400000, guid: 4bb4e64a5e5d3fb4dacd2d4141d3987a, type: 2}
-  statsLevel2: {fileID: 11400000, guid: 38b77b05cb38d4f4999f4d5068c614a2, type: 2}
-  statsLevel3: {fileID: 11400000, guid: e9afbaf43da928d48a774b1fe9536ad4, type: 2}
+  statsLevel0: {fileID: 11400000, guid: 0b25e72ccc5e0264fbc6697ad07ddada, type: 2}
+  statsLevel1: {fileID: 11400000, guid: b2d5fb1d885f6694e853b75356d157a8, type: 2}
+  statsLevel2: {fileID: 11400000, guid: 25d8c4500bb4de44997787c99edeefe0, type: 2}
+  statsLevel3: {fileID: 11400000, guid: 472e7c86c888cf84e93c3faea09b6228, type: 2}
 --- !u!70 &852396670785821877
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

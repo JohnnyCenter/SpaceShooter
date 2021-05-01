@@ -204,8 +204,9 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         loadedProjectileLevel.UpdateProjectileLevel(projectileLevel); //Updates the stats for the loaded projectile
         //LoadSound
         Sound = loadedProjectileLevel.stats.BulletSound;
+        SoundSource.clip = Sound;
         SoundSource.Play();
-        print("LoadedSoundIs: "+ Sound);
+        //print("LoadedSoundIs: "+ Sound);
         //Set the projectile to active and fire it
         _loadedProjectile.SetActive(true);
         OnFireWeapon?.Invoke(_loadedProjectile);

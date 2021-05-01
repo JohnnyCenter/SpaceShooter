@@ -15,7 +15,7 @@ public class scrFireBasicProjectile : MonoBehaviour
     private GameObject currentlyLoadedProjectile;
 
     public static event Action<GameObject> OnFireBasicWeapon;
-
+    private AudioSource SoundSource;
 
     [SerializeField]
     playerController pc;
@@ -28,6 +28,7 @@ public class scrFireBasicProjectile : MonoBehaviour
         basicProjectiles = new List<GameObject>(); //Initialize the list
         InstantiateBasicProjectiles();
         pc = FindObjectOfType<playerController>(); //TEMPORARY CHANGE TO CONNECT PLAYERCONTROLLER WITH THIS SCRIPT//
+        SoundSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -82,6 +83,7 @@ public class scrFireBasicProjectile : MonoBehaviour
         //loadedProjectileLevel.UpdateProjectileLevel(projectileLevel); //Updates the stats for the loaded projectile 
         //Set the projectile to active and fire it
         basicProjectile.SetActive(true);
+        SoundSource.Play();
         OnFireBasicWeapon?.Invoke(basicProjectile);
         canFire = false;
         float weaponCooldown = basicWeaponFireRate; //Gets the fire rate from the current loaded projectile
