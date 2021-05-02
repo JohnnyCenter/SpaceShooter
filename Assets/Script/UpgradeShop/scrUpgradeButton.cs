@@ -28,6 +28,8 @@ public class scrUpgradeButton : MonoBehaviour
     public static event Action<int, int> OnWeaponPurchased; //Weapon _ID, Weapon placement(left or right)
     private AudioSource audioSource;
     private GameObject thePlayer;
+    [SerializeField] private GameObject leftBaseWeapon;
+    [SerializeField] private GameObject rightBaseWeapon;
 
 
     private void Awake()
@@ -63,6 +65,7 @@ public class scrUpgradeButton : MonoBehaviour
             {
                 case 0:
                     //PLAY SOUND
+                    leftBaseWeapon.SetActive(true);
                     audioSource.Play();
                     upgrade.UpgradePurchased(placement);
                     buttonImage.color = Color.grey;
@@ -75,7 +78,7 @@ public class scrUpgradeButton : MonoBehaviour
                     return;
                 case 1:
                     //PLAY SOUND
-
+                    rightBaseWeapon.SetActive(true);
                     upgrade.UpgradePurchased(placement);
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;

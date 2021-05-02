@@ -13,6 +13,8 @@ TagManager:
   - LeftBorder
   - RightBorder
   - PlayerMesh
+  - BaseWeaonLeft
+  - BaseWeaponRight
   layers:
   - Default
   - TransparentFX

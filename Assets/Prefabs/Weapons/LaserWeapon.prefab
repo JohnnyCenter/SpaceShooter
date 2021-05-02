@@ -328,6 +328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4673677127274939484}
+  - component: {fileID: 2181892630846501433}
   m_Layer: 0
   m_Name: LaserWeapon
   m_TagString: Untagged
@@ -344,7 +345,7 @@ Transform:
   m_GameObject: {fileID: 5447082005439651558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -20}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 7090902830109559800}
   - {fileID: 4794210266340559377}
@@ -353,3 +354,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2181892630846501433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447082005439651558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111a2a104ce26dd4682ecb9def6df440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLevel0: {fileID: 2935043456170006183}
+  weaponLevel1: {fileID: 4703219316149159151}
+  weaponLevel2: {fileID: 5244500769157731905}
+  weaponLevel3: {fileID: 4971809550316668082}

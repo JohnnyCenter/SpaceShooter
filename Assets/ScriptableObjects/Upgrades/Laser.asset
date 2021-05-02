@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradePrefab: {fileID: 5447082005439651558, guid: a807edc45890cc141bc5b8cd7b9e6de4,
     type: 3}
+  weaponUpgrader: {fileID: 2181892630846501433, guid: a807edc45890cc141bc5b8cd7b9e6de4,
+    type: 3}
   upgradeCost: 36
   upgradingCost: 40
   upgradeName: Laser

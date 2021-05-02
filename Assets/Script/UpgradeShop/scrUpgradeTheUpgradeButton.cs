@@ -21,7 +21,11 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     [SerializeField] private int upgradePlacement = 0;
     private GameObject thePlayer;
     scrProjectileLevelTracker[] projectileLevelTrackers;
+    private scrUpgradeWeapon localWeaponUpgrader;
     scrGameManager gameManager;
+
+    private GameObject InstantiatedWeapon;
+    private scrUpgradeWeapon weaponUpgrader;
 
     private void Awake()
     {
@@ -36,7 +40,7 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     }
     private void Start()
     {
-        projectileLevelTrackers = thePlayer.GetComponentsInChildren<scrProjectileLevelTracker>(); //Gets the projectileLevelTracjers
+        projectileLevelTrackers = thePlayer.GetComponentsInChildren<scrProjectileLevelTracker>(); //Gets the projectileLevelTrackers
     }
     public void UpdateTheUpgrade(UpgradesSO _upgrade)
     {
@@ -45,18 +49,21 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
         upgradeLevelText.text = "Level " + upgradeLevel.ToString();
         upgradeCost.text = _upgrade.UpgradingCost.ToString();
         localUpgrade = _upgrade;
+        InstantiatedWeapon = localUpgrade.ActualWeaponInstantiated;
+        weaponUpgrader = InstantiatedWeapon.GetComponent<scrUpgradeWeapon>();
     }
     public void IncreaseUpgradeLevel() //This is called from a button
     {
         if (upgradeLevel >= 1) //Because this code cannot run if we are not already at least level 1 (or else, the upgrade is not yet assigned or purchased)
         {
+            print("Stuff is upgraded");
             if(gameManager.PlayerScrap < localUpgrade.UpgradingCost)
             {
                 print("Did not have enough money to purchase the upgrade");
                 upgradeMenu.CloseUpgradePanel();
                 return;
             }
-            //Implement if check to check that we have enough scrap
+            weaponUpgrader.UpgradeWeapon();
             gameManager.SpendScrap(localUpgrade.UpgradingCost);
             upgradeLevel += 1;
             upgradeLevelText.text = "Level " + upgradeLevel.ToString();

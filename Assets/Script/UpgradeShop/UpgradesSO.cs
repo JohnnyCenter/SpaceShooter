@@ -8,6 +8,8 @@ public class UpgradesSO : ScriptableObject
 {
     [Tooltip("Set the upgrade-prefab that corresponds to this upgrade")]
     public GameObject upgradePrefab;
+    public GameObject ActualWeaponInstantiated { get; private set; }
+    [HideInInspector] public scrUpgradeWeapon weaponUpgrader;
     [Tooltip("Set the cost of this upgrade")]
     [SerializeField] private int upgradeCost;
     [Tooltip("Set the cost of upgrading this upgrade")]
@@ -24,10 +26,8 @@ public class UpgradesSO : ScriptableObject
     [SerializeField] private int projectileType;
     public int ProjectileType { get; private set; }
 
-    //private GameObject upgradeLocation;
     private GameObject playerBody;
     public string UpgradeName { get; private set; }
-
     public void ResetUpgradeStats()
     {
         ProjectileType = projectileType;
@@ -48,7 +48,7 @@ public class UpgradesSO : ScriptableObject
     {
         upgradeLocationLeft = _playerPossition;
         upgradeLocationLeft.x = _playerPossition.x - playerWidth;
-        upgradeLocationLeft.z = _playerPossition.z - 7;
+        upgradeLocationLeft.z = _playerPossition.z + 31.26f;
         return upgradeLocationLeft;
     }
     public Vector3 GetUPgradeLocationLeft()
@@ -59,7 +59,7 @@ public class UpgradesSO : ScriptableObject
     {
         upgradeLocationRight = _playerPossition;
         upgradeLocationRight.x = _playerPossition.x + playerWidth;
-        upgradeLocationRight.z = _playerPossition.z - 7;
+        upgradeLocationRight.z = _playerPossition.z + 31.26f;
         return upgradeLocationRight;
     }
     public Quaternion SetUpgradeRotation(Vector3 _playerRotation)
@@ -77,10 +77,10 @@ public class UpgradesSO : ScriptableObject
         switch(placement)
         {
             case 0:
-                Instantiate(upgradePrefab, SetUpgradeLocationLeft(playerBody.transform.position), new Quaternion(-90f, 0f, 0f, 90), playerBody.transform); //Instantiate the upgrade with the player as parent
+                ActualWeaponInstantiated = Instantiate(upgradePrefab, SetUpgradeLocationLeft(playerBody.transform.position), new Quaternion(-90f, 0f, 0f, 90), playerBody.transform); //Instantiate the upgrade with the player as parent
                 return;
             case 1:
-                Instantiate(upgradePrefab, SetUpgradeLocationRight(playerBody.transform.position), new Quaternion(-90f, 0f, 0f, 90), playerBody.transform); //Instantiate the upgrade with the player as parent
+                ActualWeaponInstantiated = Instantiate(upgradePrefab, SetUpgradeLocationRight(playerBody.transform.position), new Quaternion(-90f, 0f, 0f, 90), playerBody.transform); //Instantiate the upgrade with the player as parent
                 return;
             default:
                 Debug.LogError("The placement value is incorrect when used for switch statement in the class UpgradeSO");
