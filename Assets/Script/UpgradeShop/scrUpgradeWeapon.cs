@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class scrUpgradeWeapon : MonoBehaviour
 {
@@ -8,6 +9,13 @@ public class scrUpgradeWeapon : MonoBehaviour
     [SerializeField] private GameObject weaponLevel1;
     [SerializeField] private GameObject weaponLevel2;
     [SerializeField] private GameObject weaponLevel3;
+    [SerializeField] private Image upgradeImageLevel2;
+    [SerializeField] private Image upgradeImageLevel3;
+    [SerializeField] private Image upgradeImageLevel4;
+    public Image UpgradeImageLevel2 { get; private set; }
+    public Image UpgradeImageLevel3 { get; private set; }
+    public Image UpgradeImageLevel4 { get; private set; }
+
     private int upgradeLevel;
     private int upgradePlacement;
 
@@ -17,23 +25,30 @@ public class scrUpgradeWeapon : MonoBehaviour
         weaponLevel1.SetActive(false);
         weaponLevel2.SetActive(false);
         weaponLevel3.SetActive(false);
+        AssignSprites();
+    }
+    public void AssignSprites()
+    {
+        UpgradeImageLevel2 = upgradeImageLevel2;
+        UpgradeImageLevel3 = upgradeImageLevel3;
+        UpgradeImageLevel4 = upgradeImageLevel4;
     }
     public void UpgradeWeapon()
     {
-        print("Weapon is upgraded---");
+        //print("Weapon is upgraded---");
         upgradeLevel += 1;
         switch(upgradeLevel)
         {
             case 1:
-                print("---To level 1");
+                //print("---To level 1");
                 weaponLevel1.SetActive(true);
                 return;
             case 2:
-                print("---To level 2");
+                //print("---To level 2");
                 weaponLevel2.SetActive(true);
                 return;
             case 3:
-                print("---To level 3");
+                //print("---To level 3");
                 weaponLevel3.SetActive(true);
                 return;
         }

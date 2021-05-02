@@ -370,3 +370,9 @@ MonoBehaviour:
   weaponLevel1: {fileID: 4703219316149159151}
   weaponLevel2: {fileID: 5244500769157731905}
   weaponLevel3: {fileID: 4971809550316668082}
+  upgradeImageLevel2: {fileID: 5088837722280767242, guid: e28804c111a326446897fb9c19c828d6,
+    type: 3}
+  upgradeImageLevel3: {fileID: 8328345995578794930, guid: 8f33a7c83f014954e834d6ad9598052f,
+    type: 3}
+  upgradeImageLevel4: {fileID: 4774336975380356109, guid: 5f2e8463e2e414949b211084357c2be8,
+    type: 3}

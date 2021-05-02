@@ -13,6 +13,8 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     private Image UpgradeImage; //Used to display a sketch of the upgrade purchased
     [SerializeField] private TextMeshProUGUI upgradeLevelText; //Used to tell display the CURRENT level of the upgrade
     [SerializeField] private TextMeshProUGUI upgradeCost;
+    [SerializeField] private Image upgradeImage;
+
     private int upgradeLevel;
     UpgradesSO localUpgrade; //This will be null, until its assigned by the "UpdateTheUpgrade" function bellow.
     private scrUpgradeMenu upgradeMenu;
@@ -51,10 +53,30 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
         localUpgrade = _upgrade;
         InstantiatedWeapon = localUpgrade.ActualWeaponInstantiated;
         weaponUpgrader = InstantiatedWeapon.GetComponent<scrUpgradeWeapon>();
+        weaponUpgrader.AssignSprites();
+        upgradeImage.sprite = weaponUpgrader.UpgradeImageLevel2.sprite;
+    }
+    private void UpdateImage(int upgradeLevel)
+    {
+        switch(upgradeLevel)
+        {
+            case 2:
+                print("image is number 2");
+                upgradeImage.sprite = weaponUpgrader.UpgradeImageLevel2.sprite;
+                return;
+            case 3:
+                print("image is number 3");
+                upgradeImage.sprite = weaponUpgrader.UpgradeImageLevel3.sprite;
+                return;
+            case 4:
+                print("image is number 4");
+                upgradeImage.sprite = weaponUpgrader.UpgradeImageLevel4.sprite;
+                return;
+        }
     }
     public void IncreaseUpgradeLevel() //This is called from a button
     {
-        if (upgradeLevel >= 1) //Because this code cannot run if we are not already at least level 1 (or else, the upgrade is not yet assigned or purchased)
+        if (upgradeLevel >= 1 && upgradeLevel < 4) //Because this code cannot run if we are not already at least level 1 (or else, the upgrade is not yet assigned or purchased)
         {
             print("Stuff is upgraded");
             if(gameManager.PlayerScrap < localUpgrade.UpgradingCost)
@@ -63,6 +85,7 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
                 upgradeMenu.CloseUpgradePanel();
                 return;
             }
+            UpdateImage(upgradeLevel + 1);
             weaponUpgrader.UpgradeWeapon();
             gameManager.SpendScrap(localUpgrade.UpgradingCost);
             upgradeLevel += 1;
@@ -72,6 +95,11 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
             foreach(scrProjectileLevelTracker levelTracker in projectileLevelTrackers)
             {
                 levelTracker.IncreaseProjectileLevel(upgradePlacement);
+            }
+            if(upgradeLevel == 4) //Max level reached
+            {
+                upgradeLevelText.text = "Max level reached!";
+                upgradeCost.text = ""; //Hides it..
             }
             upgradeMenu.CloseUpgradePanel();
         }

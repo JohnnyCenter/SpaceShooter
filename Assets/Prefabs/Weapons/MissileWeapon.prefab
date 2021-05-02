@@ -51,6 +51,12 @@ MonoBehaviour:
   weaponLevel1: {fileID: 7115638028091030399}
   weaponLevel2: {fileID: 6892043926885210430}
   weaponLevel3: {fileID: 3286754122412220819}
+  upgradeImageLevel2: {fileID: 5088837722280767242, guid: 9fe48d55334069349b035cca58506562,
+    type: 3}
+  upgradeImageLevel3: {fileID: 5088837722280767242, guid: e1b16d436b18a6f4caa77326613e6f11,
+    type: 3}
+  upgradeImageLevel4: {fileID: 5088837722280767242, guid: 8399f1b54117fe14787daee6e54ce0ce,
+    type: 3}
 --- !u!1 &3286754122412220819
 GameObject:
   m_ObjectHideFlags: 0
