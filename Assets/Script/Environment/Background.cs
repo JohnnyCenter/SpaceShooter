@@ -50,6 +50,7 @@ public class Background : MonoBehaviour
     }
     #endregion
 
+    #region Background Color Change
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -106,4 +107,5 @@ public class Background : MonoBehaviour
     {
         sr.DOColor(Color.white, colorFadeSpeed);
     }
+    #endregion
 }

@@ -11,6 +11,7 @@ public class playerController : MonoBehaviour
     public bool firing = false;
     public bool turning = false;
     LeanSelectable ls;
+    LeanMultiUpdate lms;
     public GameObject Compass;
     LeanSelectable compassActive;
     tempCompass rotation;
@@ -25,6 +26,7 @@ public class playerController : MonoBehaviour
         ls = GetComponent<LeanSelectable>();
         compassActive = Compass.GetComponent<LeanSelectable>();
         rotation = GetComponent<tempCompass>();
+        lms = GetComponent<LeanMultiUpdate>();
         Shipvolume1.Play();
         shipvolume1 = true;
         shipvolume2 = false;
@@ -48,11 +50,13 @@ public class playerController : MonoBehaviour
         if (turning)
         {
             rotation.enabled = true;
+            lms.enabled = false;
         }
         else
         {
             rotation.enabled = false;
             OnPlayerTurning?.Invoke(transform.rotation); //Added by JONT
+            lms.enabled = true;
         }
 
         if (ls.IsSelected)
@@ -93,7 +97,9 @@ public class playerController : MonoBehaviour
         moveSpeed = newSpeed;
     }
 
-     void PlayEngine1()
+    #region Sound
+
+    void PlayEngine1()
     {
         Debug.Log("Sound should play");
         Shipvolume1.Play();
@@ -127,4 +133,5 @@ public class playerController : MonoBehaviour
             shipvolume2 = false;
             shipvolume1 = false;
         }
+    #endregion
 }

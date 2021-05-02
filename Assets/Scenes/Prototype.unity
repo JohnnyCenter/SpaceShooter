@@ -775,7 +775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.8
   colorFadeSpeed: 0
-  colorFadeTime: 5
+  colorFadeTime: 12
   playerSpeed: 0
   speedTreshold: 15
   player: {fileID: 3472293815277634418}
@@ -2764,7 +2764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.9
   colorFadeSpeed: 0
-  colorFadeTime: 5
+  colorFadeTime: 16
   playerSpeed: 0
   speedTreshold: 15
   player: {fileID: 3472293815277634418}
@@ -4173,7 +4173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.85
   colorFadeSpeed: 0
-  colorFadeTime: 5
+  colorFadeTime: 14
   playerSpeed: 0
   speedTreshold: 15
   player: {fileID: 3472293815277634418}
@@ -7231,7 +7231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: 0.7
   colorFadeSpeed: 0
-  colorFadeTime: 5
+  colorFadeTime: 10
   playerSpeed: 0
   speedTreshold: 15
   player: {fileID: 3472293815277634418}
