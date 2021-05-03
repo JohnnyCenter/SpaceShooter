@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Portal : MonoBehaviour
 {
     [SerializeField]
     int moonCounter, moonGoal; [Tooltip("Set when the Portal should open. When MoonCounter is the same as MoonGoal so will the portal open")]
     bool portalOpen;
+    public static event Action PlayerEnteredPortal;
 
     SpriteRenderer sr;
 
@@ -45,7 +47,8 @@ public class Portal : MonoBehaviour
     {
         if (other.CompareTag("PlayerBody") && portalOpen)
         {
-            Debug.Log("Player Won!");
+            PlayerEnteredPortal?.Invoke();
+            Debug.Log("Player Won!"); //Her vinner spilleren, transition til Win Screen
         }
     }
 
