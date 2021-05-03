@@ -9,7 +9,7 @@ public class StartScreen : MonoBehaviour
     GameObject TouchManager;
     public static event Action StartEngine;
     private cameraFollow cam;
-
+    
     private void Awake()
     {
         TouchManager.gameObject.SetActive(false);

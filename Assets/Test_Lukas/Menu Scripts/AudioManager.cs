@@ -7,13 +7,23 @@ public class AudioManager : MonoBehaviour
     private AudioSource[] allAudioSources;
     public AudioSource inGameMenu;
     public bool ispaused = false;
+    public AudioSource intro;
+    private AudioSource StartFreeroam;
+    private GameObject TheSource;
     private void Awake()
     {
         allAudioSources = FindObjectsOfType<AudioSource>();
-      
         
+
     }
-   public void stopallaudio()
+
+    private void Start()
+    {
+        intro.Play();
+        TheSource = GameObject.FindGameObjectWithTag("FreeRoamTrack");
+        StartFreeroam = TheSource.gameObject.GetComponent<AudioSource>();
+    }
+    public void stopallaudio()
    {
         foreach (AudioSource audioS in allAudioSources)
         {
@@ -51,5 +61,10 @@ public class AudioManager : MonoBehaviour
         ispaused = true;
     }
 
-    
+    public void startfreeroack()
+    {
+        StartFreeroam.Play();
+        intro.Stop();
+    }
+
 }
