@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
-    private bool inCombat;
+   
+  
+    private AudioSource freeroam;
+    private GameObject freeroamaudio;
+    public AudioSource MoonEntered;
+    public AudioSource MoonDiscovered;
+    public AudioSource PortalEntered;
+
+
+    private void Start()
+    {
+        freeroamaudio = GameObject.FindGameObjectWithTag("FreeRoamTrack");
+        freeroam = freeroamaudio.gameObject.GetComponent<AudioSource>();
+    }
 
     private void OnEnable()
     {
@@ -28,35 +41,72 @@ public class Audio : MonoBehaviour
 
     private void Update()
     {
-        if (inCombat)
+      /*  if (Enteredmoon == true)
         {
             Debug.Log("PLay Combat Music");
+            MoonEntered.Play();
+           // MoonDiscovered.Stop();
+            freeroam.Stop();
+
         }
         else
         {
-            Debug.Log("Play Free Roam Music");
+           // Debug.Log("Play Free Roam Music");
+            // freeroam.Play();
+
         }
+
+        if (moonDiscovered == true)
+        {
+            
+            MoonDiscovered.Play();
+            Debug.Log("PlayMoonDiscovered");
+
+        }
+        else
+        {
+          //   freeroam.Play();
+        }
+
+        if (ExitMoonzone == true)
+        {
+            freeroam.Play();
+            Debug.Log("Playfreeroam");
+        }
+       
+*/
+        
     }
 
     void DiscoverMoonAudio()
     {
         Debug.Log("Moon Discovered Sound plays");
+       
+        MoonDiscovered.Play();
+
     }
 
     void EnteredMoonZone()
     {
-        inCombat = true;
+        freeroam.Pause();
+        MoonEntered.Play();
+       
         Debug.Log("Player entered zone, play moon battle music");
     }
 
     void ExitMoonZone()
     {
-        inCombat = false;
+        freeroam.UnPause();
+        MoonEntered.Stop();
+        
         Debug.Log("Player left zone, transition back to free roam music");
     }
 
     void EnteredPortal()
     {
+        PortalEntered.Play();
         Debug.Log("Transition to Win Screen and play winscreen audio");
     }
+
+    
 }
