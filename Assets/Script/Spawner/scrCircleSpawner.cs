@@ -34,11 +34,31 @@ public class scrCircleSpawner : MonoBehaviour
     }
     private void Start()
     {
-        gameIntensety = 4; // ;)
+        gameIntensety = 2; // ;)
         StartCoroutine(StartSpawnTimer(spawnTimer));
         //gameIntensety = scrGameWaveManager.gameWaveManager.CurrentWave; //This reference does not work yet
 
     }
+
+    //Region below added by August, this increase gameIntensety by 1 for every moon discovered
+    #region Moon Increase intensity
+    private void OnEnable()
+    {
+        Moon.MoonCompleted += AddIntensity;
+    }
+
+    private void OnDisable()
+    {
+        Moon.MoonCompleted += AddIntensity;
+    }
+
+    void AddIntensity()
+    {
+        gameIntensety += 1;
+        Debug.Log("Intensity increased");
+    }
+    #endregion 
+
     private void Update() //This is just for testing!
     {
         

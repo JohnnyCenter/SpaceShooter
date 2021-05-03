@@ -76,7 +76,7 @@ public class scrEnemyStats : MonoBehaviour
         audioPlayer.clip = deathSound;
         audioPlayer.Play();
         OnEnemyKilled?.Invoke(stats.ScrapReward);
-        StartCoroutine(DeathWaitForSound(2f));
+        StartCoroutine(DeathWaitForSound(1f));
         canTakeDamage = false;
         canTakeDamageCountdownStarted = false;
         countDownStarted = false;
