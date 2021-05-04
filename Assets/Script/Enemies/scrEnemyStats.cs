@@ -14,11 +14,16 @@ public class scrEnemyStats : MonoBehaviour
     private bool canTakeDamageCountdownStarted;
     private bool countDownStarted;
     private AudioSource audioPlayer;
-    [SerializeField] private AudioClip takeDamageSound;
+    [SerializeField] private AudioClip takeResistedDamageSound;
+    [SerializeField] private AudioClip takeWeaknessDamageSound;
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private bool isLakiutuProjectile;
+    [Tooltip("How much extra damage is taken when weakness is exploited")]
+    [Range(1, 4)]
+    [SerializeField] private int weaknessMultiplier;
     public bool IsVisibleOnScreen { get; set; }  //Used to affect spawner
     public EnemyStatsSO LocalStats { get; private set; } //For reference in other scripts
-
+    private scrEnemyWeaknessTracker weaknessTracker;
     private void Awake()
     {
         stats.resetStats(); //Makes sure any changes to the variables in the scriptableObject is updated before start
@@ -27,11 +32,16 @@ public class scrEnemyStats : MonoBehaviour
     }
     private void Start()
     {
+        weaknessTracker = GetComponent<scrEnemyWeaknessTracker>(); //Gets the instance
         LocalStats = stats;
         health = stats.Health;
-        canTakeDamage = false;
-        canTakeDamageCountdownStarted = false;
-        countDownStarted = false;
+        if(!isLakiutuProjectile)
+        {
+            canTakeDamage = false;
+            canTakeDamageCountdownStarted = false;
+            countDownStarted = false;
+        }
+
     }
     private void Update()
     {
@@ -48,14 +58,28 @@ public class scrEnemyStats : MonoBehaviour
         yield return new WaitForSeconds(_timeToWait);
         canTakeDamage = true;
     }
-    public void TakeDamage(int _damage)
+    public void TakeDamage(int _damage, int _damageType)
     {
+        if(_damageType == weaknessTracker.WeaknessIndex || weaknessTracker.WeaknessIndex == 4)
+        {
+            print("Weakness!");
+            //Special extra damage effect
+            audioPlayer.clip = takeWeaknessDamageSound;
+            _damage = (_damage * weaknessMultiplier);
+        }
+        if(isLakiutuProjectile)
+        {
+            Destroy(this.gameObject);
+        }
         if(canTakeDamage)
         {
             OnEnemyHit?.Invoke();
             print("Ouch, took this much damage: " + _damage);
             health -= _damage;
-            audioPlayer.clip = takeDamageSound;
+            if(_damageType != weaknessTracker.WeaknessIndex || weaknessTracker.WeaknessIndex != 4)
+            {
+                audioPlayer.clip = takeResistedDamageSound;
+            }
             audioPlayer.Play();
 
             if (health <= 0)
@@ -99,12 +123,21 @@ public class scrEnemyStats : MonoBehaviour
         canTakeDamageCountdownStarted = false;
         countDownStarted = false;
     }
+    private void DeleteThisOnPLayerDeath()
+    {
+        Destroy(this.gameObject);
+    }
     private void OnEnable()
     {
+        scrPlayerHealth.OnPlayerDeath += DeleteThisOnPLayerDeath;
         health = stats.Health;
         canTakeDamage = false;
         canTakeDamageCountdownStarted = false;
         countDownStarted = false;
+    }
+    private void OnDisable()
+    {
+        scrPlayerHealth.OnPlayerDeath -= DeleteThisOnPLayerDeath;
     }
     private void OnBecameVisible()
     {

@@ -13,12 +13,14 @@ public class scrProjectileMovement : MonoBehaviour
     protected scrProjectileLevel projectileStats;
     protected playerController playerController;
     protected float playerMovementSpeed;
+    private scrPlayerProjectileType projectileType;
 
     protected virtual void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<playerController>(); //Gets the reference
         playerMovementSpeed = 0f;
         projectileStats = GetComponent<scrProjectileLevel>(); //Gets the reference
+        projectileType = GetComponent<scrPlayerProjectileType>();
     }
     protected void Update()
     {
@@ -44,7 +46,8 @@ public class scrProjectileMovement : MonoBehaviour
             collision.TryGetComponent<scrEnemyStats>(out scrEnemyStats targetStats);
             if(targetStats != null)
             {
-                targetStats.TakeDamage(projectileStats.stats.WeaponDamage);
+                print("Dealing damage to: " + collision);
+                targetStats.TakeDamage(projectileStats.stats.WeaponDamage, projectileType.DamageTypeIndex);
                 DestroyProjectile();
             }
             BasicProjectileHit(collision.gameObject.name);

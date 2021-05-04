@@ -24,6 +24,7 @@ public class scrEnemyAttack : MonoBehaviour
     private float franticAttackTimer;
     private float timeSinceFranticAttack;
     public bool FranticAttack { get; private set; }
+    private bool playerIsDead;
 
     private AudioSource SoundSource;
 
@@ -36,6 +37,7 @@ public class scrEnemyAttack : MonoBehaviour
     }
     private void Start()
     {
+        playerIsDead = false;
         weaponCooldownTimer = 0f;
         canFire = false;
         franticAttackTimer = 1.5f;
@@ -43,11 +45,15 @@ public class scrEnemyAttack : MonoBehaviour
     }
     private void Update()
     {
-        if(enemyMovement.IAmActive && !FranticAttack && !IsDead)
+        if(playerIsDead)
+        {
+            return;
+        }
+        if(enemyMovement.IAmActive && !FranticAttack && !IsDead && !playerIsDead)
         {
             FireBasicProjectile();
         }
-        else if(enemyMovement.IAmActive && FranticAttack && timeSinceFranticAttack <= franticAttackTimer && canUseFranticAttack && !IsDead)
+        else if(enemyMovement.IAmActive && FranticAttack && timeSinceFranticAttack <= franticAttackTimer && canUseFranticAttack && !IsDead && !playerIsDead)
         {
             timeSinceFranticAttack += Time.deltaTime;
             if (timeSinceFranticAttack >= franticAttackTimer)
@@ -142,8 +148,13 @@ public class scrEnemyAttack : MonoBehaviour
         //print("Rotating enemies...");
         projectileRotation = _newRotation;
     }
+    private void dissableEnemyAttack()
+    {
+        playerIsDead = true;
+    }
     private void OnEnable()
     {
+        scrPlayerHealth.OnPlayerDeath += dissableEnemyAttack;
         IsDead = false;
         playerController.OnPlayerTurning += RotateEnemyProjectile;
         canFire = false;
@@ -151,8 +162,10 @@ public class scrEnemyAttack : MonoBehaviour
         FranticAttack = false;
         enemyStats.OnEnemyHit += SetFranticAttack;
     }
+
     private void OnDisable()
     {
+        scrPlayerHealth.OnPlayerDeath -= dissableEnemyAttack;
         playerController.OnPlayerTurning -= RotateEnemyProjectile;
         FranticAttack = false;
         enemyStats.OnEnemyHit -= SetFranticAttack;

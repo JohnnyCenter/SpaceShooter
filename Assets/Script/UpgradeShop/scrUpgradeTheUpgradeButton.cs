@@ -14,6 +14,8 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI upgradeLevelText; //Used to tell display the CURRENT level of the upgrade
     [SerializeField] private TextMeshProUGUI upgradeCost;
     [SerializeField] private Image upgradeImage;
+    [SerializeField] private TextMeshProUGUI upgradeInfoText;
+    private AudioSource audioSource;
 
     private int upgradeLevel;
     UpgradesSO localUpgrade; //This will be null, until its assigned by the "UpdateTheUpgrade" function bellow.
@@ -39,6 +41,7 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
         upgradeMenu = FindObjectOfType<scrUpgradeMenu>(); //Get the instance (using a singletonpattern to get the instance)
         upgradeLevelText.text = "Level " + upgradeLevel.ToString();
         upgradeCost.text = "0";
+        audioSource = thePlayer.gameObject.GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -55,6 +58,7 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
         weaponUpgrader = InstantiatedWeapon.GetComponent<scrUpgradeWeapon>();
         weaponUpgrader.AssignSprites();
         upgradeImage.sprite = weaponUpgrader.UpgradeImageLevel2.sprite;
+        upgradeInfoText.text = weaponUpgrader.UpgradeInfoLevel2.text;
     }
     private void UpdateImage(int upgradeLevel)
     {
@@ -63,14 +67,17 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
             case 2:
                 print("image is number 2");
                 upgradeImage.sprite = weaponUpgrader.UpgradeImageLevel2.sprite;
+                upgradeInfoText.text = weaponUpgrader.UpgradeInfoLevel2.text;
                 return;
             case 3:
                 print("image is number 3");
                 upgradeImage.sprite = weaponUpgrader.UpgradeImageLevel3.sprite;
+                upgradeInfoText.text = weaponUpgrader.UpgradeInfoLevel3.text;
                 return;
             case 4:
                 print("image is number 4");
                 upgradeImage.sprite = weaponUpgrader.UpgradeImageLevel4.sprite;
+                upgradeInfoText.text = weaponUpgrader.UpgradeInfoLevel4.text;
                 return;
         }
     }
@@ -82,9 +89,12 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
             if(gameManager.PlayerScrap < localUpgrade.UpgradingCost)
             {
                 print("Did not have enough money to purchase the upgrade");
-                upgradeMenu.CloseUpgradePanel();
+                audioSource.clip = upgradeMenu.cannotAfford;
+                audioSource.Play();
+                upgradeMenu.ReturnToMainMenuNoSound();
                 return;
             }
+            audioSource.Play();
             UpdateImage(upgradeLevel + 1);
             weaponUpgrader.UpgradeWeapon();
             gameManager.SpendScrap(localUpgrade.UpgradingCost);
@@ -101,7 +111,7 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
                 upgradeLevelText.text = "Max level reached!";
                 upgradeCost.text = ""; //Hides it..
             }
-            upgradeMenu.CloseUpgradePanel();
+            upgradeMenu.ReturnToMainMenu();
         }
 
     }

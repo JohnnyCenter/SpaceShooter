@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7754561206847029097}
   - component: {fileID: -1201108530144690990}
   - component: {fileID: 852396670785821877}
+  - component: {fileID: 6402459237744424913}
+  - component: {fileID: 6516745635411989793}
   m_Layer: 0
   m_Name: Laser2D
   m_TagString: Untagged
@@ -82,6 +84,42 @@ CapsuleCollider2D:
   m_Offset: {x: -0.013706736, y: 8.01336}
   m_Size: {x: 0.1619003, y: 21.822752}
   m_Direction: 0
+--- !u!50 &6402459237744424913
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337143145188243958}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &6516745635411989793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337143145188243958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453852d71fbbd3d4794a7b4b41423029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBallistic: 0
+  IsEnergy: 1
+  IsPlasma: 0
 --- !u!1 &8501257929735186803
 GameObject:
   m_ObjectHideFlags: 0

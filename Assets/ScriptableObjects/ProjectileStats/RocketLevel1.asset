@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98edf95f0cc6830448b0b2ffb9b41891, type: 3}
   m_Name: RocketLevel1
   m_EditorClassIdentifier: 
-  weaponDamage: 1
-  weaponFireRate: 1.2
+  weaponDamage: 2
+  weaponFireRate: 1.5
   BulletSound: {fileID: 8300000, guid: 7823b7ed36e065f4e835334018a148c9, type: 3}

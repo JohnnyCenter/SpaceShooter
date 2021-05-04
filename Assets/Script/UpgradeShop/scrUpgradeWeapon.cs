@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class scrUpgradeWeapon : MonoBehaviour
 {
@@ -12,9 +13,15 @@ public class scrUpgradeWeapon : MonoBehaviour
     [SerializeField] private Image upgradeImageLevel2;
     [SerializeField] private Image upgradeImageLevel3;
     [SerializeField] private Image upgradeImageLevel4;
+    [SerializeField] private TextMeshProUGUI upgradeInfoLevel2;
+    [SerializeField] private TextMeshProUGUI upgradeInfoLevel3;
+    [SerializeField] private TextMeshProUGUI upgradeInfoLevel4;
     public Image UpgradeImageLevel2 { get; private set; }
     public Image UpgradeImageLevel3 { get; private set; }
     public Image UpgradeImageLevel4 { get; private set; }
+    public TextMeshProUGUI UpgradeInfoLevel2 { get; private set; }
+    public TextMeshProUGUI UpgradeInfoLevel3 { get; private set; }
+    public TextMeshProUGUI UpgradeInfoLevel4 { get; private set; }
 
     private int upgradeLevel;
     private int upgradePlacement;
@@ -32,6 +39,9 @@ public class scrUpgradeWeapon : MonoBehaviour
         UpgradeImageLevel2 = upgradeImageLevel2;
         UpgradeImageLevel3 = upgradeImageLevel3;
         UpgradeImageLevel4 = upgradeImageLevel4;
+        UpgradeInfoLevel2 = upgradeInfoLevel2;
+        UpgradeInfoLevel3 = upgradeInfoLevel3;
+        UpgradeInfoLevel4 = upgradeInfoLevel4;
     }
     public void UpgradeWeapon()
     {

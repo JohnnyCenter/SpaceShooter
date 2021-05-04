@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: -2625755856481952293}
   - component: {fileID: -647619209795276502}
   - component: {fileID: 7067850649795564038}
+  - component: {fileID: 2779537728202977011}
+  - component: {fileID: -5378768269854336547}
   m_Layer: 0
   m_Name: Plasma2D
   m_TagString: Untagged
@@ -132,3 +134,39 @@ CapsuleCollider2D:
   m_Offset: {x: 0.05293095, y: 0.10056853}
   m_Size: {x: 1.0084155, y: 1.0955534}
   m_Direction: 0
+--- !u!50 &2779537728202977011
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3909584754008862521}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-5378768269854336547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3909584754008862521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453852d71fbbd3d4794a7b4b41423029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBallistic: 0
+  IsEnergy: 0
+  IsPlasma: 1

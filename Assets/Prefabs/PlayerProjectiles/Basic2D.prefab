@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: -1819324372697438513}
   - component: {fileID: -5849782232515775840}
   - component: {fileID: 3311151346916974329}
+  - component: {fileID: 1021845796829560564}
+  - component: {fileID: 4880607249368086134}
   m_Layer: 0
   m_Name: Basic2D
   m_TagString: Untagged
@@ -132,3 +134,39 @@ CapsuleCollider2D:
   m_Offset: {x: 0.017966807, y: 0.02695012}
   m_Size: {x: 0.91589355, y: 1.1643586}
   m_Direction: 0
+--- !u!50 &1021845796829560564
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337143145188243958}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4880607249368086134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337143145188243958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453852d71fbbd3d4794a7b4b41423029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBallistic: 1
+  IsEnergy: 0
+  IsPlasma: 0

@@ -376,3 +376,9 @@ MonoBehaviour:
     type: 3}
   upgradeImageLevel4: {fileID: 4774336975380356109, guid: 5f2e8463e2e414949b211084357c2be8,
     type: 3}
+  upgradeInfoLevel2: {fileID: 6419424291890027650, guid: da51ccd3abcd00c478fa3ff017e4767b,
+    type: 3}
+  upgradeInfoLevel3: {fileID: 6419424291890027650, guid: 5410ee0dd5e1a5e4da19512eaf7328f9,
+    type: 3}
+  upgradeInfoLevel4: {fileID: 6419424291890027650, guid: 25ca0a9c6c6122a4393dfa2e8546235c,
+    type: 3}

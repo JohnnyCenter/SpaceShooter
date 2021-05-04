@@ -18,6 +18,10 @@ public class scrCircleSpawner : MonoBehaviour
     private List<GameObject> poolOfEnemyType2;
     private List<GameObject> poolOfEnemyType3;
     private List<GameObject> poolOfEnemyType4;
+    private List<GameObject> poolOfEnemyType5;
+    private List<GameObject> poolOfEnemyType6;
+
+    private bool spawnerIsDisabled;
 
 
     private void Awake()
@@ -26,6 +30,8 @@ public class scrCircleSpawner : MonoBehaviour
         poolOfEnemyType2 = new List<GameObject>();
         poolOfEnemyType3 = new List<GameObject>();
         poolOfEnemyType4 = new List<GameObject>();
+        poolOfEnemyType5 = new List<GameObject>();
+        poolOfEnemyType6 = new List<GameObject>();
         numberOfEachEnemyTypeInPool = 8;
         for(int i = 0; i < numberOfEachEnemyTypeInPool; i ++)
         {
@@ -34,7 +40,8 @@ public class scrCircleSpawner : MonoBehaviour
     }
     private void Start()
     {
-        gameIntensety = 2; // ;)
+        spawnerIsDisabled = false;
+        gameIntensety = 6; // ;)
         StartCoroutine(StartSpawnTimer(spawnTimer));
         //gameIntensety = scrGameWaveManager.gameWaveManager.CurrentWave; //This reference does not work yet
 
@@ -45,13 +52,18 @@ public class scrCircleSpawner : MonoBehaviour
     private void OnEnable()
     {
         Moon.MoonCompleted += AddIntensity;
+        scrPlayerHealth.OnPlayerDeath += DissableSpawner;
     }
 
     private void OnDisable()
     {
         Moon.MoonCompleted += AddIntensity;
+        scrPlayerHealth.OnPlayerDeath -= DissableSpawner;
     }
-
+    private void DissableSpawner()
+    {
+        spawnerIsDisabled = true;
+    }
     void AddIntensity()
     {
         gameIntensety += 1;
@@ -79,8 +91,18 @@ public class scrCircleSpawner : MonoBehaviour
         }     
         if (Input.GetKeyDown(KeyCode.R))
         {
-            print("Game Intensity set to 3");
+            print("Game Intensity set to 4");
             gameIntensety = 4;
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            print("Game Intensity set to 4");
+            gameIntensety = 5;
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            print("Game Intensity set to 4");
+            gameIntensety = 6;
         }
 
     }
@@ -99,6 +121,10 @@ public class scrCircleSpawner : MonoBehaviour
     }
     private void InstantiateEnemies()
     {
+        if(spawnerIsDisabled)
+        {
+            return;
+        }
         foreach(GameObject enemy in enemyTypes)
         {
             GameObject newInstance = Instantiate(enemy, transform.position, Quaternion.identity, enemySpawner.transform); //Instantiates enemies with spawner as parent
@@ -117,12 +143,22 @@ public class scrCircleSpawner : MonoBehaviour
 
                     break;
                 case 3:
-                    poolOfEnemyType3.Add(newInstance); //Adds enemy to list 2
+                    poolOfEnemyType3.Add(newInstance); //Adds enemy to list 3
                     newInstance.SetActive(false); //Hides it
 
                     break;
                 case 4:
-                    poolOfEnemyType4.Add(newInstance); //Adds enemy to list 2
+                    poolOfEnemyType4.Add(newInstance); //Adds enemy to list 4
+                    newInstance.SetActive(false); //Hides it
+
+                    break;
+                case 5:
+                    poolOfEnemyType5.Add(newInstance); //Adds enemy to list 5
+                    newInstance.SetActive(false); //Hides it
+
+                    break;
+                case 6:
+                    poolOfEnemyType6.Add(newInstance); //Adds enemy to list 6
                     newInstance.SetActive(false); //Hides it
 
                     break;
@@ -135,6 +171,10 @@ public class scrCircleSpawner : MonoBehaviour
 
     private void SpawnEnemies()
     {
+        if(spawnerIsDisabled)
+        {
+            return;
+        }
         print("Spawning enemies");
         StartCoroutine(StartSpawnTimer(spawnTimer)); //Start the next cycle
         //Assign possitions:
@@ -199,6 +239,38 @@ public class scrCircleSpawner : MonoBehaviour
                 {
                     //spawn enemy at i possition
                     GameObject _enemy = poolOfEnemyType4[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
+                    //Check that the enemy is not currenty on screen
+                    if (_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
+                    {
+                        break;
+                    }
+                    _enemy.transform.position = spawnPoints[i].transform.position; //Move the enemy to the right possition
+                    _enemy.transform.parent = null; //Remove parents
+                    _enemy.SetActive(true); //Set the enemy to active
+                }
+                return;
+            case 5:
+                print("Spawning type 5");
+                for (int i = 0; i < spawnPoints.Length; i++)
+                {
+                    //spawn enemy at i possition
+                    GameObject _enemy = poolOfEnemyType5[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
+                    //Check that the enemy is not currenty on screen
+                    if (_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
+                    {
+                        break;
+                    }
+                    _enemy.transform.position = spawnPoints[i].transform.position; //Move the enemy to the right possition
+                    _enemy.transform.parent = null; //Remove parents
+                    _enemy.SetActive(true); //Set the enemy to active
+                }
+                return;
+            case 6:
+                print("Spawning type 6");
+                for (int i = 0; i < spawnPoints.Length; i++)
+                {
+                    //spawn enemy at i possition
+                    GameObject _enemy = poolOfEnemyType6[i]; //Get the enemy 0 for spawn point 0, enemy 1 for spawn point 1 and so on
                     //Check that the enemy is not currenty on screen
                     if (_enemy.GetComponent<scrEnemyStats>().IsVisibleOnScreen)
                     {

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2246696289679991596}
   - component: {fileID: -1994688220517172492}
   - component: {fileID: 5335211211919568812}
+  - component: {fileID: 8714412183060188561}
+  - component: {fileID: 7793806061301539734}
   m_Layer: 0
   m_Name: Torpedo2D
   m_TagString: Untagged
@@ -133,6 +135,42 @@ CapsuleCollider2D:
   m_Offset: {x: 0.019988418, y: 0.12649369}
   m_Size: {x: 0.70071864, y: 0.87404346}
   m_Direction: 0
+--- !u!50 &8714412183060188561
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337143145188243958}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &7793806061301539734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337143145188243958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453852d71fbbd3d4794a7b4b41423029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsBallistic: 1
+  IsEnergy: 0
+  IsPlasma: 0
 --- !u!1 &6089225097400562330
 GameObject:
   m_ObjectHideFlags: 0

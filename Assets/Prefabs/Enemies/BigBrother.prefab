@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 8885890259757864216}
   - component: {fileID: 4786250661466286523}
   - component: {fileID: 6758709428883247253}
+  - component: {fileID: -5418643852998433127}
   m_Layer: 0
   m_Name: BigBrother
   m_TagString: Enemy
@@ -133,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5b85fd79857e84d88b39551a4dfcd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 4
+  enemyType: 6
 --- !u!114 &4786250661466286517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,9 +160,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec863252da53d44a849abc82d94a202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  matWhite: {fileID: 2100000, guid: f5444266dd9db25468363f354e3d05bf, type: 2}
   stats: {fileID: 11400000, guid: 6892696a5eab5df49bb34207b2063404, type: 2}
-  takeDamageSound: {fileID: 8300000, guid: 851ba671ecf89d4428ea17947490a632, type: 3}
+  takeResistedDamageSound: {fileID: 8300000, guid: a1443320180aadb45b9c23e0a3b320d9,
+    type: 3}
+  takeWeaknessDamageSound: {fileID: 8300000, guid: 32ea62b5bf91577409c2c820cb525913,
+    type: 3}
   deathSound: {fileID: 8300000, guid: 851ba671ecf89d4428ea17947490a632, type: 3}
+  isLakiutuProjectile: 0
+  weaknessMultiplier: 2
 --- !u!114 &4786250661466286516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +343,22 @@ CapsuleCollider2D:
   m_Offset: {x: -0.055079818, y: 0.027540207}
   m_Size: {x: 1.1922185, y: 2.2333412}
   m_Direction: 0
+--- !u!114 &-5418643852998433127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786250661466286522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6db817bf11d61a4a82a79a6849ad069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weakToEnergy: 0
+  weakToPlasma: 1
+  weakToBallistics: 0
+  weakToAll: 0
 --- !u!1 &7148373269777733353
 GameObject:
   m_ObjectHideFlags: 0

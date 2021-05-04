@@ -57,6 +57,12 @@ MonoBehaviour:
     type: 3}
   upgradeImageLevel4: {fileID: 5088837722280767242, guid: 8399f1b54117fe14787daee6e54ce0ce,
     type: 3}
+  upgradeInfoLevel2: {fileID: 6419424291890027650, guid: 86d00c2e695b9ce4cbf86688d132f8d8,
+    type: 3}
+  upgradeInfoLevel3: {fileID: 6419424291890027650, guid: 38bd7ce2128e61441b11b65c3401a4ca,
+    type: 3}
+  upgradeInfoLevel4: {fileID: 6419424291890027650, guid: f6a53b8dc2b29144a839490ebc18874e,
+    type: 3}
 --- !u!1 &3286754122412220819
 GameObject:
   m_ObjectHideFlags: 0

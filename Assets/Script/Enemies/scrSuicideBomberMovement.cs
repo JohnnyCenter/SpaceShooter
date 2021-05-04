@@ -15,6 +15,8 @@ public class scrSuicideBomberMovement : MonoBehaviour
     private float timeSinceLastSwitch;
 
     private bool MovingTowardsPlayer;
+    private bool playerIsAlive;
+    [SerializeField] private bool isMine;
     private void Awake()
     {
         healthAndStats = GetComponent<scrEnemyStats>(); //Get the instance
@@ -23,6 +25,7 @@ public class scrSuicideBomberMovement : MonoBehaviour
     }
     private void Start()
     {
+        playerIsAlive = true;
         canMove = false;
         MovingTowardsPlayer = true;
     }
@@ -32,7 +35,7 @@ public class scrSuicideBomberMovement : MonoBehaviour
         //print("Player Movement Speed is: " + playerMovementSpeed);
         movementSpeed = ((100f - playerMovementSpeed) * Time.deltaTime) / 20;
         //print("Movement speed is: " + movementSpeed);
-        if(canMove)
+        if(canMove && playerIsAlive && !isMine)
         {
             if(MovingTowardsPlayer)
             {
@@ -43,7 +46,7 @@ public class scrSuicideBomberMovement : MonoBehaviour
                 DriftingMovement();
             }
         }
-        if(!MovingTowardsPlayer)
+        if(!MovingTowardsPlayer && playerIsAlive && !isMine)
         {
             timeSinceLastSwitch += Time.deltaTime;
             if(timeSinceLastSwitch > 2f)
@@ -104,14 +107,20 @@ public class scrSuicideBomberMovement : MonoBehaviour
         canMove = true;
         MovingTowardsPlayer = true;
     }
+    private void DissableMovement()
+    {
+        playerIsAlive = false;
+    }
     private void OnEnable()
     {
+        scrPlayerHealth.OnPlayerDeath += DissableMovement;
         canMove = false;
         MovingTowardsPlayer = true;
         healthAndStats.OnEnemyHit += GotHit;
     }
     private void OnDisable()
     {
+        scrPlayerHealth.OnPlayerDeath -= DissableMovement;
         healthAndStats.OnEnemyHit -= GotHit;
     }
 }

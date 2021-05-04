@@ -9,7 +9,7 @@ public class scrEnemyProjectiles : MonoBehaviour
     [Tooltip("Decides how much time it takes before the projectile despawns")]
     [SerializeField] private float despawnTimer;
     private float timeSinceSpawned;
-    [Range(15f, 30f)]
+    [Range(5f, 30f)]
     [SerializeField] private float movementSpeed = 20f;
     protected playerController playerController;
     protected float playerMovementSpeed;

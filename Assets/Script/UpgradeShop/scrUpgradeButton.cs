@@ -55,8 +55,10 @@ public class scrUpgradeButton : MonoBehaviour
             //If yes:
             if(upgrade.UpgradeCost > gameManager.PlayerScrap)
             {
-                upgradeMenu.CloseUpgradePanel();
+                upgradeMenu.ReturnToMainMenuNoSound();
                 print("Could not afford upgrade. The cost was: " + upgrade.UpgradeCost + " and the player had: " + gameManager.PlayerScrap);
+                audioSource.clip = upgradeMenu.cannotAfford;
+                audioSource.Play();
                 return;
             }
             currentPlacementButton = gameManager.CurrentPlacementButton; //Gets the current reference from the game manager
@@ -65,25 +67,28 @@ public class scrUpgradeButton : MonoBehaviour
             {
                 case 0:
                     //PLAY SOUND
-                    leftBaseWeapon.SetActive(true);
+                    audioSource.clip = upgradeMenu.canAfford;
                     audioSource.Play();
+                    leftBaseWeapon.SetActive(true);
                     upgrade.UpgradePurchased(placement);
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
-                    upgradeMenu.CloseUpgradePanel();
+                    upgradeMenu.ReturnToMainMenu();
                     leftUpgradeInfo.UpdateTheUpgrade(upgrade);
                     OnWeaponPurchased?.Invoke(upgrade.ProjectileType, 0);
                     gameManager.SpendScrap(upgrade.UpgradeCost);
                     return;
                 case 1:
                     //PLAY SOUND
+                    audioSource.clip = upgradeMenu.canAfford;
+                    audioSource.Play();
                     rightBaseWeapon.SetActive(true);
                     upgrade.UpgradePurchased(placement);
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
-                    upgradeMenu.CloseUpgradePanel();
+                    upgradeMenu.ReturnToMainMenu();
                     rightUpgradeInfo.UpdateTheUpgrade(upgrade);
                     OnWeaponPurchased?.Invoke(upgrade.ProjectileType, 1);
                     gameManager.SpendScrap(upgrade.UpgradeCost);
