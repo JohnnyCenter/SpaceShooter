@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,13 +13,16 @@ public class PauseMenu : MonoBehaviour
 
     [Tooltip("Add the options menu")]
     public GameObject OptionsMenu;
+    public GameObject loadingSreen;
+    public Slider slider;
     // Start is called before the first frame update
 
 
-    public void RestartLevel()
+    public void RestartLevel(int sceneIndex)
     {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        StartCoroutine(LoadAsyncchronously(sceneIndex));
+       // Scene scene = SceneManager.GetActiveScene();
+      //  SceneManager.LoadScene(scene.name);
         Time.timeScale = 1f;
         OptionsMenu.SetActive(false);
         GameIsPaused = false;
@@ -38,8 +42,9 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0F;
         GameIsPaused = true;
     }
-    public void LoadMenu()
+    public void LoadMenu(int sceneIndex)
     {
+        StartCoroutine(LoadAsyncchronously(sceneIndex));
         Time.timeScale = 1f;
         Debug.Log("LOADMENU");
         SceneManager.LoadScene("Lukas_Prototype");
@@ -60,4 +65,22 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("quit");
         Application.Quit();
     }
+
+    IEnumerator LoadAsyncchronously(int sceneIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+
+        loadingSreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 9F);
+            Debug.Log(progress);
+
+            slider.value = progress;
+
+            yield return null;
+        }
+    }
 }
+
