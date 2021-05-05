@@ -55,8 +55,8 @@ public class scrUpgradeButton : MonoBehaviour
             //If yes:
             if(upgrade.UpgradeCost > gameManager.PlayerScrap)
             {
-                upgradeMenu.ReturnToMainMenuNoSound();
-                print("Could not afford upgrade. The cost was: " + upgrade.UpgradeCost + " and the player had: " + gameManager.PlayerScrap);
+                //upgradeMenu.ReturnToMainMenuNoSound();
+                //print("Could not afford upgrade. The cost was: " + upgrade.UpgradeCost + " and the player had: " + gameManager.PlayerScrap);
                 audioSource.clip = upgradeMenu.cannotAfford;
                 audioSource.Play();
                 return;

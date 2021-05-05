@@ -9,6 +9,7 @@ public class scrPlacementButton : MonoBehaviour
 {
     public static Action<scrPlacementButton> OnPlacementButtonUsed;
     [SerializeField] TextMeshProUGUI placementText;
+    private AudioSource audioSource;
     private Image buttonImage;
     private scrUpgradeMenu upgrademenu;
     [Tooltip("0 is left placement, 1 is right")]
@@ -22,6 +23,7 @@ public class scrPlacementButton : MonoBehaviour
         placementUsed = false;
         buttonImage = GetComponent<Image>();
         buttonIsUsable = true;
+        audioSource = scrUpgradeMenu.Instance.GetComponent<AudioSource>();
     }
 
     public void DissableButton()
@@ -35,6 +37,7 @@ public class scrPlacementButton : MonoBehaviour
         if(placementUsed == false)
         {
             //print("Placement button clicked");
+            audioSource.Play();
             OnPlacementButtonUsed?.Invoke(this);
             upgrademenu.OpenUpgradeMenuWithPlacementReference(upgradePlacementNumber);
             upgrademenu.UpgradePLacementPanel.SetActive(false); //Close the upgrade placement panel

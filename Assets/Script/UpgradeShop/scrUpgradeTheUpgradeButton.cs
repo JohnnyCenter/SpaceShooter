@@ -85,13 +85,13 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
     {
         if (upgradeLevel >= 1 && upgradeLevel < 4) //Because this code cannot run if we are not already at least level 1 (or else, the upgrade is not yet assigned or purchased)
         {
-            print("Stuff is upgraded");
+            //print("Stuff is upgraded");
             if(gameManager.PlayerScrap < localUpgrade.UpgradingCost)
             {
-                print("Did not have enough money to purchase the upgrade");
+                //print("Did not have enough money to purchase the upgrade");
                 audioSource.clip = upgradeMenu.cannotAfford;
                 audioSource.Play();
-                upgradeMenu.ReturnToMainMenuNoSound();
+                //upgradeMenu.ReturnToMainMenuNoSound();
                 return;
             }
             audioSource.Play();

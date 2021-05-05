@@ -48,6 +48,8 @@ public class scrUpgradeMenu : MonoBehaviour
     [SerializeField] private GameObject bigBrotherInfoCard; //Don`t forget to set this in the inspector!
     private bool bigBrotherInfoCardHasBeenOpened;
 
+    [SerializeField] private GameObject map;
+
 
     public GameObject UpgradePLacementPanel { get; private set; }
     //public int UpgradePlacement { get; private set; } //Buttons rerference this variable for upgrade placement
@@ -184,6 +186,7 @@ public class scrUpgradeMenu : MonoBehaviour
         if(purchasePanel.activeSelf == false && upgradePanel.activeSelf == false && UpgradePLacementPanel.activeSelf == false && upgradeTheUpgradePanel.activeSelf == false)
         {
             //Debug.Log("Opens upgrade panel");
+            map.SetActive(false);
             purchasePanel.SetActive(true);
             menuButton.SetActive(false); //Hide the open menu button
             Time.timeScale = 0f;
@@ -213,6 +216,7 @@ public class scrUpgradeMenu : MonoBehaviour
     }
     public void OpenUpgradeMenuWithPlacementReference(int placement)
     {
+        map.SetActive(false);
         upgradePanel.SetActive(true);
         //print("Upgrade menu is opened with the following placement: " + placement);
         //UpgradePlacement = placement;
@@ -242,6 +246,7 @@ public class scrUpgradeMenu : MonoBehaviour
     }
     public void CloseUpgradePanel() //CLoses the menu completely
     {
+        map.SetActive(true);
         purchasePanel.SetActive(false);
         upgradePanel.SetActive(false);
         upgradePlacementPanel.SetActive(false);
