@@ -15,6 +15,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionsMenu;
     public GameObject loadingSreen;
     public Slider slider;
+    public Image fill;
+    private float progress;
     // Start is called before the first frame update
 
 
@@ -72,10 +74,11 @@ public class PauseMenu : MonoBehaviour
 
         loadingSreen.SetActive(true);
 
-        while (!operation.isDone)
+        while (progress < 1f)
         {
-            float progress = Mathf.Clamp01(operation.progress / 9F);
+            progress = Mathf.Clamp01(operation.progress / 9F);
             Debug.Log(progress);
+            fill.fillAmount = progress;
 
             slider.value = progress;
 

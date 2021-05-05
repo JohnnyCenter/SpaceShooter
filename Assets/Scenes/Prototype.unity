@@ -6289,6 +6289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingSreen: {fileID: 146334232}
   slider: {fileID: 1812712112}
+  fill: {fileID: 1842116633}
 --- !u!1 &750055560
 GameObject:
   m_ObjectHideFlags: 0
@@ -13911,6 +13912,18 @@ Transform:
   m_Father: {fileID: 2102501979}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1842116633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3427329606704705167, guid: 87a3c8d4b17e5484b9d4e160ed453246,
+    type: 3}
+  m_PrefabInstance: {fileID: 202240224}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1853962942
 GameObject:
   m_ObjectHideFlags: 0
@@ -22014,6 +22027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingSreen: {fileID: 146334232}
   slider: {fileID: 1812712112}
+  fill: {fileID: 1842116633}
 --- !u!1 &3044046453282697508
 GameObject:
   m_ObjectHideFlags: 0
@@ -22799,6 +22813,7 @@ MonoBehaviour:
   OptionsMenu: {fileID: 1158720621}
   loadingSreen: {fileID: 146334232}
   slider: {fileID: 1812712112}
+  fill: {fileID: 1842116633}
 --- !u!1 &3044046454769392672
 GameObject:
   m_ObjectHideFlags: 0

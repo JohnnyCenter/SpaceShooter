@@ -7,7 +7,8 @@ public class LevelLoader : MonoBehaviour
 {
     public GameObject loadingSreen;
     public Slider slider;
-
+    private float progress;
+    public Image sliderfill;
     public void LoadLevel(int sceneIndex)
     {
         StartCoroutine(LoadAsyncchronously(sceneIndex));
@@ -20,10 +21,13 @@ public class LevelLoader : MonoBehaviour
 
         loadingSreen.SetActive(true);
 
-        while (!operation.isDone)
+       
+
+        while (progress < 1f)
         {
-            float progress = Mathf.Clamp01(operation.progress / 9F);
+            progress = Mathf.Clamp01(operation.progress / 9F);
             Debug.Log(progress);
+            sliderfill.fillAmount = progress;
 
             slider.value = progress;
 

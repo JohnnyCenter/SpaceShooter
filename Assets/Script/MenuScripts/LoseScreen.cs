@@ -8,6 +8,8 @@ public class LoseScreen : MonoBehaviour
 {
     public GameObject loadingSreen;
     public Slider slider;
+    private float progress;
+    public Image fill;
     public void Restart(int sceneIndex)
     {
         Debug.Log("Restarted");
@@ -33,10 +35,11 @@ public class LoseScreen : MonoBehaviour
 
         loadingSreen.SetActive(true);
 
-        while (!operation.isDone)
+        while (progress < 1f)
         {
-            float progress = Mathf.Clamp01(operation.progress / 9F);
+            progress = Mathf.Clamp01(operation.progress / 9F);
             Debug.Log(progress);
+            fill.fillAmount = progress;
 
             slider.value = progress;
 
