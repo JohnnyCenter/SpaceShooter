@@ -16,11 +16,12 @@ public class scrEnemyProjectiles : MonoBehaviour
 
     private void Awake()
     {
-        playerController = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<playerController>(); //Gets the reference
-        playerMovementSpeed = 0f;
+
     }
     private void Start()
     {
+        playerController = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<playerController>(); //Gets the reference
+        playerMovementSpeed = 0f;
         timeSinceSpawned = 0f;
     }
     private void Update()

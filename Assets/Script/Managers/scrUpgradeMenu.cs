@@ -49,6 +49,9 @@ public class scrUpgradeMenu : MonoBehaviour
     [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
     [SerializeField] private GameObject bigBrotherInfoCard; //Don`t forget to set this in the inspector!
     private bool bigBrotherInfoCardHasBeenOpened;
+    [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
+    [SerializeField] private GameObject bossEnemyInfoCard; //Don`t forget to set this in the inspector!
+    private bool bossEnemyInfoCardHasBeenOpened;
 
     [SerializeField] private GameObject map;
 
@@ -101,6 +104,7 @@ public class scrUpgradeMenu : MonoBehaviour
         beybladeInfoCardHasBeenOpened = false;
         suicideBomberInfoCardHasBeenOpened = false;
         bigBrotherInfoCardHasBeenOpened = false;
+        bossEnemyInfoCardHasBeenOpened = false;
     }
     private void Update()
     {
@@ -175,6 +179,15 @@ public class scrUpgradeMenu : MonoBehaviour
                     return;
                 }
                 return;
+            case 7:
+                if (!bossEnemyInfoCardHasBeenOpened)
+                {
+                    Time.timeScale = 0f;
+                    bossEnemyInfoCardHasBeenOpened = true;
+                    bossEnemyInfoCard.SetActive(true);
+                    return;
+                }
+                return;
         }
     }
     public void CloseAllInfoCards()
@@ -185,6 +198,7 @@ public class scrUpgradeMenu : MonoBehaviour
         beybladeInfoCard.SetActive(false);
         suicideBomberInfoCard.SetActive(false);
         bigBrotherInfoCard.SetActive(false);
+        bossEnemyInfoCard.SetActive(false);
         Time.timeScale = 1f;
         audioSource.Play();
     }

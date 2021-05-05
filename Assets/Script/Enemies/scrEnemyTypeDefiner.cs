@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class scrEnemyTypeDefiner : MonoBehaviour
 {
-    [Range(1,6)]
+    [Range(1,7)]
     [SerializeField] private int enemyType;
     public int EnemyType { get; private set; }
 

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5004ba0d364a82240a8e32d8c8eda81c, type: 3}
-  m_Name: BigBrotherStats
+  m_Name: BossStats
   m_EditorClassIdentifier: 
-  health: 16
-  scrapReward: 40
+  health: 50
+  scrapReward: 500
   damageDealthOnCollision: 0

@@ -5,6 +5,10 @@ using System;
 
 public class scrEnemyStats : MonoBehaviour
 {
+    [Tooltip("Only turn this to tru for the boss")]
+    [SerializeField] private bool thisIsTheBoss;
+    public static Action OnBossDestroyed;
+
     public Action OnEnemyHit;
     private scrEnemyAttack localAttackScript;
     public static Action<int> OnEnemyKilled;
@@ -87,6 +91,10 @@ public class scrEnemyStats : MonoBehaviour
 
             if (health <= 0)
             {
+                if(thisIsTheBoss)
+                {
+                    OnBossDestroyed?.Invoke();
+                }
                 EnemyDies();
             }
         }
