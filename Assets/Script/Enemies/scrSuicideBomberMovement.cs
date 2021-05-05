@@ -111,8 +111,14 @@ public class scrSuicideBomberMovement : MonoBehaviour
     {
         playerIsAlive = false;
     }
+    private void RotateEnemy(Quaternion _newRotation)
+    {
+        //print("Rotating enemies...");
+        transform.rotation = _newRotation;
+    }
     private void OnEnable()
     {
+        playerController.OnPlayerTurning += RotateEnemy;
         scrPlayerHealth.OnPlayerDeath += DissableMovement;
         canMove = false;
         MovingTowardsPlayer = true;
@@ -120,6 +126,7 @@ public class scrSuicideBomberMovement : MonoBehaviour
     }
     private void OnDisable()
     {
+        playerController.OnPlayerTurning -= RotateEnemy;
         scrPlayerHealth.OnPlayerDeath -= DissableMovement;
         healthAndStats.OnEnemyHit -= GotHit;
     }
