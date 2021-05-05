@@ -41,7 +41,7 @@ public class scrCircleSpawner : MonoBehaviour
     private void Start()
     {
         spawnerIsDisabled = false;
-        gameIntensety = 6; // ;)
+        gameIntensety = 2; // ;)
         StartCoroutine(StartSpawnTimer(spawnTimer));
         //gameIntensety = scrGameWaveManager.gameWaveManager.CurrentWave; //This reference does not work yet
 
@@ -53,6 +53,7 @@ public class scrCircleSpawner : MonoBehaviour
     {
         Moon.MoonCompleted += AddIntensity;
         scrPlayerHealth.OnPlayerDeath += DissableSpawner;
+        StartCoroutine(StartSpawnTimer(spawnTimer));
     }
 
     private void OnDisable()
@@ -66,7 +67,7 @@ public class scrCircleSpawner : MonoBehaviour
     }
     void AddIntensity()
     {
-        gameIntensety += 1;
+        gameIntensety += 2;
         Debug.Log("Intensity increased");
     }
     #endregion 
@@ -128,6 +129,8 @@ public class scrCircleSpawner : MonoBehaviour
         foreach(GameObject enemy in enemyTypes)
         {
             GameObject newInstance = Instantiate(enemy, transform.position, Quaternion.identity, enemySpawner.transform); //Instantiates enemies with spawner as parent
+            var stats = newInstance.GetComponent<scrEnemyStats>();
+            stats.freeRoam = false;
             scrEnemyTypeDefiner _enemyType = newInstance.GetComponent<scrEnemyTypeDefiner>(); //Get the reference
             
             switch(_enemyType.EnemyType) //Sort enemies by type, into lists

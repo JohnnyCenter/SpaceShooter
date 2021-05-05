@@ -24,11 +24,14 @@ public class scrEnemyStats : MonoBehaviour
     public bool IsVisibleOnScreen { get; set; }  //Used to affect spawner
     public EnemyStatsSO LocalStats { get; private set; } //For reference in other scripts
     private scrEnemyWeaknessTracker weaknessTracker;
+
+    public bool freeRoam;   
     private void Awake()
     {
         stats.resetStats(); //Makes sure any changes to the variables in the scriptableObject is updated before start
         audioPlayer = GetComponent<AudioSource>(); //Get the local reference
         TryGetComponent<scrEnemyAttack>(out localAttackScript);
+        freeRoam = true;
     }
     private void Start()
     {
@@ -109,7 +112,14 @@ public class scrEnemyStats : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTimer);
         //Enemy dies
-        gameObject.SetActive(false);
+        if (freeRoam)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
         IsVisibleOnScreen = false;
         health = stats.Health;
     }

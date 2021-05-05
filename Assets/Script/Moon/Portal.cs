@@ -8,7 +8,7 @@ public class Portal : MonoBehaviour
     [SerializeField]
     int moonCounter, moonGoal; [Tooltip("Set when the Portal should open. When MoonCounter is the same as MoonGoal so will the portal open")]
     bool portalOpen;
-    public static event Action PlayerEnteredPortal;
+    public static event Action PlayerEnteredPortal, PortalOpen;
 
     SpriteRenderer sr;
 
@@ -41,6 +41,7 @@ public class Portal : MonoBehaviour
     {
         portalOpen = true;
         sr.enabled = true;
+        PortalOpen?.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
