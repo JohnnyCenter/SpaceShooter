@@ -6,6 +6,7 @@ using System;
 public class Portal : MonoBehaviour
 {
     public static Action OnAllMoonsVisited;
+    private bool bossIsSpawned;
     [SerializeField]
     int moonCounter, moonGoal; [Tooltip("Set when the Portal should open. When MoonCounter is the same as MoonGoal so will the portal open")]
     bool portalOpen;
@@ -18,6 +19,7 @@ public class Portal : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         sr.enabled = false;
         moonCounter = 0;
+        bossIsSpawned = false;
     }
     private void BossIsDestroyed()
     {
@@ -39,7 +41,11 @@ public class Portal : MonoBehaviour
     {
         if(moonCounter >= moonGoal)
         {
-            OnAllMoonsVisited?.Invoke(); //Tells the boss spawner to spawn the boss
+            if(!bossIsSpawned)
+            {
+                bossIsSpawned = true;
+                OnAllMoonsVisited?.Invoke(); //Tells the boss spawner to spawn the boss
+            }
         }
         //Only for testing!
         if(Input.GetKeyDown(KeyCode.B))

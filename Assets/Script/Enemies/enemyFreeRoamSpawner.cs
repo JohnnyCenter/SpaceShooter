@@ -18,12 +18,12 @@ public class enemyFreeRoamSpawner : MonoBehaviour
         spawnPos = transform.position;
         deathTimer = 20;
         spawning = false;
-        Debug.Log(gameObject.transform.childCount);
+        PickEnemy();
     }
 
     private void Start()
     {
-        PickEnemy();
+        SpawnEnemy();
     }
 
     private void OnBecameVisible()
@@ -41,6 +41,7 @@ public class enemyFreeRoamSpawner : MonoBehaviour
         if(gameObject.transform.childCount == 0 && spawning == false)
         {
             StartCoroutine("SpawnCooldown");
+            Debug.Log("IT WORKS NOW!!");
         }
     }
 
