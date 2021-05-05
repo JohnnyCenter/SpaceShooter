@@ -21,6 +21,8 @@ public class scrUpgradeMenu : MonoBehaviour
 
     [Header("Assign panels from the inspector")]
     [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
+    [SerializeField] private GameObject modelPanel; //Don`t forget to set this in the inspector!
+    [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
     [SerializeField] private GameObject upgradePanel; //Don`t forget to set this in the inspector!
     [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
     [SerializeField] private GameObject upgradePlacementPanel; //Don`t forget to set this in the inspector!
@@ -89,6 +91,7 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradePanel.SetActive(false);
         UpgradePLacementPanel.SetActive(false);
         upgradeTheUpgradePanel.SetActive(false);
+        modelPanel.SetActive(false);
 
         //Reset info cards
         CloseAllInfoCards();
@@ -105,6 +108,10 @@ public class scrUpgradeMenu : MonoBehaviour
         //{
         //    purchasePanel.SetActive(true);
         //}
+    }
+    public void DisplayModelPanel()
+    {
+        modelPanel.SetActive(true);
     }
     public void TurnPurchaseShieldOff()
     {
@@ -234,6 +241,7 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradePlacementPanel.SetActive(false);
         upgradeTheUpgradePanel.SetActive(false);
         menuButton.SetActive(false); //Hide the open menu button
+        modelPanel.SetActive(false);
     }
     public void ReturnToMainMenu() //Returns the player to the main menu
     {
@@ -242,6 +250,7 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradePlacementPanel.SetActive(false);
         upgradeTheUpgradePanel.SetActive(false);
         menuButton.SetActive(false); //Hide the open menu button
+        modelPanel.SetActive(false);
         audioSource.Play();
     }
     public void CloseUpgradePanel() //CLoses the menu completely
@@ -252,6 +261,7 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradePlacementPanel.SetActive(false);
         upgradeTheUpgradePanel.SetActive(false);
         menuButton.SetActive(true);
+        modelPanel.SetActive(false);
         Time.timeScale = 1f;
         audioSource.Play();
     }

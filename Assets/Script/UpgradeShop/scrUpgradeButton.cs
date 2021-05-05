@@ -74,10 +74,11 @@ public class scrUpgradeButton : MonoBehaviour
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
-                    upgradeMenu.ReturnToMainMenu();
+                    //upgradeMenu.ReturnToMainMenu();
                     leftUpgradeInfo.UpdateTheUpgrade(upgrade);
                     OnWeaponPurchased?.Invoke(upgrade.ProjectileType, 0);
                     gameManager.SpendScrap(upgrade.UpgradeCost);
+                    upgradeMenu.DisplayModelPanel();
                     return;
                 case 1:
                     //PLAY SOUND
@@ -88,10 +89,11 @@ public class scrUpgradeButton : MonoBehaviour
                     buttonImage.color = Color.grey;
                     upgradeIsSold = true;
                     upgradeCost.text = "Sold";
-                    upgradeMenu.ReturnToMainMenu();
+                    //upgradeMenu.ReturnToMainMenu();
                     rightUpgradeInfo.UpdateTheUpgrade(upgrade);
                     OnWeaponPurchased?.Invoke(upgrade.ProjectileType, 1);
                     gameManager.SpendScrap(upgrade.UpgradeCost);
+                    upgradeMenu.DisplayModelPanel();
                     return;
                 default:
                     Debug.LogError("The placement value is incorrect when used for switch statement in the class scrUpgradeButton");

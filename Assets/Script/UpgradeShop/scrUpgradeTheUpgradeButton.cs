@@ -111,7 +111,8 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
                 upgradeLevelText.text = "Max level reached!";
                 upgradeCost.text = ""; //Hides it..
             }
-            upgradeMenu.ReturnToMainMenu();
+            //upgradeMenu.ReturnToMainMenu();
+            upgradeMenu.DisplayModelPanel();
         }
 
     }

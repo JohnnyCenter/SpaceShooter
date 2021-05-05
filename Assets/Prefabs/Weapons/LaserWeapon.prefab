@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7090902830109559800}
   - component: {fileID: 4733270156257843288}
   - component: {fileID: 8775530548594003317}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LaserLevel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 4794210266340559377}
   - component: {fileID: 4009583708585472282}
   - component: {fileID: 3914511112990440940}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LaserLevel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 3420032497803860804}
   - component: {fileID: 7829292999229289336}
   - component: {fileID: 7697325222303056168}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LaserLevel4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 8802167154195433547}
   - component: {fileID: 8071726830251651873}
   - component: {fileID: 3867920285686347575}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LaserLevel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4673677127274939484}
   - component: {fileID: 2181892630846501433}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LaserWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

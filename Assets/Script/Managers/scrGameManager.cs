@@ -30,7 +30,7 @@ public class scrGameManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerScrap = 50;
+        PlayerScrap = 500;
         scrapText.text =  PlayerScrap.ToString();
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
