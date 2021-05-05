@@ -17,6 +17,13 @@ public class scrSuicideBomberMovement : MonoBehaviour
     private bool MovingTowardsPlayer;
     private bool playerIsAlive;
     [SerializeField] private bool isMine;
+
+    //Sabotage related
+    private bool sabotaged;
+    private float timeSinceSabotaged;
+    [Tooltip("How many seconds the enemy is sabotaged")]
+    [SerializeField] private float sabotageTime = 5f;
+
     private void Awake()
     {
         healthAndStats = GetComponent<scrEnemyStats>(); //Get the instance
@@ -31,11 +38,20 @@ public class scrSuicideBomberMovement : MonoBehaviour
     }
     private void Update()
     {
+        if (sabotaged)
+        {
+            timeSinceSabotaged += Time.deltaTime;
+            if (timeSinceSabotaged >= sabotageTime)
+            {
+                timeSinceSabotaged = 0;
+                sabotaged = false;
+            }
+        }
         playerMovementSpeed = playerController.moveSpeed;
         //print("Player Movement Speed is: " + playerMovementSpeed);
         movementSpeed = ((100f - playerMovementSpeed) * Time.deltaTime) / 20;
         //print("Movement speed is: " + movementSpeed);
-        if(canMove && playerIsAlive && !isMine)
+        if(canMove && playerIsAlive && !isMine && !sabotaged)
         {
             if(MovingTowardsPlayer)
             {
@@ -116,8 +132,14 @@ public class scrSuicideBomberMovement : MonoBehaviour
         //print("Rotating enemies...");
         transform.rotation = _newRotation;
     }
+    private void IsSabotaged()
+    {
+        sabotaged = true;
+        timeSinceSabotaged = 0f;
+    }
     private void OnEnable()
     {
+        scrSabotage.OnSabotageTriggered += IsSabotaged;
         playerController.OnPlayerTurning += RotateEnemy;
         scrPlayerHealth.OnPlayerDeath += DissableMovement;
         canMove = false;
@@ -126,6 +148,7 @@ public class scrSuicideBomberMovement : MonoBehaviour
     }
     private void OnDisable()
     {
+        scrSabotage.OnSabotageTriggered -= IsSabotaged;
         playerController.OnPlayerTurning -= RotateEnemy;
         scrPlayerHealth.OnPlayerDeath -= DissableMovement;
         healthAndStats.OnEnemyHit -= GotHit;

@@ -28,6 +28,13 @@ public class scrEnemyAttack : MonoBehaviour
 
     private AudioSource SoundSource;
 
+    //Sabotage related
+    private bool sabotaged;
+    private float timeSinceSabotaged;
+    [Tooltip("How many seconds the enemy is sabotaged")]
+    [SerializeField] private float sabotageTime = 5f;
+
+
     private void Awake()
     {
         IsDead = false;
@@ -45,15 +52,24 @@ public class scrEnemyAttack : MonoBehaviour
     }
     private void Update()
     {
-        if(playerIsDead)
+        if (sabotaged)
+        {
+            timeSinceSabotaged += Time.deltaTime;
+            if (timeSinceSabotaged >= sabotageTime)
+            {
+                timeSinceSabotaged = 0;
+                sabotaged = false;
+            }
+        }
+        if (playerIsDead)
         {
             return;
         }
-        if(enemyMovement.IAmActive && !FranticAttack && !IsDead && !playerIsDead)
+        if(enemyMovement.IAmActive && !FranticAttack && !IsDead && !playerIsDead && !sabotaged)
         {
             FireBasicProjectile();
         }
-        else if(enemyMovement.IAmActive && FranticAttack && timeSinceFranticAttack <= franticAttackTimer && canUseFranticAttack && !IsDead && !playerIsDead)
+        else if(enemyMovement.IAmActive && FranticAttack && timeSinceFranticAttack <= franticAttackTimer && canUseFranticAttack && !IsDead && !playerIsDead && !sabotaged)
         {
             timeSinceFranticAttack += Time.deltaTime;
             if (timeSinceFranticAttack >= franticAttackTimer)
@@ -152,8 +168,14 @@ public class scrEnemyAttack : MonoBehaviour
     {
         playerIsDead = true;
     }
+    private void IsSabotaged()
+    {
+        sabotaged = true;
+        timeSinceSabotaged = 0f;
+    }
     private void OnEnable()
     {
+        scrSabotage.OnSabotageTriggered += IsSabotaged;
         scrPlayerHealth.OnPlayerDeath += dissableEnemyAttack;
         IsDead = false;
         playerController.OnPlayerTurning += RotateEnemyProjectile;
@@ -165,6 +187,7 @@ public class scrEnemyAttack : MonoBehaviour
 
     private void OnDisable()
     {
+        scrSabotage.OnSabotageTriggered -= IsSabotaged;
         scrPlayerHealth.OnPlayerDeath -= dissableEnemyAttack;
         playerController.OnPlayerTurning -= RotateEnemyProjectile;
         FranticAttack = false;

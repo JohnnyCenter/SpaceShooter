@@ -91,7 +91,12 @@ public class scrFireBasicProjectile : MonoBehaviour
     }
     private IEnumerator WeaponCooldown(float timer)
     {
+        canFire = false;
         yield return new WaitForSeconds(timer);
         canFire = true;
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(WeaponCooldown(0.5f));
     }
 }

@@ -216,6 +216,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     }
     private IEnumerator WeaponCooldown(float timer)
     {
+        weaponCanFire = false;
         yield return new WaitForSeconds(timer);
         weaponCanFire = true;
     }
@@ -234,6 +235,7 @@ public class scrPlayerProjectileLoader : MonoBehaviour
     }
     private void OnEnable()
     {
+        StartCoroutine(WeaponCooldown(0.5f));
         scrUpgradeButton.OnWeaponPurchased += WeaponPurchased;
     }
     private void OnDisable()

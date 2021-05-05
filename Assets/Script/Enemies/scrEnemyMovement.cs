@@ -24,6 +24,12 @@ public class scrEnemyMovement : MonoBehaviour
     public bool IsHit { get; private set; }
     private float spinTimer;
 
+    //Sabotage related
+    private bool sabotaged;
+    private float timeSinceSabotaged;
+    [Tooltip("How many seconds the enemy is sabotaged")]
+    [SerializeField] private float sabotageTime = 5f;
+
     private void Awake()
     {
         thePlayer = GameObject.FindGameObjectWithTag("PlayerBody");
@@ -61,6 +67,15 @@ public class scrEnemyMovement : MonoBehaviour
         {
             BasicEnemyMovement();
         }
+        if(sabotaged)
+        {
+            timeSinceSabotaged += Time.deltaTime;
+            if(timeSinceSabotaged >= sabotageTime)
+            {
+                timeSinceSabotaged = 0;
+                sabotaged = false;
+            }
+        }
     }
     private void BasicEnemyMovement()
     {
@@ -75,11 +90,11 @@ public class scrEnemyMovement : MonoBehaviour
             switchSideCounter = 0f;
             switchSideValue = GetRandomNumber();
         }
-        if (moveRight && !collidingWithRightBorder)
+        if (moveRight && !collidingWithRightBorder && !sabotaged)
         {
             transform.Translate(Vector2.right * sidewaysMovementSpeed * Time.deltaTime);
         }
-        else if (!collidingWithLeftBorder)
+        else if (!collidingWithLeftBorder && !sabotaged)
         {
             transform.Translate(-Vector2.right * sidewaysMovementSpeed * Time.deltaTime);
         }
@@ -124,13 +139,20 @@ public class scrEnemyMovement : MonoBehaviour
         IsHit = true;
         //spinTimer = 0f;
     }
+    private void IsSabotaged()
+    {
+        sabotaged = true;
+        timeSinceSabotaged = 0f;
+    }
     private void OnEnable()
     {
+        scrSabotage.OnSabotageTriggered += IsSabotaged;
         playerController.OnPlayerTurning += RotateEnemy;
         localStats.OnEnemyHit += SetIsHit;
     }
     private void OnDisable()
     {
+        scrSabotage.OnSabotageTriggered -= IsSabotaged;
         playerController.OnPlayerTurning -= RotateEnemy;
         localStats.OnEnemyHit -= SetIsHit;
     }
