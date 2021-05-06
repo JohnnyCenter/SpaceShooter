@@ -21,6 +21,10 @@ public class scrGameManager : MonoBehaviour
     private bool scrapperActive;
     [SerializeField]
     private int scrapperCooldown, scrapBonus;
+
+    private float desiredNumber, initialNumber, currentNumber;
+    private float animationTime = 0.5f;
+
     private void Awake()
     {
         if(instance != null && instance != this)
@@ -50,11 +54,15 @@ public class scrGameManager : MonoBehaviour
         deathTime = 2;
         totalScore = 0;
         portalBonus = 0;
+
+        initialNumber = currentNumber = 0f;
+        desiredNumber = 0;
     }
     public void SpendScrap(int _amount)
     {
         PlayerScrap -= _amount;
         scrapText.text =  PlayerScrap.ToString();
+
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
         UiScrapText3.text = PlayerScrap.ToString();
@@ -75,6 +83,8 @@ public class scrGameManager : MonoBehaviour
         UiScrapText3.text = PlayerScrap.ToString();
         totalNumberOfEnemiesKilled += 1; //Increment total number of enemies killed
         killText.text = totalNumberOfEnemiesKilled.ToString();
+        StartCoroutine("IncreaseFontSizeScrap");
+        StartCoroutine("IncreaseFontSizeKill");
     }
     private void GetPlacementButtonUsed(scrPlacementButton _buttonSent)
     {
@@ -111,22 +121,6 @@ public class scrGameManager : MonoBehaviour
         Portal.PlayerEnteredPortal -= PortalBonus;
         scrScrapper.OnScrapperTriggered += RunScrapper;
 
-    }
-
-    IEnumerator RunEndScreen()
-    {
-        yield return new WaitForSeconds(deathTime);
-        CalculateScore();
-        loseScoreText.text = "Score: " + totalScore.ToString();
-        respawnPanel.SetActive(true);
-    }
-
-    IEnumerator RunWinScreen()
-    {
-        yield return new WaitForSeconds(deathTime);
-        CalculateScore();
-        winScoreText.text = "Score: " + totalScore.ToString();
-        winScreen.SetActive(true);
     }
 
     void IncreaseMoonScore()
@@ -172,5 +166,66 @@ public class scrGameManager : MonoBehaviour
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
         UiScrapText3.text = PlayerScrap.ToString();
+        StartCoroutine("IncreaseFontSizeScrap");
+    }
+
+    IEnumerator IncreaseFontSizeScrap()
+    {
+        scrapText.fontSize = 50;
+        yield return new WaitForSeconds(1);
+        scrapText.fontSize = 40;
+    }
+
+    IEnumerator IncreaseFontSizeKill()
+    {
+        killText.fontSize = 50;
+        yield return new WaitForSeconds(1);
+        killText.fontSize = 40;
+    }
+
+    private void Update()
+    {
+        if (currentNumber != desiredNumber)
+        {
+            if (initialNumber < desiredNumber)
+            {
+                currentNumber += (animationTime * Time.deltaTime) * (desiredNumber - initialNumber);
+                if (currentNumber >= desiredNumber)
+                    currentNumber = desiredNumber;
+            }
+            else
+            {
+                currentNumber -= (animationTime * Time.deltaTime) * (initialNumber - desiredNumber);
+                if (currentNumber <= desiredNumber)
+                    currentNumber = desiredNumber;
+            }
+        }
+        loseScoreText.text = "Score: " + currentNumber.ToString("0");
+        winScoreText.text = "Score: " + currentNumber.ToString("0");
+    }
+
+    void AddToValue(float value)
+    {
+        initialNumber = currentNumber;
+        desiredNumber += value;
+    }
+
+    IEnumerator RunEndScreen()
+    {
+        yield return new WaitForSeconds(deathTime);
+        CalculateScore();
+        respawnPanel.SetActive(true);
+        //yield return new WaitForSeconds(2);
+        AddToValue(totalScore);
+        //loseScoreText.text = "Score: " + totalScore.ToString();
+    }
+
+    IEnumerator RunWinScreen()
+    {
+        yield return new WaitForSeconds(deathTime);
+        CalculateScore();
+        winScreen.SetActive(true);
+        AddToValue(totalScore);
+       // winScoreText.text = "Score: " + totalScore.ToString("0");
     }
 }

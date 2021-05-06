@@ -25,6 +25,8 @@ public class scrPlayerHealth : MonoBehaviour
     [SerializeField]
     private int strongholdTimer;
     private bool invincible;
+
+    ParticleSystem ps;
     private void Awake()
     {
         canTakeDamage = true;
@@ -34,6 +36,7 @@ public class scrPlayerHealth : MonoBehaviour
         gameManager = scrGameManager.instance;
         strongholdTimer = 20;
         invincible = false;
+        ps = transform.Find("DeathParticles").GetComponent<ParticleSystem>();
     }
     private void Update()
     {
@@ -109,6 +112,7 @@ public class scrPlayerHealth : MonoBehaviour
     {
         //Dissable player body
         playerMesh.SetActive(false);
+        ps.Play();
 
         //Play explotion effect
         OnPlayerDeath?.Invoke();
