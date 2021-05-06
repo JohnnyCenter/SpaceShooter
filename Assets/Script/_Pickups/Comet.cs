@@ -85,6 +85,7 @@ public class Comet : MonoBehaviour
         sr.enabled = false;
         cc2D.enabled = false;
         Sparkles.Play();
+        Handheld.Vibrate();
         CometSound.Stop();
         yield return new WaitForSeconds(30);
         StartingCycle?.Invoke();

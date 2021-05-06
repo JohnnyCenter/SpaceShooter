@@ -5,7 +5,7 @@ using System;
 
 public class scrPlayerHealth : MonoBehaviour
 {
-    public static Action OnPlayerShieldsDissabled;
+    public static Action OnPlayerShieldsDissabled, playerTookDamage;
     [SerializeField] private float invincebilityLength;
     public static Action OnPlayerDeath;
     [Tooltip("Set player health")]
@@ -24,6 +24,7 @@ public class scrPlayerHealth : MonoBehaviour
     GameObject Shield;
     [SerializeField]
     private int strongholdTimer;
+    private bool invincible;
     private void Awake()
     {
         canTakeDamage = true;
@@ -32,6 +33,7 @@ public class scrPlayerHealth : MonoBehaviour
         upgradeMenu = scrUpgradeMenu.Instance;
         gameManager = scrGameManager.instance;
         strongholdTimer = 20;
+        invincible = false;
     }
     private void Update()
     {
@@ -43,6 +45,11 @@ public class scrPlayerHealth : MonoBehaviour
         {
             canTakeDamage = true;
         }
+        if (invincible)
+        {
+            canTakeDamage = false;
+        }
+
         if (playerHealth <= 1)
             Shield.SetActive(false);
         else
@@ -57,44 +64,46 @@ public class scrPlayerHealth : MonoBehaviour
             upgradeMenu.TurnPurchaseShieldOff();
         }
     }
-    private void TakeDamage()
+    public void TakeDamage()
     {
-        if(canTakeDamage)
-        {
-            canTakeDamage = false;
-            playerIsHitRecently = true;
-            StartCoroutine(ResetCanTakeDamage(invincebilityLength));
-            print("ouch!");
-            playerHealth -= 1;
-            playertakedamageaudio.Play();
-            if(playerHealth <= 1)
+             if (canTakeDamage)
             {
-                OnPlayerShieldsDissabled?.Invoke();
+                canTakeDamage = false;
+                playerIsHitRecently = true;
+                StartCoroutine(ResetCanTakeDamage(invincebilityLength));
+                print("ouch!");
+                playerHealth -= 1;
+                playertakedamageaudio.Play();
+                playerTookDamage?.Invoke();
+                if (playerHealth <= 1)
+                {
+                    OnPlayerShieldsDissabled?.Invoke();
+                }
+                if (playerHealth <= 0)
+                {
+                    playerDies();
+                }
             }
-            if (playerHealth <= 0)
-            {
-                playerDies();
-            }
-        }
 
     }
     public void DealDamageToPlayer(int _amount) //For reference in other scripts
     {
-        if(canTakeDamage)
-        {
-            canTakeDamage = false;
-            playerIsHitRecently = true;
-            StartCoroutine(ResetCanTakeDamage(invincebilityLength));
-            playerHealth -= _amount;
+            if (canTakeDamage)
+            {
+                canTakeDamage = false;
+                playerIsHitRecently = true;
+                StartCoroutine(ResetCanTakeDamage(invincebilityLength));
+                playerHealth -= _amount;
+                playerTookDamage?.Invoke();
             if (playerHealth <= 1)
-            {
-                OnPlayerShieldsDissabled?.Invoke();
+                {
+                    OnPlayerShieldsDissabled?.Invoke();
+                }
+                if (playerHealth <= 0)
+                {
+                    playerDies();
+                }
             }
-            if (playerHealth <= 0)
-            {
-                playerDies();
-            }
-        }
     }
     private void playerDies()
     {
@@ -130,8 +139,22 @@ public class scrPlayerHealth : MonoBehaviour
 
     IEnumerator Invincible()
     {
-        canTakeDamage = false;
+        /*if(playerHealth == 0)
+        {
+            playerHealth = 100;
+            yield return new WaitForSeconds(strongholdTimer);
+            playerHealth = 0;
+        }
+        else
+        {
+            var previousHealth = playerHealth;
+            playerHealth = 100;
+            yield return new WaitForSeconds(strongholdTimer);
+            playerHealth = previousHealth;
+        } */
+
+        invincible = true;
         yield return new WaitForSeconds(strongholdTimer);
-        canTakeDamage = true;
+        invincible = false;
     }
 }
