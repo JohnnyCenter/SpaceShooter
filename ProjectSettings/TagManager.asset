@@ -17,6 +17,8 @@ TagManager:
   - BaseWeaponRight
   - MusicManager
   - FreeRoamTrack
+  - Comet
+  - CometBoundary
   layers:
   - Default
   - TransparentFX

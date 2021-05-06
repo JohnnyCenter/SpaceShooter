@@ -14,6 +14,17 @@ public class scrSabotage : MonoBehaviour
             TriggerSabotage();
         }
     }
+
+    private void OnEnable()
+    {
+        Comet.ActivatePowerUp += TriggerSabotage;
+    }
+
+    private void OnDisable()
+    {
+        Comet.ActivatePowerUp -= TriggerSabotage;
+    }
+
     private void TriggerSabotage()
     {
         OnSabotageTriggered?.Invoke();

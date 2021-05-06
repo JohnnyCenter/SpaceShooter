@@ -28,7 +28,7 @@ public class scrEnemyMovement : MonoBehaviour
     private bool sabotaged;
     private float timeSinceSabotaged;
     [Tooltip("How many seconds the enemy is sabotaged")]
-    [SerializeField] private float sabotageTime = 5f;
+    [SerializeField] private float sabotageTime = 10f;
 
     private void Awake()
     {

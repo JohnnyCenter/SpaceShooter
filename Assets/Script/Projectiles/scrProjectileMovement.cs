@@ -52,6 +52,17 @@ public class scrProjectileMovement : MonoBehaviour
             }
             BasicProjectileHit(collision.gameObject.name);
         }
+
+        if (collision.CompareTag("Comet"))
+        {
+            collision.TryGetComponent<Comet>(out Comet cometHealth);
+            if(cometHealth != null)
+            {
+                cometHealth.TakeDamage(projectileStats.stats.WeaponDamage);
+                DestroyProjectile();
+            }
+            BasicProjectileHit(collision.gameObject.name);
+        }
     }
     private void DestroyProjectile()
     {

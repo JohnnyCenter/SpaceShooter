@@ -6,7 +6,11 @@ public class CometSpawner : MonoBehaviour
 {
     [SerializeField]
     private List<int> numberPool;
+    [SerializeField]
     private int numberCount;
+    private int cometType, spawnTimer;
+    [SerializeField]
+    private int minTimer, maxTimer;
 
     [SerializeField]
     GameObject[] Comets;
@@ -16,6 +20,7 @@ public class CometSpawner : MonoBehaviour
         numberPool = new List<int>();
         ReloadNumberPool();
         numberCount = 0;
+        StartCoroutine("SpawnCycle");
     }
 
     void ReloadNumberPool()
@@ -24,14 +29,16 @@ public class CometSpawner : MonoBehaviour
         {
             numberPool.Add(n);
         }
+        Debug.Log("COMET: PoolReloaded");
     }
 
     void PickNumber()
     {
         int index = Random.Range(0, numberPool.Count - 1);
-        int i = numberPool[index];
+        cometType = numberPool[index];
         numberPool.RemoveAt(index);
         numberCount += 1;
+        Debug.Log("COMET: Picked a number and removed a slot");
     }
 
     private void Update()
@@ -52,5 +59,35 @@ public class CometSpawner : MonoBehaviour
         numberCount = 0;
         ReloadNumberPool();
         yield return null;
+    }
+
+    void SpawnComet()
+    {
+        Instantiate(Comets[cometType], transform.position, Quaternion.identity);
+        Debug.Log("COMET: Spawned a Comet");
+    }
+
+    IEnumerator SpawnCycle()
+    {
+        spawnTimer = Random.Range(minTimer, maxTimer);
+        yield return new WaitForSeconds(spawnTimer);
+        Debug.Log("COMET: Spawntimer over");
+        PickNumber();
+        SpawnComet();
+    }
+
+    void StartCycle()
+    {
+        StartCoroutine("SpawnCycle");
+    }
+
+    private void OnEnable()
+    {
+        Comet.StartingCycle += StartCycle;
+    }
+
+    private void OnDisable()
+    {
+        Comet.StartingCycle -= StartCycle;
     }
 }
