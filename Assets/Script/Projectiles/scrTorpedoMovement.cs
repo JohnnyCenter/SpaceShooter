@@ -6,7 +6,7 @@ public class scrTorpedoMovement : scrProjectileMovement
 {
     private List<GameObject> targets;
     private GameObject torpedoTarget;
-    private float minDistanceToTarget = 0.5f;
+    private float minDistanceToTarget = 0.1f;
     protected override void Awake()
     {
         base.Awake();
@@ -18,7 +18,14 @@ public class scrTorpedoMovement : scrProjectileMovement
     {
         if (playerController != null)
         {
-            playerMovementSpeed = playerController.moveSpeed;
+            if(playerController.firing)
+            {
+                playerMovementSpeed = playerController.moveSpeed / 2;
+            }
+            else if(!playerController.firing)
+            {
+                playerMovementSpeed = playerController.moveSpeed;
+            }
         }
         MoveTorpedo();
     }
@@ -33,7 +40,7 @@ public class scrTorpedoMovement : scrProjectileMovement
         {
             //print("Projectile homing in on target");
             //RotateTorpedo();
-            transform.position = Vector3.MoveTowards(transform.position, torpedoTarget.transform.position, (movementSpeed + playerMovementSpeed) * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, torpedoTarget.transform.position, (movementSpeed + playerMovementSpeed) * Time.deltaTime * 50);
             if((transform.position - torpedoTarget.transform.position).magnitude <= minDistanceToTarget)
             {
                 //print("Targets cleared");
@@ -58,6 +65,15 @@ public class scrTorpedoMovement : scrProjectileMovement
         {
             //print("Target added to list");
             targets.Add(_target);
+            torpedoTarget = targets[0];
+        }
+    }
+    public void RemoveTargetFromList(GameObject _target)
+    {
+        if (_target != null)
+        {
+            //print("Target added to list");
+            targets.Remove(_target);
             torpedoTarget = targets[0];
         }
     }

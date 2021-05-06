@@ -22,7 +22,8 @@ public class scrProjectileDetection : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-
+            //This causes a null reference
+            //torpedoMovement.RemoveTargetFromList(collision.gameObject);
         }
         //Loose reference and update scrTorpedoMovement
     }

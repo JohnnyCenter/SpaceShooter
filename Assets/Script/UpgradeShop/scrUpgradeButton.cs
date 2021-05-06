@@ -67,6 +67,7 @@ public class scrUpgradeButton : MonoBehaviour
             {
                 case 0:
                     //PLAY SOUND
+                    Handheld.Vibrate();
                     audioSource.clip = upgradeMenu.canAfford;
                     audioSource.Play();
                     leftBaseWeapon.SetActive(true);
@@ -82,6 +83,7 @@ public class scrUpgradeButton : MonoBehaviour
                     return;
                 case 1:
                     //PLAY SOUND
+                    Handheld.Vibrate();
                     audioSource.clip = upgradeMenu.canAfford;
                     audioSource.Play();
                     rightBaseWeapon.SetActive(true);

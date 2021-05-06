@@ -14,6 +14,8 @@ public class scrUpgradeMenu : MonoBehaviour
     public AudioClip cannotAfford;
     public AudioClip canAfford;
 
+    [SerializeField] private GameObject UpgradeMenuBackgroundImage;
+
     [Header("Assign the menu button")]
     [Tooltip("Drag the openUpgradeMenu (found in the inspector under UI -> Canvas) into this slot")]
     [SerializeField] private GameObject menuButton;
@@ -95,6 +97,7 @@ public class scrUpgradeMenu : MonoBehaviour
         UpgradePLacementPanel.SetActive(false);
         upgradeTheUpgradePanel.SetActive(false);
         modelPanel.SetActive(false);
+        UpgradeMenuBackgroundImage.SetActive(false);
 
         //Reset info cards
         CloseAllInfoCards();
@@ -207,6 +210,7 @@ public class scrUpgradeMenu : MonoBehaviour
         if(purchasePanel.activeSelf == false && upgradePanel.activeSelf == false && UpgradePLacementPanel.activeSelf == false && upgradeTheUpgradePanel.activeSelf == false)
         {
             //Debug.Log("Opens upgrade panel");
+            UpgradeMenuBackgroundImage.SetActive(true);
             map.SetActive(false);
             purchasePanel.SetActive(true);
             menuButton.SetActive(false); //Hide the open menu button
@@ -276,6 +280,7 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradeTheUpgradePanel.SetActive(false);
         menuButton.SetActive(true);
         modelPanel.SetActive(false);
+        UpgradeMenuBackgroundImage.SetActive(false);
         Time.timeScale = 1f;
         audioSource.Play();
     }

@@ -95,6 +95,7 @@ public class scrUpgradeTheUpgradeButton : MonoBehaviour
                 return;
             }
             audioSource.Play();
+            Handheld.Vibrate();
             UpdateImage(upgradeLevel + 1);
             weaponUpgrader.UpgradeWeapon();
             gameManager.SpendScrap(localUpgrade.UpgradingCost);

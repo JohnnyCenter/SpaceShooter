@@ -125,7 +125,8 @@ public class scrEnemyStats : MonoBehaviour
         countDownStarted = false;
         anim.SetInteger("Death", 1);
         ps.Play();
-        em.enabled = false;
+        //Commented out because it caused a null reference
+        //em.enabled = false;
     }
     private IEnumerator DeathWaitForSound(float waitTimer)
     {
