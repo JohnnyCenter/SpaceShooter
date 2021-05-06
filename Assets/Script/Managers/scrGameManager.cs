@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class scrGameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject respawnPanel, winScreen;
+    [SerializeField] private GameObject respawnPanel, winScreen, scrapImage;
     public static scrGameManager instance;
     public scrPlacementButton CurrentPlacementButton { get; set; }
     [SerializeField] private TextMeshProUGUI scrapText, UiScrapText1, UiScrapText2, UiScrapText3, loseScoreText, winScoreText, killText;
@@ -16,6 +18,9 @@ public class scrGameManager : MonoBehaviour
     [SerializeField] private float deathTime;
     private int enemyScore, moonScore, portalBonus, totalScore, moonsCompleted;
 
+    private bool scrapperActive;
+    [SerializeField]
+    private int scrapperCooldown, scrapBonus;
     private void Awake()
     {
         if(instance != null && instance != this)
@@ -26,6 +31,8 @@ public class scrGameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        scrapperCooldown = 20;
     }
 
     private void Start()
@@ -54,7 +61,14 @@ public class scrGameManager : MonoBehaviour
     }
     private void ScrapGained(int _amount)
     {
-        PlayerScrap += _amount; //Update scrap amount
+        if (scrapperActive)
+        {
+            PlayerScrap += _amount * 2; //Add twice as much scrap while Power-Up is active
+        }
+        else
+        {
+            PlayerScrap += _amount; //Update scrap amount
+        }
         scrapText.text =  PlayerScrap.ToString(); //Update display
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
@@ -86,6 +100,7 @@ public class scrGameManager : MonoBehaviour
         scrPlayerHealth.OnPlayerDeath += OpenRespawnPanel;
         Moon.MoonCompleted += IncreaseMoonScore;
         Portal.PlayerEnteredPortal += PortalBonus;
+        scrScrapper.OnScrapperTriggered += RunScrapper;
     }
     private void OnDisable()
     {
@@ -94,6 +109,8 @@ public class scrGameManager : MonoBehaviour
         scrPlayerHealth.OnPlayerDeath -= OpenRespawnPanel;
         Moon.MoonCompleted -= IncreaseMoonScore;
         Portal.PlayerEnteredPortal -= PortalBonus;
+        scrScrapper.OnScrapperTriggered += RunScrapper;
+
     }
 
     IEnumerator RunEndScreen()
@@ -129,5 +146,31 @@ public class scrGameManager : MonoBehaviour
         enemyScore = totalNumberOfEnemiesKilled * 250;
 
         totalScore = enemyScore + moonScore + portalBonus;
+    }
+
+    void RunScrapper()
+    {
+        Debug.Log("Scrapper is active");
+        StartCoroutine("Scrapper");
+    }
+
+    IEnumerator Scrapper()
+    {
+        scrapperActive = true;
+        var image = scrapImage.GetComponent<Image>();
+        image.DOColor(Color.yellow, 2);
+        Debug.Log("It got here");
+        yield return new WaitForSeconds(scrapperCooldown);
+        image.DOColor(Color.white, 1);
+        scrapperActive = false;
+    }
+
+    public void BonusScrap()
+    {
+        PlayerScrap += scrapBonus;
+        scrapText.text = PlayerScrap.ToString();
+        UiScrapText1.text = PlayerScrap.ToString();
+        UiScrapText2.text = PlayerScrap.ToString();
+        UiScrapText3.text = PlayerScrap.ToString();
     }
 }

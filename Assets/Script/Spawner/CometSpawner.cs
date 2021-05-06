@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CometSpawner : MonoBehaviour
 {
     [SerializeField]
@@ -11,6 +12,7 @@ public class CometSpawner : MonoBehaviour
     private int cometType, spawnTimer;
     [SerializeField]
     private int minTimer, maxTimer;
+    playerController player;
 
     [SerializeField]
     GameObject[] Comets;
@@ -21,6 +23,7 @@ public class CometSpawner : MonoBehaviour
         ReloadNumberPool();
         numberCount = 0;
         StartCoroutine("SpawnCycle");
+        player = GetComponentInParent<playerController>();
     }
 
     void ReloadNumberPool()
@@ -63,14 +66,16 @@ public class CometSpawner : MonoBehaviour
 
     void SpawnComet()
     {
-        Instantiate(Comets[cometType], transform.position, Quaternion.identity);
+        Instantiate(Comets[cometType], transform.position, Quaternion.Euler(new Vector3(0, 0, player.transform.rotation.eulerAngles.z + 180)));
         Debug.Log("COMET: Spawned a Comet");
     }
 
     IEnumerator SpawnCycle()
     {
+        Debug.Log("COMET: CYCLE HAS BEGUN");
         spawnTimer = Random.Range(minTimer, maxTimer);
         yield return new WaitForSeconds(spawnTimer);
+        yield return new WaitUntil(() => player.turning == false);
         Debug.Log("COMET: Spawntimer over");
         PickNumber();
         SpawnComet();

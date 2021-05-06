@@ -9,7 +9,7 @@ public class scrPlayerHealth : MonoBehaviour
     [SerializeField] private float invincebilityLength;
     public static Action OnPlayerDeath;
     [Tooltip("Set player health")]
-    [SerializeField] private int playerHealth;
+    public int playerHealth;
     private GameObject playerMesh;
     public AudioSource playertakedamageaudio;
     public AudioSource playerdiesaudio;
@@ -22,6 +22,8 @@ public class scrPlayerHealth : MonoBehaviour
     //Linjen under er lagt til av August og burde slettes
     [SerializeField]
     GameObject Shield;
+    [SerializeField]
+    private int strongholdTimer;
     private void Awake()
     {
         canTakeDamage = true;
@@ -29,6 +31,7 @@ public class scrPlayerHealth : MonoBehaviour
         controller = GetComponent<playerController>();
         upgradeMenu = scrUpgradeMenu.Instance;
         gameManager = scrGameManager.instance;
+        strongholdTimer = 20;
     }
     private void Update()
     {
@@ -112,9 +115,23 @@ public class scrPlayerHealth : MonoBehaviour
     private void OnEnable()
     {
         scrEnemyProjectiles.OnPlayerDamagedByEnemy += TakeDamage;
+        Stronghold.OnStrongholdTriggered += RunInvincible;
     }
     private void OnDisable()
     {
         scrEnemyProjectiles.OnPlayerDamagedByEnemy -= TakeDamage;
+        Stronghold.OnStrongholdTriggered -= RunInvincible;
+    }
+
+    void RunInvincible()
+    {
+        StartCoroutine("Invincible");
+    }
+
+    IEnumerator Invincible()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(strongholdTimer);
+        canTakeDamage = true;
     }
 }

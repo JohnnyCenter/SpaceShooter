@@ -11,6 +11,7 @@ public class Audio : MonoBehaviour
     public AudioSource MoonEntered;
     public AudioSource MoonDiscovered;
     public AudioSource PortalEntered;
+    public AudioSource Sabotage, Scrapper, Scavenger, Stronghold;
 
 
     private void Start()
@@ -27,6 +28,10 @@ public class Audio : MonoBehaviour
         Moon.PlayerEnterMoonZoneGreen += EnteredMoonZone;
         Moon.PlayerExitMoonZone += ExitMoonZone;
         Portal.PlayerEnteredPortal += EnteredPortal;
+        PowerUpUIManager.SabotageSFX += PlaySabotage;
+        PowerUpUIManager.ScavengerSFX += PlayScavenger;
+        PowerUpUIManager.ScrapperSFX += PlayScrapper;
+        PowerUpUIManager.StrongholdSFX += PlayStronghold;
     }
 
     private void OnDisable()
@@ -37,6 +42,10 @@ public class Audio : MonoBehaviour
         Moon.PlayerEnterMoonZoneGreen -= EnteredMoonZone;
         Moon.PlayerExitMoonZone -= ExitMoonZone;
         Portal.PlayerEnteredPortal -= EnteredPortal;
+        PowerUpUIManager.SabotageSFX -= PlaySabotage;
+        PowerUpUIManager.ScavengerSFX -= PlayScavenger;
+        PowerUpUIManager.ScrapperSFX -= PlayScrapper;
+        PowerUpUIManager.StrongholdSFX -= PlayStronghold;
     }
 
     private void Update()
@@ -108,5 +117,24 @@ public class Audio : MonoBehaviour
         Debug.Log("Transition to Win Screen and play winscreen audio");
     }
 
-    
+    void PlaySabotage()
+    {
+        Sabotage.Play();
+        Debug.Log("AUDIOMANAGER: Sabotage sound plays");
+    }
+
+    void PlayScrapper()
+    {
+        Scrapper.Play();
+    }
+
+    void PlayScavenger()
+    {
+        Scavenger.Play();
+    }
+
+    void PlayStronghold()
+    {
+        Stronghold.Play();
+    }
 }

@@ -9,13 +9,16 @@ public class Comet : MonoBehaviour
     [SerializeField]
     private int health, cometLifeTime;
     public static event Action ActivatePowerUp, StartingCycle;
-    private bool powerActivated, invisible;
+    private bool powerActivated, invisible, flyOff, disconnected;
     SpriteRenderer sr;
     CircleCollider2D cc2D;
     LeanConstrainToCollider ctc;
     GameObject boundary;
     private float spawnOffset;
-    
+    ParticleSystem Sparkles;
+    playerController player;
+    private AudioSource CometSound;
+
 
     private void Awake()
     {
@@ -27,6 +30,11 @@ public class Comet : MonoBehaviour
         boundary = GameObject.FindGameObjectWithTag("CometBoundary");
         ctc.Collider = boundary.GetComponent<BoxCollider>();
         AdjustSpawn();
+        Sparkles = GetComponentInChildren<ParticleSystem>();
+        StartCoroutine("TimeLimit");
+        flyOff = false;
+        player = GameObject.FindGameObjectWithTag("PlayerBody").GetComponent<playerController>();
+        CometSound = GetComponent<AudioSource>();
     }
 
     void AdjustSpawn()
@@ -47,6 +55,16 @@ public class Comet : MonoBehaviour
         {
             StartCoroutine("ActivatePower");
         }
+
+        if (flyOff)
+        {
+            transform.position -= transform.up * 40 * Time.deltaTime;
+        }
+
+        if (player.turning && disconnected == false)
+        {
+            Discharge();
+        }
     }
 
     private void OnBecameVisible()
@@ -66,6 +84,8 @@ public class Comet : MonoBehaviour
         StopCoroutine("TimeLimit");
         sr.enabled = false;
         cc2D.enabled = false;
+        Sparkles.Play();
+        CometSound.Stop();
         yield return new WaitForSeconds(30);
         StartingCycle?.Invoke();
         Destroy(gameObject);
@@ -75,8 +95,17 @@ public class Comet : MonoBehaviour
     {
         yield return new WaitForSeconds(cometLifeTime);
         ctc.enabled = false;
+        flyOff = true;
+        CometSound.Stop();
         yield return new WaitUntil(() => invisible == true);
         StartingCycle?.Invoke();
         Destroy(gameObject);
+    }
+
+    void Discharge()
+    {
+        disconnected = true;
+        ctc.enabled = false;
+        flyOff = true;
     }
 }
