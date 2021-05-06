@@ -202,6 +202,8 @@ public class scrPlayerProjectileLoader : MonoBehaviour
         //Update projectile stats based on weapon level
         scrProjectileLevel loadedProjectileLevel = _loadedProjectile.GetComponent<scrProjectileLevel>();
         loadedProjectileLevel.UpdateProjectileLevel(projectileLevel); //Updates the stats for the loaded projectile
+        //Add recoil by level
+
         //LoadSound
         Sound = loadedProjectileLevel.stats.BulletSound;
         SoundSource.clip = Sound;

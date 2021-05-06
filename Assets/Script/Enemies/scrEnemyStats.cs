@@ -29,13 +29,21 @@ public class scrEnemyStats : MonoBehaviour
     public EnemyStatsSO LocalStats { get; private set; } //For reference in other scripts
     private scrEnemyWeaknessTracker weaknessTracker;
 
-    public bool freeRoam;   
+    public bool freeRoam;
+
+    Animator anim;
+    scrEnemyMovement em;
+    ParticleSystem ps;
+
     private void Awake()
     {
         stats.resetStats(); //Makes sure any changes to the variables in the scriptableObject is updated before start
         audioPlayer = GetComponent<AudioSource>(); //Get the local reference
         TryGetComponent<scrEnemyAttack>(out localAttackScript);
         freeRoam = true;
+        anim = GetComponent<Animator>();
+        em = GetComponent<scrEnemyMovement>();
+        ps = transform.Find("DeathParticles").GetComponent<ParticleSystem>();
     }
     private void Start()
     {
@@ -115,6 +123,9 @@ public class scrEnemyStats : MonoBehaviour
         canTakeDamage = false;
         canTakeDamageCountdownStarted = false;
         countDownStarted = false;
+        anim.SetInteger("Death", 1);
+        ps.Play();
+        em.enabled = false;
     }
     private IEnumerator DeathWaitForSound(float waitTimer)
     {

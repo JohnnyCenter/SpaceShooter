@@ -28,6 +28,7 @@ public class StartScreen : MonoBehaviour
     public void startEngine()
     {
         StartEngine?.Invoke();
+        Handheld.Vibrate();
         TouchManager.gameObject.SetActive(true);
         cam.enabled = true;
         var text = gameObject.transform.Find("Tap to Start");
