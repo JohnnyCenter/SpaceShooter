@@ -22,7 +22,7 @@ public class Comet : MonoBehaviour
 
     private void Awake()
     {
-        health = 10;
+        health = 3;
         powerActivated = false;
         sr = GetComponent<SpriteRenderer>();
         cc2D = GetComponent<CircleCollider2D>();

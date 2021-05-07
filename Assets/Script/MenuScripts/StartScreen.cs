@@ -9,12 +9,15 @@ public class StartScreen : MonoBehaviour
     GameObject TouchManager;
     public static event Action StartEngine;
     private cameraFollow cam;
+    scrCircleSpawner spawner;
     
     private void Awake()
     {
         TouchManager.gameObject.SetActive(false);
         cam = FindObjectOfType<cameraFollow>();
         cam.enabled = false;
+        spawner = FindObjectOfType<scrCircleSpawner>();
+        spawner.enabled = false;
     }
 
     private void Update()
@@ -35,6 +38,7 @@ public class StartScreen : MonoBehaviour
         text.gameObject.SetActive(false);
         var image = gameObject.transform.Find("Button");
         image.gameObject.SetActive(false);
+        spawner.enabled = true;
         Debug.Log("Game Starting");
     }
 }
