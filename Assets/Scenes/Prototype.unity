@@ -7612,8 +7612,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberPool: 
   numberCount: 0
-  minTimer: 15
-  maxTimer: 40
+  minTimer: 5
+  maxTimer: 10
   Comets:
   - {fileID: 3515895017086068416, guid: ea35d125ffa0c104ab45c306aa7f0d48, type: 3}
   - {fileID: 5215802344506058254, guid: 1415338da5692bd498acf2fe56d448e9, type: 3}
@@ -48335,7 +48335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincebilityLength: 2
-  playerHealth: 2
+  playerHealth: 100
   playertakedamageaudio: {fileID: 3472293815277634431}
   playerdiesaudio: {fileID: 3472293815277634430}
   Shield: {fileID: 11739982}

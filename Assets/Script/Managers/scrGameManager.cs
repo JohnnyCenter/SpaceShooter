@@ -25,6 +25,8 @@ public class scrGameManager : MonoBehaviour
     private float desiredNumber, initialNumber, currentNumber;
     private float animationTime = 0.5f;
 
+    private float textSizeS, textSizeK;
+
     private void Awake()
     {
         if(instance != null && instance != this)
@@ -57,6 +59,8 @@ public class scrGameManager : MonoBehaviour
 
         initialNumber = currentNumber = 0f;
         desiredNumber = 0;
+        textSizeS = 40;
+        textSizeK = 40;
     }
     public void SpendScrap(int _amount)
     {
@@ -171,16 +175,16 @@ public class scrGameManager : MonoBehaviour
 
     IEnumerator IncreaseFontSizeScrap()
     {
-        scrapText.fontSize = 50;
+        DOTween.To(() => textSizeS, x => textSizeS = x, 50, 0.5f);
         yield return new WaitForSeconds(1);
-        scrapText.fontSize = 40;
+        DOTween.To(() => textSizeS, x => textSizeS = x, 40, 0.5f);
     }
 
     IEnumerator IncreaseFontSizeKill()
     {
-        killText.fontSize = 50;
+        DOTween.To(() => textSizeK, x => textSizeK = x, 50, 0.5f);
         yield return new WaitForSeconds(1);
-        killText.fontSize = 40;
+        DOTween.To(() => textSizeK, x => textSizeK = x, 40, 0.5f);
     }
 
     private void Update()
@@ -202,6 +206,8 @@ public class scrGameManager : MonoBehaviour
         }
         loseScoreText.text = "Score: " + currentNumber.ToString("0");
         winScoreText.text = "Score: " + currentNumber.ToString("0");
+        scrapText.fontSize = textSizeS;
+        killText.fontSize = textSizeK;
     }
 
     void AddToValue(float value)

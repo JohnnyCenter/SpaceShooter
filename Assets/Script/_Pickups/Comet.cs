@@ -47,6 +47,7 @@ public class Comet : MonoBehaviour
     {
         health -= _damage;
         Debug.Log("Comet was hit for " + _damage);
+        Debug.Log("Comet health is " + health);
     }
 
     private void Update()

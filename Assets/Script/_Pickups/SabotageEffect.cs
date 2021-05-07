@@ -24,10 +24,14 @@ public class SabotageEffect : MonoBehaviour
 
     void TurnOnEffect()
     {
-        if (inRange)
-        {
-            StartCoroutine("Effect");
-        }
+        //If we want Sabotage to just disable enemies that are on screen
+        /* if (inRange) 
+         {
+             StartCoroutine("Effect");
+         } */
+
+        //If we want Sabotage to function on all enemies
+        StartCoroutine("Effect");
     }
 
     IEnumerator Effect()
