@@ -25,7 +25,7 @@ public class scrGameManager : MonoBehaviour
     private float desiredNumber, initialNumber, currentNumber;
     private float animationTime = 0.5f;
 
-    private float textSizeS, textSizeK;
+    private float textSizeS, textSizeK, playerScrap;
 
     private void Awake()
     {
@@ -44,7 +44,8 @@ public class scrGameManager : MonoBehaviour
     private void Start()
     {
         PlayerScrap = 50;
-        scrapText.text =  PlayerScrap.ToString();
+        playerScrap = PlayerScrap;
+        //scrapText.text =  PlayerScrap.ToString();
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
         UiScrapText3.text = PlayerScrap.ToString();
@@ -65,7 +66,8 @@ public class scrGameManager : MonoBehaviour
     public void SpendScrap(int _amount)
     {
         PlayerScrap -= _amount;
-        scrapText.text =  PlayerScrap.ToString();
+        //scrapText.text =  PlayerScrap.ToString();
+        DOTween.To(() => playerScrap, x => playerScrap = x, PlayerScrap, 1f);
 
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
@@ -81,7 +83,8 @@ public class scrGameManager : MonoBehaviour
         {
             PlayerScrap += _amount; //Update scrap amount
         }
-        scrapText.text =  PlayerScrap.ToString(); //Update display
+        DOTween.To(() => playerScrap, x => playerScrap = x, PlayerScrap, 1f);
+        //scrapText.text =  PlayerScrap.ToString(); //Update display
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
         UiScrapText3.text = PlayerScrap.ToString();
@@ -206,6 +209,7 @@ public class scrGameManager : MonoBehaviour
         }
         loseScoreText.text = "Score: " + currentNumber.ToString("0");
         winScoreText.text = "Score: " + currentNumber.ToString("0");
+        scrapText.text = playerScrap.ToString("0");
         scrapText.fontSize = textSizeS;
         killText.fontSize = textSizeK;
     }
@@ -221,9 +225,7 @@ public class scrGameManager : MonoBehaviour
         yield return new WaitForSeconds(deathTime);
         CalculateScore();
         respawnPanel.SetActive(true);
-        //yield return new WaitForSeconds(2);
         AddToValue(totalScore);
-        //loseScoreText.text = "Score: " + totalScore.ToString();
     }
 
     IEnumerator RunWinScreen()
@@ -232,6 +234,5 @@ public class scrGameManager : MonoBehaviour
         CalculateScore();
         winScreen.SetActive(true);
         AddToValue(totalScore);
-       // winScoreText.text = "Score: " + totalScore.ToString("0");
     }
 }
