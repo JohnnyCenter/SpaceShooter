@@ -12,7 +12,7 @@ public class scrCircleSpawner : MonoBehaviour
     [Tooltip("How much time there is between each spawning cycle. Defaults to five")]
     [SerializeField] private float spawnTimer = 5f;
     [Tooltip("This int decides what type of enemy spawns each cycle. It is manualy set for now, will increment based on score later")]
-    private int gameIntensety = 0;
+    [SerializeField] private int gameIntensety = 0;
     private int enemyLevel = 1;
     private List<GameObject> poolOfEnemyType1;
     private List<GameObject> poolOfEnemyType2;
@@ -47,7 +47,7 @@ public class scrCircleSpawner : MonoBehaviour
 
     }
 
-    //Region below added by August, this increase gameIntensety by 1 for every moon discovered
+    //Region below added by August, this increase gameIntensety by 2 for every moon discovered
     #region Moon Increase intensity
     private void OnEnable()
     {

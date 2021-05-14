@@ -22,8 +22,12 @@ public class CometSpawner : MonoBehaviour
         numberPool = new List<int>();
         ReloadNumberPool();
         numberCount = 0;
-        StartCoroutine("SpawnCycle");
         player = GetComponentInParent<playerController>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine("SpawnCycle");
     }
 
     void ReloadNumberPool()

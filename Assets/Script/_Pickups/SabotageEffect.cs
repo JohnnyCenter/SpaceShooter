@@ -5,7 +5,7 @@ using UnityEngine;
 public class SabotageEffect : MonoBehaviour
 {
     ParticleSystem Electricity;
-    private bool inRange;
+    //private bool inRange;
 
     private void Awake()
     {
@@ -14,12 +14,12 @@ public class SabotageEffect : MonoBehaviour
 
     private void OnBecameVisible()
     {
-        inRange = true;
+        //inRange = true;
     }
 
     private void OnBecameInvisible()
     {
-        inRange = false;
+        //inRange = false;
     }
 
     void TurnOnEffect()

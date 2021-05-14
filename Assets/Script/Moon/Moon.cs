@@ -8,7 +8,7 @@ public class Moon : MonoBehaviour
     [SerializeField]
     int moonDistance; [Tooltip("How close does the player have to be for the moon to be discovered?")] //Determines how close the player needs to be to the moon to discover it !!Must be assigned in inspector or default value will be zero!!
     bool discovered; //Has the moon already been discovered?
-    private float distance; //The distance between player and the middle of the moon
+    [SerializeField]private float distance; //The distance between player and the middle of the moon
     
     [SerializeField]
     [Tooltip("Choose what color the background will change to when the player gets close")]

@@ -9,15 +9,18 @@ public class StartScreen : MonoBehaviour
     GameObject TouchManager;
     public static event Action StartEngine;
     private cameraFollow cam;
-    scrCircleSpawner spawner;
+    scrCircleSpawner spawner; //Temporary for Circle Spawner
+    CometSpawner cometSpawner;
     
     private void Awake()
     {
         TouchManager.gameObject.SetActive(false);
         cam = FindObjectOfType<cameraFollow>();
         cam.enabled = false;
-        spawner = FindObjectOfType<scrCircleSpawner>();
-        spawner.enabled = false;
+        spawner = FindObjectOfType<scrCircleSpawner>(); //Temp needs to be deleted
+        spawner.enabled = false; //Temp needs to be deleted
+        cometSpawner = FindObjectOfType<CometSpawner>();
+        cometSpawner.enabled = false;
     }
 
     private void Update()
@@ -38,7 +41,8 @@ public class StartScreen : MonoBehaviour
         text.gameObject.SetActive(false);
         var image = gameObject.transform.Find("Button");
         image.gameObject.SetActive(false);
-        spawner.enabled = true;
+        spawner.enabled = true; // Temporary
+        cometSpawner.enabled = true;
         Debug.Log("Game Starting");
     }
 }
