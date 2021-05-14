@@ -19,11 +19,12 @@ public class scrUpgradeMenu : MonoBehaviour
     [Header("Assign the menu button")]
     [Tooltip("Drag the openUpgradeMenu (found in the inspector under UI -> Canvas) into this slot")]
     [SerializeField] private GameObject menuButton;
-    [SerializeField] private GameObject purchaseShieldsButton;
 
     [Header("Assign panels from the inspector")]
     [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
     [SerializeField] private GameObject modelPanel; //Don`t forget to set this in the inspector!
+    [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
+    [SerializeField] private GameObject shieldPanel; //Don`t forget to set this in the inspector!
     [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
     [SerializeField] private GameObject upgradePanel; //Don`t forget to set this in the inspector!
     [Tooltip("These panels are all found under UI -> Canvas in the inspector")]
@@ -90,13 +91,13 @@ public class scrUpgradeMenu : MonoBehaviour
 
     private void Start()
     {
-        purchaseShieldsButton.SetActive(false);
         //Set all panels to unactive, so the menu is "closed" at game start
         purchasePanel.SetActive(false);
         upgradePanel.SetActive(false);
         UpgradePLacementPanel.SetActive(false);
         upgradeTheUpgradePanel.SetActive(false);
         modelPanel.SetActive(false);
+        shieldPanel.SetActive(false);
         UpgradeMenuBackgroundImage.SetActive(false);
 
         //Reset info cards
@@ -116,14 +117,18 @@ public class scrUpgradeMenu : MonoBehaviour
         //    purchasePanel.SetActive(true);
         //}
     }
+    public void DisplayShieldPanel()
+    {
+        shieldPanel.SetActive(true);
+        purchasePanel.SetActive(false);
+        audioSource.Play();
+        menuButton.SetActive(false); //Hide the open menu button
+    }
     public void DisplayModelPanel()
     {
         modelPanel.SetActive(true);
     }
-    public void TurnPurchaseShieldOff()
-    {
-        purchaseShieldsButton.SetActive(false);
-    }
+
     public void OpenEnemyInfoCardByType(int index)
     {
         switch(index)
@@ -216,7 +221,6 @@ public class scrUpgradeMenu : MonoBehaviour
             menuButton.SetActive(false); //Hide the open menu button
             Time.timeScale = 0f;
             audioSource.Play();
-
         }
     }
     public void OpenUpgradeTheUpgradePanel()
@@ -260,6 +264,7 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradeTheUpgradePanel.SetActive(false);
         menuButton.SetActive(false); //Hide the open menu button
         modelPanel.SetActive(false);
+        shieldPanel.SetActive(false);
     }
     public void ReturnToMainMenu() //Returns the player to the main menu
     {
@@ -269,6 +274,7 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradeTheUpgradePanel.SetActive(false);
         menuButton.SetActive(false); //Hide the open menu button
         modelPanel.SetActive(false);
+        shieldPanel.SetActive(false);
         audioSource.Play();
     }
     public void CloseUpgradePanel() //CLoses the menu completely
@@ -280,20 +286,22 @@ public class scrUpgradeMenu : MonoBehaviour
         upgradeTheUpgradePanel.SetActive(false);
         menuButton.SetActive(true);
         modelPanel.SetActive(false);
+        shieldPanel.SetActive(false);
         UpgradeMenuBackgroundImage.SetActive(false);
         Time.timeScale = 1f;
         audioSource.Play();
     }
-    private void ToggleOnShieldsButton()
+    private void PlayPurchaseSound()
     {
-        purchaseShieldsButton.SetActive(true);
+        audioSource.Play();
     }
+
     private void OnEnable()
     {
-        scrPlayerHealth.OnPlayerShieldsDissabled += ToggleOnShieldsButton;
+        scrPlayerHealth.OnShieldsUpgraded += PlayPurchaseSound;
     }
     private void OnDisable()
     {
-        scrPlayerHealth.OnPlayerShieldsDissabled -= ToggleOnShieldsButton;
+        scrPlayerHealth.OnShieldsUpgraded -= PlayPurchaseSound;
     }
 }

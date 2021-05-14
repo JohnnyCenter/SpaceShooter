@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class scrPlayerHealth : MonoBehaviour
 {
     public static Action OnPlayerShieldsDissabled, playerTookDamage;
-    [SerializeField] private float invincebilityLength;
     public static Action OnPlayerDeath;
+    public static Action OnShieldsUpgraded;
+
+    [SerializeField] private float invincebilityLength;
     [Tooltip("Set player health")]
     public int playerHealth;
     private GameObject playerMesh;
@@ -18,6 +21,26 @@ public class scrPlayerHealth : MonoBehaviour
     private scrUpgradeMenu upgradeMenu;
     private scrGameManager gameManager;
     private bool playerIsHitRecently;
+
+    //For shields upgrades
+    [Tooltip("Sets the max level for the shield")]
+    [SerializeField] private int shieldMaxLevel;
+
+    [Tooltip("Decides how fast the shields will regain at level 0")]
+    [SerializeField]private float defaultShieldRegenTime;
+    private float shieldRegenTime;
+    [Tooltip("How much faster the shields regain per level of upgrade")]
+    [SerializeField]private float shieldTimeReductionOnUpgrade;
+    private float timeSinceShieldDestroyed;
+    public int ShieldsLevel { get; private set; }
+    [Tooltip("How much it costs to upgrade shields at level 1")]
+    [SerializeField]private int shieldUpgradeCost;
+    private int shieldsUpgradeCostIncremental = 25;
+
+    [SerializeField] private TextMeshProUGUI shieldsCurrentLevelText;
+    [SerializeField] private TextMeshProUGUI shieldsUpgradeCostText;
+    [SerializeField] private TextMeshProUGUI shieldsRegenTimeText;
+
 
     //Linjen under er lagt til av August og burde slettes
     [SerializeField]
@@ -38,6 +61,15 @@ public class scrPlayerHealth : MonoBehaviour
         invincible = false;
         ps = transform.Find("DeathParticles").GetComponent<ParticleSystem>();
     }
+    private void Start()
+    {
+        ShieldsLevel = 0;
+        shieldRegenTime = defaultShieldRegenTime;
+        playerHealth = 2;
+        shieldsCurrentLevelText.text = "Current shield level: " + ShieldsLevel.ToString();
+        shieldsUpgradeCostText.text = shieldUpgradeCost.ToString();
+        shieldsRegenTimeText.text = "Current shield regen time is: " + shieldRegenTime.ToString();
+    }
     private void Update()
     {
         if (controller.turning)
@@ -52,21 +84,57 @@ public class scrPlayerHealth : MonoBehaviour
         {
             canTakeDamage = false;
         }
-
+        ShieldsRegen();
         if (playerHealth <= 1)
             Shield.SetActive(false);
         else
             Shield.SetActive(true);
-    }
-    public void ShieldsRestored()
-    {
-        if(playerHealth == 1 && gameManager.PlayerScrap > 20)
+
+        //For testing
+        if(Input.GetKey(KeyCode.Q))
         {
-            gameManager.SpendScrap(20);
-            playerHealth += 1;
-            upgradeMenu.TurnPurchaseShieldOff();
+            print("Ouch!");
+            playerHealth -= 1;
         }
     }
+    #region Shields
+    public void UpgradeShields(int _level) //Called from upgrade button
+    {
+        if(gameManager.PlayerScrap > shieldUpgradeCost && ShieldsLevel < shieldMaxLevel)
+        {
+            //Spend scrap
+            gameManager.SpendScrap(shieldUpgradeCost);
+            //Increase cost
+            shieldUpgradeCost += shieldsUpgradeCostIncremental;
+            //Increase level
+            ShieldsLevel += _level;
+            //Improve shields
+            shieldRegenTime -= shieldTimeReductionOnUpgrade;
+            //For playing upgrade sound
+            OnShieldsUpgraded?.Invoke();
+            //Update text
+            shieldsUpgradeCostText.text = shieldUpgradeCost.ToString();
+            shieldsCurrentLevelText.text = "Current shield level: " + ShieldsLevel.ToString();
+            shieldsRegenTimeText.text = "Current shield regen time is: " + shieldRegenTime.ToString();
+            if(ShieldsLevel >= shieldMaxLevel)
+            {
+                shieldsCurrentLevelText.text = "Max upgrade level reached!";
+            }
+        }
+    }
+    public void ShieldsRegen() //This is running in update and will slowly regain the shields
+    {
+        if(playerHealth <= 1)
+        {
+            timeSinceShieldDestroyed += Time.deltaTime;
+            if(timeSinceShieldDestroyed >= shieldRegenTime)
+            {
+                timeSinceShieldDestroyed = 0f;
+                playerHealth = 2;
+            }
+        }
+    }
+    #endregion
     public void TakeDamage()
     {
              if (canTakeDamage)
@@ -76,6 +144,7 @@ public class scrPlayerHealth : MonoBehaviour
                 StartCoroutine(ResetCanTakeDamage(invincebilityLength));
                 print("ouch!");
                 playerHealth -= 1;
+                timeSinceShieldDestroyed = 0f;
                 playertakedamageaudio.Play();
                 playerTookDamage?.Invoke();
                 if (playerHealth <= 1)
@@ -95,7 +164,8 @@ public class scrPlayerHealth : MonoBehaviour
             {
                 canTakeDamage = false;
                 playerIsHitRecently = true;
-                StartCoroutine(ResetCanTakeDamage(invincebilityLength));
+            timeSinceShieldDestroyed = 0f;
+            StartCoroutine(ResetCanTakeDamage(invincebilityLength));
                 playerHealth -= _amount;
                 playerTookDamage?.Invoke();
             if (playerHealth <= 1)

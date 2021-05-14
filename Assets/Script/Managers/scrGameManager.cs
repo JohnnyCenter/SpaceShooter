@@ -11,7 +11,7 @@ public class scrGameManager : MonoBehaviour
     [SerializeField] private GameObject respawnPanel, winScreen, scrapImage;
     public static scrGameManager instance;
     public scrPlacementButton CurrentPlacementButton { get; set; }
-    [SerializeField] private TextMeshProUGUI scrapText, UiScrapText1, UiScrapText2, UiScrapText3, loseScoreText, winScoreText, killText;
+    [SerializeField] private TextMeshProUGUI scrapText, UiScrapText1, UiScrapText2, UiScrapText3, UiScrapText4, loseScoreText, winScoreText, killText;
     public int PlayerScrap { get; private set; }
     private int totalNumberOfEnemiesKilled;
 
@@ -49,6 +49,7 @@ public class scrGameManager : MonoBehaviour
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
         UiScrapText3.text = PlayerScrap.ToString();
+        UiScrapText4.text = PlayerScrap.ToString();
         totalNumberOfEnemiesKilled = 0;
         killText.text = totalNumberOfEnemiesKilled.ToString();
         respawnPanel.SetActive(false);
@@ -72,6 +73,7 @@ public class scrGameManager : MonoBehaviour
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
         UiScrapText3.text = PlayerScrap.ToString();
+        UiScrapText4.text = PlayerScrap.ToString();
     }
     private void ScrapGained(int _amount)
     {
@@ -88,6 +90,7 @@ public class scrGameManager : MonoBehaviour
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
         UiScrapText3.text = PlayerScrap.ToString();
+        UiScrapText4.text = PlayerScrap.ToString();
         totalNumberOfEnemiesKilled += 1; //Increment total number of enemies killed
         killText.text = totalNumberOfEnemiesKilled.ToString();
         StartCoroutine("IncreaseFontSizeScrap");
@@ -173,6 +176,7 @@ public class scrGameManager : MonoBehaviour
         UiScrapText1.text = PlayerScrap.ToString();
         UiScrapText2.text = PlayerScrap.ToString();
         UiScrapText3.text = PlayerScrap.ToString();
+        UiScrapText4.text = PlayerScrap.ToString();
         StartCoroutine("IncreaseFontSizeScrap");
     }
 

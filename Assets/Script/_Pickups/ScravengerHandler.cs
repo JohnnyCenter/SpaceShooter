@@ -33,7 +33,7 @@ public class ScravengerHandler : MonoBehaviour
     {
         if (health.playerHealth == 1)
         {
-            health.ShieldsRestored();
+            health.ShieldsRegen();
             StartCoroutine("ShipParticles");
         }
         else
